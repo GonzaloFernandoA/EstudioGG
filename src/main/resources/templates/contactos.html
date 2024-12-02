@@ -4,24 +4,29 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Carga de Contactos</title>
+        
         <script>
-            funtion ocultarMensaje() {
-
-            setTimeout(() => {
-
-            const mensaje = document.getElementById(¿mensaje-temporal');
-
-            if (mensaje)
-            {
-            mensaje.style.display = 'none';
-            }
-            },5000;
-
-
-            }
-
-
+            document.addEventListener("DOMContentLoaded", () => {
+                const alerta = document.getElementById('alerta');
+                
+                if (alerta) {
+                    setTimeout(() => {
+                        let opacidad = 1;
+                        const efectoDeDesvanecimiento = setInterval(() => {
+                            if (opacidad <= 0) {
+                                clearInterval(efectoDeDesvanecimiento);
+                                alerta.style.display = "none";
+                            } else {
+                                opacidad -= 0.1;
+                                alerta.style.opacity = opacidad;
+                            }
+                        }, 100);
+                        
+                    }, 3000);
+                }
+            });
         </script>
+        
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -76,13 +81,30 @@
             .home-link:hover {
                 text-decoration: underline;
             }
+            #alerta {
+                position: fixed; 
+                top: 10px; 
+                right: 10px; 
+                width: 25%; 
+                height: 70px; 
+                background-color: #95df95; 
+                color: #1c1c1c; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                font-size: 16px; 
+                font-weight: bold; 
+                border-radius: 5px; 
+                z-index: 9999;
+            }
+            
         </style>
     </head>
-    <body onload="ocultarMensaje()">
+    <body>
         <div class="contact-form">
             <h2>Carga de Contactos</h2>
             
-            <form th:action="@{/save}" method="post">
+            <form id="formulario" th:action="@{/save}" method="post">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
 
@@ -92,8 +114,12 @@
                 <label for="telefono">Teléfono:</label>
                 <input type="tel" id="telefono" name="telefono" required>
 
-                <button type="submit">Grabar</button>
+                <button id="boton" type="submit">Grabar</button>
             </form>
+        </div>
+        
+        <div th:if="${alerta}" id="alerta">
+            <span th:text="${alerta}"></span>
         </div>
 
         <a href="index.html">
