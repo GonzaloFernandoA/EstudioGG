@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,6 +53,7 @@ public class ContactService {
 	        }
                 logger.info("Archivo guardado " + file.getName());
                 eventService.saveEvent(telefono, "CONTACTO_GUARDADO");
+		redirectAttributes.addFlashAttribute("alerta", "El contacto se guardó con éxito");
 		return "redirect:/contactos";
 		
 	}
