@@ -1,13 +1,16 @@
 server:
   port: 20000
   data:
-    path: C:/ruta/archivos/
-    events: C:/ruta/archivos/eventos
+    path: C:/ruta/archivos/contactos/
+    events: C:/ruta/archivos/eventos/
+    reservas: C:/ruta/archivos/reservas/
+    out: C:/ruta/archivos/out/
+    response: C:/ruta/archivos/response/
 
 whatsapp:
   api:
     base-url: https://graph.facebook.com/v21.0/414660938406899/messages
-    token: EAAP998NXCyIBO1ussZCi0cJCrdBZC347iY0sH29rtfFIfhc93kZCpq7Sgroyc56XrVIu98YvOIx8zpacxnBKdQSoqpwhhZB5GXIFjZBvt7Qgw00hzPp2H0WqGBnAMGg645mSeBfdQCMxYJewCLJA0QatRSxxhaae9RZC3N20J8coHkQs7BIYM1uVXR1lijCzP0v1HKCTlbP2cxEvyDaoIymlc9aQZDZD
+    token: EAAP998NXCyIBO5FEfzjFjrwuHcjOTeJI9MZAuhtNxnq48IT53Enk7Kwia9acUP30udfOInWzK8vT3rCTHiAPyTMRzDIPuyfiIs3I8XArGZCBeR3eX7dcnwJZBYtlluOCucJBrxUUv1uSpY0sLqAU0g6HGt7CmCW594K3iG8leZA9faMFB1PTld4diXIrcZB4MlJ3xrdskPTB9s799O9HSFU9itwZDZD
   cellNumber: 414660938406899
   templateName: menuprincipal
   templateVideo: https://res.cloudinary.com/drkaz7gd6/video/upload/v1732592503/swjcivtyxi43nll7walh.mp4

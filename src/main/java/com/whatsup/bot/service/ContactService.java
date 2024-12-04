@@ -27,7 +27,7 @@ public class ContactService {
 	@Autowired
 	ContactConfig config;
 	
-	public String save(String nombre, String apellido, String telefono)
+	public String save(String nombre, String apellido, String telefono, RedirectAttributes redirectAttributes)
 	{
 	      String fileName = telefono + ".json";
 	        File file = Paths.get(config.path, fileName).toFile();
@@ -53,6 +53,7 @@ public class ContactService {
 	        }
                 logger.info("Archivo guardado " + file.getName());
                 eventService.saveEvent(telefono, "CONTACTO_GUARDADO");
+                eventService.saveOutMessage(telefono, "ENVIAR_ENCUESTA");
 		redirectAttributes.addFlashAttribute("alerta", "El contacto se guardó con éxito");
 		return "redirect:/contactos";
 		

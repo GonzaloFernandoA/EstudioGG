@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Carga de Contactos</title>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const alerta = document.getElementById('alerta');
+                
+                if (alerta) {
+                    setTimeout(() => {
+                        let opacidad = 1;
+                        const efectoDeDesvanecimiento = setInterval(() => {
+                            if (opacidad <= 0) {
+                                clearInterval(efectoDeDesvanecimiento);
+                                alerta.style.display = "none";
+                            } else {
+                                opacidad -= 0.1;
+                                alerta.style.opacity = opacidad;
+                            }
+                        }, 100);
+                        
+                    }, 3000);
+                }
+            });
+        </script>
+        
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .contact-form {
+                width: 300px;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+            .contact-form h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .contact-form label {
+                display: block;
+                margin: 10px 0 5px;
+            }
+            .contact-form input {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            .contact-form button {
+                width: 100%;
+                padding: 10px;
+                background-color: #28a745;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            .contact-form button:hover {
+                background-color: #218838;
+            }
+            .home-link {
+                font-size: 18px;
+                color: #007bff;
+                text-decoration: none;
+            }
+            .home-link:hover {
+                text-decoration: underline;
+            }
+            #alerta {
+                position: fixed; 
+                top: 10px; 
+                right: 10px; 
+                width: 25%; 
+                height: 70px; 
+                background-color: #95df95; 
+                color: #1c1c1c; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                font-size: 16px; 
+                font-weight: bold; 
+                border-radius: 5px; 
+                z-index: 9999;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="contact-form">
+            <h2>Carga de Contactos</h2>
+            
+            <form id="formulario" th:action="@{/save}" method="post">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" required>
+
+                <button id="boton" type="submit">Grabar</button>
+            </form>
+        </div>
+        
+        <div th:if="${alerta}" id="alerta">
+            <span th:text="${alerta}"></span>
+        </div>
+
+        <a href="index.html">
+            <img src="https://img.icons8.com/ios-filled/50/000000/home.png" alt="Home" class="home-icon" title="Volver a Inicio">
+        </a>
+
+    </body>
+</html>

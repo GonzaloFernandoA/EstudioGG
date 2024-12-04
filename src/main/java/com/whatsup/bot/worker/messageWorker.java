@@ -28,32 +28,34 @@ public class messageWorker {
 
     @Autowired
     ContactConfig config;
-    
+
     @Autowired
     WhatsAppService service;
-    
+
     @Autowired
     EventService eventService;
 
-    @Scheduled(fixedRate = 5000)
+ //  @Scheduled(fixedRate = 5000)
     public void ejecutarTareaAsincrona() {
         log.info("Tarea asíncrona ejecutándose...");
 
-        Map<String, String> dataMap = readFilesToMap(config.eventsPath);
-        
-         for (Map.Entry<String, String> entry : dataMap.entrySet()) {
-            if ("CONTACTO_GUARDADO".equals(entry.getValue())) {
-                
-                String firstKey = dataMap.keySet().iterator().next();
+        Map<String, String> dataMap = readFilesToMap(config.out);
+        for (Map.Entry<String, String> entry : dataMap.entrySet()) {
+            log.info("Contenido encontrado " + entry.getValue());
+            String firstKey = dataMap.keySet().iterator().next();
+            if (entry.getValue().contains("ENVIAR_ENCUESTA")) {
                 log.info("  Enviando encuesta a ..." + firstKey);
                 service.enviarMensajeTemplate(firstKey, null);
                 eventService.saveEvent(firstKey, "ENCUESTA_ENVIADA");
-                break; // Salir después de encontrar el primer valor coincidente
+                File file = new File(config.out + firstKey);
+                file.delete();
+            } else {
+                log.info("Enviando mensaje a ..." + firstKey);
+              //  service.sendMessage(firstKey, entry.getValue());
             }
+            File file = new File(config.out + firstKey);
+            file.delete();
         }
-        
-        
-        
     }
 
     public Map<String, String> readFilesToMap(String directoryPath) {

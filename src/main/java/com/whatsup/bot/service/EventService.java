@@ -4,8 +4,10 @@
  */
 package com.whatsup.bot.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whatsup.bot.config.ContactConfig;
+import com.whatsup.bot.message.responsePost.ResponseRoot;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -24,11 +26,27 @@ public class EventService {
     @Autowired
     ContactConfig config;
 
-    public void saveEvent(String id, String evento) {
-        File file = new File(config.path + "/evento/" + id + ".json");
+    private void saveFile(String id, String evento, String path) {
+        File file = new File(path + id + ".json");
         try {
             objectMapper.writeValue(file, evento);
         } catch (IOException ex) {
+            Logger.getLogger(EventService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void saveEvent(String id, String evento) {
+        this.saveFile(id, evento, config.eventsPath);
+    }
+
+    public void saveOutMessage(String id, String evento) {
+        this.saveFile(id, evento, config.out);
+    }
+
+    public void saveResponse(String id, ResponseRoot evento) {
+        try {
+            this.saveFile(id, objectMapper.writeValueAsString(evento), config.response);
+        } catch (JsonProcessingException ex) {
             Logger.getLogger(EventService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

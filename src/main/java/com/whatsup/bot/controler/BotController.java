@@ -30,13 +30,20 @@ public class BotController {
 
     @GetMapping("/sendMessage")
     public String sendMessage() {
-        whatsAppService.sendMessage("54111545587174", "Nos comunicaremos con usted a la brevedad.");
+        whatsAppService.sendMessage(""
+                + "54111545587174", "Nos comunicaremos con usted a la brevedad.");
+       
         return "Message sent!";
     }
-    
+        @GetMapping("/sendMessage1")
+    public String sendMessage1() {
+        whatsAppService.sendMessage("5491145587174", "Nos comunicaremos con usted a la brevedad.");
+        return "Message sent!";
+    }
+
     @GetMapping("/sendTemplate")
     public String sendMessageTemplate() {
-        whatsAppService.enviarMensajeTemplate("54111545587174",null);
+        whatsAppService.enviarMensajeTemplate("541145587174",null);
         return "Message sent!";
     }
     
