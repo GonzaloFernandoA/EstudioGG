@@ -9,6 +9,6 @@ package com.whatsup.bot.message.responsePost;
  * @author Gonzalo_Avalos
  */
 public class Contact {
-        public String input;
+   public String input;
     public String wa_id;
 }

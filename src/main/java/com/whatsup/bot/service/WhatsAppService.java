@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 /**
  *
@@ -33,7 +32,7 @@ import reactor.core.publisher.Mono;
 public class WhatsAppService {
 
     @Autowired
-    EventService eventService;
+    RobotInMesssageService Service;
 
     @Autowired
     WhatsupSecurityConfig config;
@@ -71,9 +70,10 @@ public class WhatsAppService {
                 .bodyValue(mensaje)
                 .retrieve()
                 .bodyToMono(ResponseRoot.class)
-                .doOnSuccess(response -> eventService.saveResponse(numeroDestino, response) )
+                .doOnSuccess(response -> Service.SaveInconmeMessage(response) )
                 .doOnError(error -> System.err.println("Error al enviar el mensaje: " + error.getMessage()))
                 .subscribe();
+  
     }
 
     public void sendObject(Root mensaje) {

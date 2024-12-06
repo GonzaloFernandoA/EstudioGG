@@ -4,14 +4,11 @@
  */
 package com.whatsup.bot.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whatsup.bot.config.ContactConfig;
 import com.whatsup.bot.message.responsePost.ResponseRoot;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.whatsup.bot.repository.contactosRepository;
+import com.whatsup.bot.repository.eventRepository;
+import com.whatsup.bot.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,17 +19,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventService {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     ContactConfig config;
 
-    private void saveFile(String id, String evento, String path) {
-        File file = new File(path + id + ".json");
-        try {
-            objectMapper.writeValue(file, evento);
-        } catch (IOException ex) {
-            Logger.getLogger(EventService.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    @Autowired
+    contactosRepository contactRepo;
+            
+    @Autowired
+    eventRepository eventRepo   ;   
+    
+    public void getAll()
+    {
+        
+    }
+    
+    private void saveFile(String id, Object evento, String path) {
+        JsonUtils.writeJsonToFile(path + id, evento);
     }
 
     public void saveEvent(String id, String evento) {
@@ -44,10 +46,8 @@ public class EventService {
     }
 
     public void saveResponse(String id, ResponseRoot evento) {
-        try {
-            this.saveFile(id, objectMapper.writeValueAsString(evento), config.response);
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(EventService.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+            this.saveFile(id, evento, config.response);
+       
     }
 }
