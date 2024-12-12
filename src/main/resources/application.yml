@@ -3,15 +3,16 @@ server:
   data:
     contactos: C:/ruta/archivos/contactos/
     events: C:/ruta/archivos/eventos/
-    reservas: C:/ruta/archivos/reservas/
+    reservas: C:/ruta/archivos/turnos/
     out: C:/ruta/archivos/out/
     response: C:/ruta/archivos/response/
     equivalencia: C:/ruta/archivos/equivalencia/
+    tracking: C:/ruta/archivos/tracking/
 
 whatsapp:
   api:
     base-url: https://graph.facebook.com/v21.0/414660938406899/messages
-    token: EAAP998NXCyIBO3T3hI40TPCLJoETwvJlXOg6xXzdF8yc8guO5gYXIJeZBKpnfKXIKyeRBDOYITcwV80aRpWaSHG55Ejd4Eg1z3deSCha343xZAqEGqIe60Uu8MjzVIc6hiW5hLFemxCQnJH1X4b5U9yhdp5egxHRAW30LeRftv0TMNu66swdrxdt20zWKemkoMeVLxZCvEtsx46t7ltvQZAq
+    token: EAAP998NXCyIBO2qodaB3soZAE2pZC18ld6nxbzRw0sWO5vQ3z8M6sy354DI9ZBrpGCvfJVuZBR6G3JH0wQII95mJaIb1qGSmEUAo3dchE4nVLSrh8yW4cjLeVyBwFSte2qToZAUYwfwTj5axR3FyiT9RRYjjAwbmhYwASR1NQs9bH6biwqJogNC3ytBiwAtTnzoY0vZBdXFDKdWZAVgZCTvQxzSf
   cellNumber: 414660938406899
   templateName: menuprincipal
   templateVideo: https://res.cloudinary.com/drkaz7gd6/video/upload/v1732592503/swjcivtyxi43nll7walh.mp4

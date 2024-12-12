@@ -4,16 +4,20 @@
  */
 package com.whatsup.bot.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whatsup.bot.entity.DiaReserva;
-import com.whatsup.bot.entity.Reserva;
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
+
+import com.whatsup.bot.repository.agendaRepository;
+import com.whatsup.bot.service.agenda.BusinessDaysCalculator;
+import com.whatsup.bot.worker.messageWorker;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,55 +27,61 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReservaService {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
-    private final String rutaReservas = "c:\\Cosas\\bot\\EstudioGG\\src\\test\\java\\reservas\\"; // Carpeta donde se guardan las reservas
+    private final Logger log = LoggerFactory.getLogger(ReservaService.class);
+    
+    @Autowired
+    agendaRepository repo;
 
-    public List<DiaReserva> obtenerDiasDisponibles() throws IOException {
-        File folder = new File(rutaReservas);
-        File[] files = folder.listFiles();
+    @Autowired
+    BusinessDaysCalculator calc;
 
-        // Leer cada archivo JSON para ver días con horarios disponibles
-        return files != null
-                ? Arrays.stream(files)
-                        .map(file -> {
-                            try {
-                                return objectMapper.readValue(file, DiaReserva.class);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                                return null;
-                            }
-                        })
-                        .filter(Objects::nonNull)
-                        .collect(Collectors.toList())
-                : Collections.emptyList();
+    private List<String> getHorarios() {
+        List<String> horarios = new ArrayList<>();
+        horarios.add("10:00");
+        horarios.add("11:00");
+        horarios.add("12:00");
+        horarios.add("13:00");
+        horarios.add("14:00");
+        horarios.add("15:00");
+        horarios.add("16:00");
+        horarios.add("17:00");
+
+        return horarios;
+    }
+    public void reservarDiaHoraTurno(String fecha, String hora) {
+        repo.save(fecha, hora);
     }
 
-    public void reservarTurno(String fecha, String hora, String usuario) throws IOException {
+    public List<String> getDiasDisponibles() {
+        calc.setRepository(repo);
+        List<String> dias = calc.getNextBusinessDays(LocalDate.now(), 5);
 
-        Reserva nuevaReserva = new Reserva();
-        nuevaReserva.setFecha(fecha);
-        nuevaReserva.setHora(hora);
-        nuevaReserva.setUsuario(usuario);
+        return dias;
+    }
 
-        File file = new File(rutaReservas + usuario + ".json");
-        objectMapper.writeValue(file, nuevaReserva);
+    public List<String> getTurnosLibres(String dia) {
+        DiaReserva diaReserva = repo.getOrDefault(dia);
+        return getHorasDisponibles(diaReserva.getHorariosOcupados());
+    }
+
+    private List<String> getHorasDisponibles(List<String> HorariosOcupados) {
+        List<String> diferencia = new ArrayList<>(getHorarios());
+        diferencia.removeAll(HorariosOcupados);
+        return diferencia;
+    }
+
+    public void saveDias(String telefono, List<String> opciones) {
+        repo.save(telefono, opciones, "DIAS");
     }
     
-     public void reservarDiaHoraTurno(String fecha, String hora) throws IOException {
+    public void saveHoras(String telefono, List<String> opciones) {
+        repo.save(telefono, opciones, "HORAS");
+    }
 
-        DiaReserva diaReserva = new DiaReserva();
-        diaReserva.setFecha(fecha);
-      
-       
-     
-        if (diaReserva.getHorariosOcupados().contains(hora)) {
-                throw new IllegalArgumentException("Horario no disponible");
-            }
-        diaReserva.getHorariosOcupados().add(hora);
-        
-        File file = new File(rutaReservas + fecha + ".json");
-        objectMapper.writeValue(file, diaReserva);
+    public String getDiaElegido(String telefono, String respuestaDia) {
+        List<String> dias = repo.get(telefono, "DIAS");
+        char lowerCaseLetter = Character.toLowerCase( respuestaDia.charAt(0));
+        return dias.get(lowerCaseLetter - 'a' );
 
     }
 }
-

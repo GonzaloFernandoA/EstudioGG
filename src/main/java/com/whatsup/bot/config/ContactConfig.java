@@ -12,9 +12,7 @@ public class ContactConfig {
     @Value("${server.data.events}")
     public String eventsPath;
 
-   @Value("${server.data.reservas}")
-    public String reservas;
-   
+  
    @Value("${server.data.out}")
     public String out;
    

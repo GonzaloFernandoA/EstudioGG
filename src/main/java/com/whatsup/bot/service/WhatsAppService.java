@@ -4,11 +4,9 @@
  */
 package com.whatsup.bot.service;
 
-import com.whatsup.bot.builder.AgendaDiasBuilder;
 import com.whatsup.bot.config.WhatsupSecurityConfig;
 import com.whatsup.bot.message.ButtonList.Root;
 import com.whatsup.bot.message.Component;
-import com.whatsup.bot.message.Video;
 import com.whatsup.bot.message.responsePost.ResponseRoot;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,17 +98,6 @@ public class WhatsAppService {
         this.sendObject(recipientPhoneNumber, payload);
 
         return payload;
-    }
-
-    public void enviarLista(String recipientPhoneNumber) {
-        AgendaDiasBuilder builder = new AgendaDiasBuilder();
-        Root root = builder.build();
-        root.myto = recipientPhoneNumber;
-        this.sendObject(root);
-    }
-
-    public String sendMenu() {
-        return "";
     }
 
     public ResponseEntity<Void> getResponse(@RequestBody String payload,

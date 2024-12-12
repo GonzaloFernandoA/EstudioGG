@@ -17,7 +17,7 @@ public class DateUtil1 {
             // Parse the date from the given format
             LocalDate date = LocalDate.parse(yyyymmdd, DateTimeFormatter.ofPattern("yyyyMMdd"));
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, d ", new Locale("es", "ES")); //, Locale.ROOT);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, d 'de' MMMM", new Locale("es", "ES")); //, Locale.ROOT);
             return date.format(formatter);
         } catch (DateTimeParseException e) {
             return "Invalid date format";
@@ -26,5 +26,12 @@ public class DateUtil1 {
 
     public static LocalDate Now() {
         return LocalDate.now();
+    }
+        // Capitaliza la primera letra del texto (opcional, para mejorar presentación)
+    public static String capitalize(String text) {
+        if (text == null || text.isEmpty()) {
+            return text;
+        }
+        return text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
     }
 }

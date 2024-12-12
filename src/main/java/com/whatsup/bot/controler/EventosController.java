@@ -4,10 +4,13 @@
  */
 package com.whatsup.bot.controler;
 
+import com.whatsup.bot.entity.ContactoEvento;
 import com.whatsup.bot.service.EventService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 
 /**
  *
@@ -20,9 +23,12 @@ public class EventosController {
     EventService eventService;
     
     @GetMapping("/eventos")
-    public void mostrarEventos() {
+    public String mostrarEventos(Model model) {
         
-        eventService.getAll();
+        List<ContactoEvento> eventos = eventService.combinarListas();
+        model.addAttribute("objetos", eventos );
+        
+        return "eventos";
     }
 
 }

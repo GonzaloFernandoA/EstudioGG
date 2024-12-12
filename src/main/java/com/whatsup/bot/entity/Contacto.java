@@ -9,9 +9,14 @@ package com.whatsup.bot.entity;
  * @author Gonzalo_Avalos
  */
 public class Contacto {
+
     private String nombre;
     private String apellido;
-    private String telefono; 
+    private String telefono;
+
+    public Contacto() {
+
+    }
 
     public Contacto(String nombre, String apellido, String telefono) {
         this.nombre = nombre;
@@ -60,5 +65,5 @@ public class Contacto {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
+
 }

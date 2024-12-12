@@ -59,7 +59,6 @@ public class contactosRepository {
 
         List<T> listaObjetos = new ArrayList<>();
         Path directorio = Paths.get(pathDirectorio);
-
         
         if (!Files.isDirectory(directorio)) {
             throw new IllegalArgumentException("El path proporcionado no es un directorio válido.");
@@ -69,10 +68,10 @@ public class contactosRepository {
 
         for (Path archivo : stream) {
             if (Files.isRegularFile(archivo)) {
-                String contenido = Files.readString(archivo);
-
+                //String contenido = Files.readString(archivo);
+                logger.info(archivo.toString());
                 // Llamada al método estático que convierte el contenido en un objeto de la clase deseada
-                T objeto = JsonUtils.readJsonFromFile(contenido, tipoClase);
+                T objeto = JsonUtils.readJsonFromFile(archivo.toString().replaceAll( ".json", ""), tipoClase);
 
                 listaObjetos.add(objeto);
             }

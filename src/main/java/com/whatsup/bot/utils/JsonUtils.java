@@ -4,11 +4,14 @@
  */
 package com.whatsup.bot.utils;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 /**
  *
@@ -17,13 +20,24 @@ import org.slf4j.LoggerFactory;
 public class JsonUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(JsonUtils.class);
-    
+
     public static <T> T readJsonFromFile(String file, Class<T> clazz) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(new File(file + ".json"), clazz);
         } catch (IOException e) {
-            logger.error("Failed to read JSON from file: " + file+ "," + e.getMessage());
+            logger.error("Failed to read JSON from file: " + file + "," + e.getMessage());
+            return null;
+        }
+    }
+
+    public static <T> List<T> readJsonFromFileToList(String file, Class<T> clazz) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            return objectMapper.readValue(new File(file + ".json"), new TypeReference<List<T>>() {} );
+        } catch (IOException ex) {
+            logger.error("Failed to read JSON from file: " + file + "," + ex.getMessage());
             return null;
         }
     }
@@ -35,6 +49,16 @@ public class JsonUtils {
         } catch (IOException e) {
             throw new RuntimeException("Failed to write JSON to file: " + filePath, e);
         }
-         logger.info("Archivo guardado." + filePath );
+        logger.info("Archivo guardado." + filePath);
+    }
+    
+    public static <T> T JSonToClass(String cadena, Class<T> clazz) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(cadena, clazz);
+        } catch (IOException e) {
+            logger.error("Failed to read JSON from content: " + cadena + "," + e.getMessage());
+            return null;
+        }
     }
 }

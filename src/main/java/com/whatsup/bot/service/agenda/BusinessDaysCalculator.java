@@ -1,5 +1,6 @@
 package com.whatsup.bot.service.agenda;
 
+import com.whatsup.bot.repository.agendaRepository;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
@@ -11,18 +12,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class BusinessDaysCalculator {
 
- public static List<String> getNextBusinessDays(int numberOfDays) {
+    private agendaRepository repository;
+
+    public void setRepository(agendaRepository repo) {
+        repository = repo;
+    }
+
+    public List<String> getNextBusinessDays(LocalDate today, int numberOfDays) {
         List<String> businessDays = new ArrayList<>();
-        LocalDate currentDate = DateUtil1.Now();
+        LocalDate currentDate = today;
 
         // Loop until we get the requested number of business days
         while (businessDays.size() < numberOfDays) {
             // Move to next day
             currentDate = currentDate.plusDays(1);
 
-            // Check if the day is a weekday
-            if (currentDate.getDayOfWeek() != DayOfWeek.SATURDAY && currentDate.getDayOfWeek() != DayOfWeek.SUNDAY) {
-                // Format the date as YYYYMMDD
+            if (currentDate.getDayOfWeek() != DayOfWeek.SATURDAY && currentDate.getDayOfWeek() != DayOfWeek.SUNDAY
+                    && this.TieneTurnosLibres(currentDate)) {
+
                 String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
                 businessDays.add(formattedDate);
             }
@@ -30,9 +37,13 @@ public class BusinessDaysCalculator {
         return businessDays;
     }
 
-    // Capitaliza la primera letra del texto (opcional, para mejorar presentación)
-    public static String capitalize(String text) {
-        if (text == null || text.isEmpty()) return text;
-        return text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
+    private Boolean TieneTurnosLibres(LocalDate currentDate) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String fechaFormateada = currentDate.format(formatter);
+
+        return repository.getOrDefault(fechaFormateada).TieneHorariosDisponibles();
     }
+
+
 }

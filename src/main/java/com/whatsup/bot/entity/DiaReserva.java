@@ -12,8 +12,8 @@ import java.util.List;
  * @author Gonzalo_Avalos
  */
 public class DiaReserva {
-    private String fecha; // formato YYYYMMDD
-    private List<String> horariosOcupados  = new ArrayList<>(); // Ejemplo: ["10:00", "11:00", "12:00", ...]
+    private String fecha; 
+    private List<String> horariosOcupados = new ArrayList<>();
 
     /**
      * @return the fecha
@@ -34,11 +34,13 @@ public class DiaReserva {
         return horariosOcupados;
     }
 
-    /**
-     * @param horariosDisponibles the horariosDisponibles to set
-     */
     public void setHorariosOcupados(List<String> horariosOcupados) {
         this.horariosOcupados = horariosOcupados;
+    }
+    
+    public Boolean TieneHorariosDisponibles()
+    {
+        return this.getHorariosOcupados().size() < 8 ;
     }
     
 }
