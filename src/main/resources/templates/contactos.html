@@ -8,8 +8,13 @@
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 const alerta = document.getElementById('alerta');
+                const texto = document.querySelector('#alerta span').textContent;
                 
                 if (alerta) {
+                    if (texto == "El contacto se guardó con éxito") {
+                        alerta.style.backgroundColor = '#95df95';
+                    }
+                    
                     setTimeout(() => {
                         let opacidad = 1;
                         const efectoDeDesvanecimiento = setInterval(() => {
