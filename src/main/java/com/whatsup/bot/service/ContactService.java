@@ -34,7 +34,8 @@ public class ContactService {
 
 	        if (file.exists()) {
                     logger.error("El archivo ya existe. " + file.getName());
-	            return "redirect:/error?message=El archivo ya existe";
+	            redirectAttributes.addFlashAttribute("alerta", "ERROR: El contacto ya existe");
+	            return "redirect:/contactos";
 	        }
 
 	        Map<String, String> data = new HashMap<>();
