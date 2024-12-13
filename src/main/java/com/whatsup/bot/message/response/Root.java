@@ -11,6 +11,6 @@ import java.util.ArrayList;
  * @author Gonzalo_Avalos
  */
 public class Root {
-        public String object;
+    public String object;
     public ArrayList<Entry> entry;
 }

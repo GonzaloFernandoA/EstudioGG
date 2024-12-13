@@ -9,10 +9,12 @@ package com.whatsup.bot.message.response;
  * @author Gonzalo_Avalos
  */
 public class Message {
-        public Context context;
+
+    public Context context;
     public String from;
     public String id;
     public String timestamp;
     public String type;
     public Button button;
+        public Text text;
 }

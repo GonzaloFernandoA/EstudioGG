@@ -50,69 +50,26 @@
 
     <h1>Eventos</h1>
 
-    <table>
+  <table>
         <thead>
             <tr>
-                <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Evento</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Acción</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Juan</td>
-                <td>Pérez</td>
-                <td><img src="https://img.icons8.com/emoji/48/000000/double-check-emoji.png" alt="Mensaje Leído" class="icon" title="Mensaje Leído"></td>
-            </tr>
-            <tr>
-                <td>María</td>
-                <td>González</td>
-                <td><img src="https://img.icons8.com/ios-filled/50/000000/phone.png" alt="Llamar Ahora" class="icon" title="Llamar Ahora"></td>
-            </tr>
-            <tr>
-                <td>Lucas</td>
-                <td>Rodríguez</td>
-                <td>Vacio</td>
-            </tr>
-            <tr>
-                <td>Ana</td>
-                <td>Martínez</td>
-                <td><img src="https://img.icons8.com/ios-filled/50/000000/calendar.png" alt="Turno Agendado" class="icon" title="Turno Agendado: 10:30 AM"></td>
-            </tr>
-            <tr>
-                <td>Pablo</td>
-                <td>Fernández</td>
-                <td>No Interesado</td>
-            </tr>
-            <tr>
-                <td>Laura</td>
-                <td>Gutiérrez</td>
-                <td><img src="https://img.icons8.com/ios-filled/50/000000/calendar.png" alt="Turno Agendado" class="icon" title="Turno Agendado: 2:00 PM"></td>
-            </tr>
-            <tr>
-                <td>Diego</td>
-                <td>Sánchez</td>
-                <td><img src="https://img.icons8.com/emoji/48/000000/double-check-emoji.png" alt="Mensaje Leído" class="icon" title="Mensaje Leído"></td>
-            </tr>
-            <tr>
-                <td>Carla</td>
-                <td>Herrera</td>
-                <td><img src="https://img.icons8.com/ios-filled/50/000000/phone.png" alt="Llamar Ahora" class="icon" title="Llamar Ahora"></td>
-            </tr>
-            <tr>
-                <td>Pedro</td>
-                <td>Morales</td>
-                <td>No Interesado</td>
-            </tr>
-            <tr>
-                <td>Sofía</td>
-                <td>Ruiz</td>
-                <td><img src="https://img.icons8.com/ios-filled/50/000000/calendar.png" alt="Turno Agendado" class="icon" title="Turno Agendado: 11:00 AM"></td>
+            <tr th:each="objeto : ${objetos}">
+                <td th:text="${objeto.apellido}"></td>
+                <td th:text="${objeto.nombre}"></td>
+                <td th:text="${objeto.telefono}"></td>
+                <td th:text="${objeto.evento}"></td>
             </tr>
         </tbody>
     </table>
 
-    <a href="index.html">
+    <a href="/">
         <img src="https://img.icons8.com/ios-filled/50/000000/home.png" alt="Home" class="home-icon" title="Volver a Inicio">
     </a>
 </body>

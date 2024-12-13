@@ -1,0 +1,7 @@
+{
+  "fechasEnviadas" : [ "20241012", "20241013", "20241014" ],
+  "fechaReservada" : "20241012",
+  "horasEnviadas" : [ "10:00", "11:00", "12:00" ],
+  "horaReservada" : "12:00",
+  "confirmado" : ""
+}
