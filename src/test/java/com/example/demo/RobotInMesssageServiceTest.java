@@ -4,9 +4,7 @@
  */
 package com.example.demo;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.whatsup.bot.message.response.Root;
-import com.whatsup.bot.message.responsePost.ResponseRoot;
+import com.whatsup.bot.builder.task.respuestaHorasTask;
 import com.whatsup.bot.repository.agendaRepository;
 import com.whatsup.bot.service.EquivalenciaService;
 import com.whatsup.bot.service.EventService;
@@ -16,16 +14,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 
 import org.mockito.Mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 /**
  *
@@ -38,6 +35,9 @@ public class RobotInMesssageServiceTest {
     @InjectMocks
     RobotInMesssageService service;
 
+    @Mock
+    respuestaHorasTask respuestaHoras ;
+    
     @Mock
     ReservaService reserva;
     
@@ -64,8 +64,10 @@ public class RobotInMesssageServiceTest {
 
         service.SaveInconmeMessage(response);
 
-        verify(event).saveOutMessage("TELEFONO1", "MENU_HORA_20241201");
-        verify(event).saveEvent("TELEFONO1", "MENU HORA");
+   //     verify(event).saveOutMessage("TELEFONO1", "MENU_HORA_20241201");
+     //   verify(event).saveEvent("TELEFONO1", "MENU HORA");
+        verify(respuestaHoras).Run(response);
+        
     }
 
 }

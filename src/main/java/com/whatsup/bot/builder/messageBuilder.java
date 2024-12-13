@@ -9,6 +9,8 @@ import com.whatsup.bot.service.agenda.DateUtil1;
 import com.whatsup.bot.service.trackingService;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +21,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class messageBuilder {
 
+    private final Logger log = LoggerFactory.getLogger(messageBuilder.class);
+    
     @Autowired
     trackingService tracking;
 
@@ -64,7 +68,7 @@ public class messageBuilder {
         String diaTexto = DateUtil1.convertDateToText(dia);
         String hora = tracking.get(telefono).getHoraReservada();
         String message = "Confirma el turno para el día *" + DateUtil1.capitalize(diaTexto) + "* a la hora *"
-                + hora + "* ?" + System.lineSeparator() + System.lineSeparator()  ;
+                + hora + "* ?" +System.lineSeparator() + System.lineSeparator()  ;
         
         
          List<String> opciones = new ArrayList<>();
@@ -78,7 +82,7 @@ public class messageBuilder {
             label[0]++;
         });
 
-        String result = String.join(System.lineSeparator(), diasConvert);
+        String result = String.join( System.lineSeparator(), diasConvert);
         
         return message + result;    }
 }

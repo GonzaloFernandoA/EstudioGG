@@ -38,9 +38,12 @@ public class respuestaHorasTask extends basicTask {
         Root message = this.getMessage(incomingMessage);
         String respuesta = message.entry.get(0).changes.get(0).value.messages.get(0).text.body;
 
-        if (Valid(respuesta)) {
-            String telefonowa_id = message.entry.get(0).changes.get(0).value.contacts.get(0).wa_id;
+         String telefonowa_id = message.entry.get(0).changes.get(0).value.contacts.get(0).wa_id;
             String telefono = equivalencia.get(telefonowa_id);
+        
+        
+        if (Valid(respuesta)) {
+
 
             if (tracking.isReservaDiasIsBlank(telefono)) {
                 String diaElegido = tracking.getFechaSegunOpcion(telefono, respuesta);
@@ -64,11 +67,14 @@ public class respuestaHorasTask extends basicTask {
  
                     event.saveOutMessage(telefono, "Turno Confirmado. Gracias");
                 } 
-                    else
+                else if ("A".equals(respuesta)) 
+                    
                 {
                     tracking.Delete(telefono);
                     event.saveOutMessage(telefono, "ENVIAR_ENCUESTA");
                 }
+                else
+                {                    event.saveOutMessage(telefono, "Respuesta inválida.");}
                     
             }
         }

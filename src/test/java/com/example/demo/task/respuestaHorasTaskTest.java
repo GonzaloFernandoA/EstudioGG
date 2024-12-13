@@ -4,7 +4,6 @@
  */
 package com.example.demo.task;
 
-
 import com.whatsup.bot.builder.task.respuestaHorasTask;
 import com.whatsup.bot.service.EquivalenciaService;
 import com.whatsup.bot.service.EventService;
@@ -20,6 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -33,7 +33,7 @@ public class respuestaHorasTaskTest {
 
     @Mock
     trackingService tracking;
-    
+
     @Mock
     EventService event;
 
@@ -58,15 +58,16 @@ public class respuestaHorasTaskTest {
         verify(reserva, never()).getDiaElegido(any(), any());
     }
 
-        @Test
+    @Test
     void TareaENCUESTAOKValidacionTest() throws IOException {
-
+        
+        when(equivalencia.get(any())).thenReturn("TELEFONO1");
+        
         String response = new String(Files.readAllBytes(Paths.get("src/test/java/resources/respuestacorrecta.json")));
         task.Run(response);
-        verify(event).saveEvent(any(), any());
-        verify(equivalencia).get(any());
-        verify(reserva).getDiaElegido(any(), any());
+        verify(event).saveOutMessage("TELEFONO1", "Respuesta inválida.");
+    
 
     }
-    
+
 }

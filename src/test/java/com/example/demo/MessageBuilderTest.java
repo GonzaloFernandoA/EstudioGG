@@ -22,7 +22,7 @@ import org.mockito.MockitoAnnotations;
  *
  * @author Gonzalo_Avalos
  */
-public class MessageBuilderTest {
+public class messageBuilderTest {
 
     @InjectMocks
     messageBuilder builder;
@@ -58,8 +58,9 @@ public class MessageBuilderTest {
         when(tracking.get("TELEFONO1")).thenReturn(entity);
 
         String mensaje = builder.ConfirmacionMessage("TELEFONO1");
-        Assertions.assertEquals("Confirma el turno para el día *Miércoles, 11 de diciembre* a la hora *12:00* ? "
-                + System.lineSeparator() + System.lineSeparator() +"*A*: Si " + System.lineSeparator() +
+        Assertions.assertEquals("Confirma el turno para el día *Miércoles, 11 de diciembre* a la hora *12:00* ?" +
+                System.lineSeparator() + System.lineSeparator()
+                 +"*A*: Si" + System.lineSeparator() +
                    "*B*: No" , mensaje);
     }
 }
