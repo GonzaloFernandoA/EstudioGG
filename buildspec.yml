@@ -24,9 +24,9 @@ jobs:
           distribution: 'corretto'
           java-version: '17'
 
-      # Hacer el script de Gradle ejecutable
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
+      # Asegurar permisos de ejecución para gradlew
+      - name: Grant Execute Permission for Gradle Wrapper
+        run: chmod +x gradlew
 
       # Compilar el proyecto
       - name: Build with Gradle
