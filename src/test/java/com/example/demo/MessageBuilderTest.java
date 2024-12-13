@@ -22,7 +22,7 @@ import org.mockito.MockitoAnnotations;
  *
  * @author Gonzalo_Avalos
  */
-public class messageBuilderTest {
+public class MessageBuilderTest {
 
     @InjectMocks
     messageBuilder builder;
