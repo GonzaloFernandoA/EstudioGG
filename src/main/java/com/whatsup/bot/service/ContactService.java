@@ -27,7 +27,7 @@ public class ContactService {
 	@Autowired
 	ContactConfig config;
 	
-	public String save(String nombre, String apellido, String telefono)
+	public String save(String nombre, String apellido, String telefono, RedirectAttributes redirectAttributes)
 	{
 	      String fileName = telefono + ".json";
 	        File file = Paths.get(config.path, fileName).toFile();
