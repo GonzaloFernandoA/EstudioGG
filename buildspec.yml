@@ -26,7 +26,10 @@ jobs:
 
       # Asegurar permisos de ejecución para gradlew
       - name: Grant Execute Permission for Gradle Wrapper
-        run: chmod +x gradlew
+        run: |
+          ls -l gradlew
+          chmod +x gradlew
+          ls -l gradlew
 
       # Compilar el proyecto
       - name: Build with Gradle
