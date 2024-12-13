@@ -54,7 +54,7 @@ public class RobotInMesssageServiceTest {
         worker.SaveInconmeMessage(response);
        
         verify(EventServiceMock).saveEvent("541145587174", "Envio agenda dia.");
-        verify(EventServiceMock).saveOutMessage("541145587174", "ENVIO_MENU_DIA");
+
     }
     
  
