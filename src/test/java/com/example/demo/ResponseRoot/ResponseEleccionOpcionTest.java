@@ -4,7 +4,6 @@
  */
 package com.example.demo.ResponseRoot;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whatsup.bot.message.response.Root;
 import java.io.IOException;
@@ -30,10 +29,7 @@ public class ResponseEleccionOpcionTest {
 
         String response = new String(Files.readAllBytes(Paths.get("src/test/java/resources/respuestaEligioDIa.json")));
         
-        JsonNode rootNode = objectMapper.readTree(response);
-        // Identificar el tipo de objeto
-        String type = rootNode.get("type").asText();
-        
+       
         Root root = objectMapper.readValue(response, Root.class);
         Assertions.assertEquals("text", root.entry.get(0).changes.get(0).value.messages.get(0).type);
       

@@ -54,7 +54,7 @@ public class respuestaHorasTaskTest {
         String response = new String(Files.readAllBytes(Paths.get("src/test/java/resources/respuestaIncorrecta.json")));
         task.Run(response);
         verify(event, never()).saveEvent(any(), any());
-        verify(equivalencia, never()).get(any());
+        verify(equivalencia).get(any());
         verify(reserva, never()).getDiaElegido(any(), any());
     }
 
