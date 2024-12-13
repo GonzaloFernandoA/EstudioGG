@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author Gonzalo_Avalos
  */
 public class Entry {
-      public String id;
-    public ArrayList<Change> changes;  
+
+    public String id;
+    public ArrayList<Change> changes;
 }

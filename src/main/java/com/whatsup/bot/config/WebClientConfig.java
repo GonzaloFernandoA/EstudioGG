@@ -29,10 +29,11 @@ public class WebClientConfig {
         return builder
                 .baseUrl(baseUrl)
                 .filter(logRequest()) // Registrar la solicitud
-                .filter(logResponse()) // Registrar la respuesta
                 .defaultHeader("Authorization", "Bearer " + token)
                 .defaultHeader("Content-Type", "application/json")
                 .build();
+        
+     //     .filter(logResponse()) // Registrar la respuesta
     }
 
     private ExchangeFilterFunction logRequest() {

@@ -9,6 +9,7 @@ package com.whatsup.bot.message.response;
  * @author Gonzalo_Avalos
  */
 public class Change {
-        public Value value;
+
+    public Value value;
     public String field;
 }

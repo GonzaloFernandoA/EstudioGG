@@ -4,11 +4,10 @@
  */
 package com.whatsup.bot.service;
 
-import com.whatsup.bot.builder.AgendaDiasBuilder;
 import com.whatsup.bot.config.WhatsupSecurityConfig;
 import com.whatsup.bot.message.ButtonList.Root;
 import com.whatsup.bot.message.Component;
-import com.whatsup.bot.message.Video;
+import com.whatsup.bot.message.responsePost.ResponseRoot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 /**
  *
@@ -31,6 +29,8 @@ import reactor.core.publisher.Mono;
 @Service
 public class WhatsAppService {
 
+    @Autowired
+    RobotInMesssageService Service;
 
     @Autowired
     WhatsupSecurityConfig config;
@@ -55,30 +55,27 @@ public class WhatsAppService {
         List<Component> componentes = new ArrayList<>();
         Component componente = new Component();
         componentes.add(componente);
-        
-        template.put("components",componentes );
-
+        template.put("components", componentes);
         body.put("template", template);
 
-
-            this.sendObject(body);
+        this.sendObject(numeroDestino, body);
     }
-    
-    public void sendObject(Map<String, Object> mensaje )
-    {
+
+    public void sendObject(String numeroDestino, Map<String, Object> mensaje) {
+
                 this.webClient.post()
                 .header("Content-Type", "application/json")
                 .bodyValue(mensaje)
                 .retrieve()
-                .bodyToMono(String.class)
-                .doOnSuccess(response -> System.out.println("Mensaje enviado correctamente: " + response))
+                .bodyToMono(ResponseRoot.class)
+                .doOnSuccess(response -> Service.SaveInconmeMessage(response) )
                 .doOnError(error -> System.err.println("Error al enviar el mensaje: " + error.getMessage()))
                 .subscribe();
+  
     }
-    
-        public void sendObject(Root mensaje )
-    {
-                this.webClient.post()
+
+    public void sendObject(Root mensaje) {
+        this.webClient.post()
                 .header("Content-Type", "application/json")
                 .bodyValue(mensaje)
                 .retrieve()
@@ -98,22 +95,9 @@ public class WhatsAppService {
         text.put("body", messageText);
         payload.put("text", text);
 
-        this.sendObject(payload);
-        
-        return payload;
-    }
+        this.sendObject(recipientPhoneNumber, payload);
 
-    public void enviarLista(String recipientPhoneNumber )
-    {
-        AgendaDiasBuilder builder = new AgendaDiasBuilder();
-        Root root = builder.build();
-        root.myto = recipientPhoneNumber;
-            this.sendObject(root);
-    }
-    
-    
-    public String sendMenu() {
-        return "";
+        return payload;
     }
 
     public ResponseEntity<Void> getResponse(@RequestBody String payload,

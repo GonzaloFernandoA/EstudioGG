@@ -4,10 +4,14 @@
  */
 package com.whatsup.bot.builder;
 
-import com.whatsup.bot.service.agenda.BusinessDaysCalculator;
+import com.whatsup.bot.service.ReservaService;
 import com.whatsup.bot.service.agenda.DateUtil1;
+import com.whatsup.bot.service.trackingService;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,14 +21,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class messageBuilder {
 
-    public String AgendaBuild() {
-        List<String> dias = BusinessDaysCalculator.getNextBusinessDays(5);
+    private final Logger log = LoggerFactory.getLogger(messageBuilder.class);
+    
+    @Autowired
+    trackingService tracking;
+
+    @Autowired
+    ReservaService service;
+
+    public void setService(ReservaService serviceMock) {
+        service = serviceMock;
+    }
+
+    public String AgendaBuild(List<String> dias) {
         List<String> diasConvert = new ArrayList<>();
 
         final char[] label = {'A'};
 
         dias.forEach(item -> {
-            diasConvert.add(label[0] + ": " + BusinessDaysCalculator.capitalize(DateUtil1.convertDateToText(item)));
+            diasConvert.add("*" + label[0] + "*: " + DateUtil1.capitalize(DateUtil1.convertDateToText(item)));
             label[0]++;
         });
 
@@ -32,27 +47,42 @@ public class messageBuilder {
         return result;
     }
 
-    public String HorarioBuild() {
+    public String AgendaBuildHoras(List<String> dias) {
+        List<String> diasConvert = new ArrayList<>();
 
-        List<String> Horas = new ArrayList<>();
-        List<String> HorasConvert = new ArrayList<>();
-        Horas.add("10:00");
-        Horas.add("11:00");
-        Horas.add("12:00");
-        Horas.add("13:00");
-        Horas.add("14:00");
-        Horas.add("15:00");
-        Horas.add("16:00");
-        Horas.add("17:00");
+        final char[] label = {'A'};
 
-        final char[] label = {'1'};
-
-        Horas.forEach(item -> {
-            HorasConvert.add(label[0] + ": " + item);
+        dias.forEach(item -> {
+            diasConvert.add("*" + label[0] + "*: " + item);
             label[0]++;
         });
 
-        String result = String.join(System.lineSeparator(), HorasConvert);
+        String result = String.join(System.lineSeparator(), diasConvert);
         return result;
     }
+
+    public String ConfirmacionMessage(String telefono) {
+
+        List<String> diasConvert = new ArrayList<>();
+        String dia = tracking.get(telefono).getFechaReservada();
+        String diaTexto = DateUtil1.convertDateToText(dia);
+        String hora = tracking.get(telefono).getHoraReservada();
+        String message = "Confirma el turno para el día *" + DateUtil1.capitalize(diaTexto) + "* a la hora *"
+                + hora + "* ?" +System.lineSeparator() + System.lineSeparator()  ;
+        
+        
+         List<String> opciones = new ArrayList<>();
+        opciones.add("Si");
+        opciones.add("No");
+        
+        final char[] label = {'A'};
+
+        opciones.forEach(item -> {
+            diasConvert.add("*" + label[0] + "*: " + item);
+            label[0]++;
+        });
+
+        String result = String.join( System.lineSeparator(), diasConvert);
+        
+        return message + result;    }
 }

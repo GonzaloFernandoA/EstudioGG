@@ -18,11 +18,8 @@ public class HorarioSender {
     @Autowired 
     WhatsAppService sender;
     
-    @Autowired
-    messageBuilder builder;
-    
     public void Send( String telefono )
     {
-        sender.sendMessage(telefono, "Elija una hora para entrevista:" + System.lineSeparator() + builder.HorarioBuild());
+        sender.sendMessage(telefono, "Elija una hora para entrevista:" + System.lineSeparator() );
     }
 }

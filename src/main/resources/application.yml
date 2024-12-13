@@ -1,13 +1,18 @@
 server:
   port: 20000
   data:
-    path: C:/ruta/archivos/
-    events: C:/ruta/archivos/eventos
+    contactos: C:/ruta/archivos/contactos/
+    events: C:/ruta/archivos/eventos/
+    reservas: C:/ruta/archivos/turnos/
+    out: C:/ruta/archivos/out/
+    response: C:/ruta/archivos/response/
+    equivalencia: C:/ruta/archivos/equivalencia/
+    tracking: C:/ruta/archivos/tracking/
 
 whatsapp:
   api:
     base-url: https://graph.facebook.com/v21.0/414660938406899/messages
-    token: EAAP998NXCyIBO1ussZCi0cJCrdBZC347iY0sH29rtfFIfhc93kZCpq7Sgroyc56XrVIu98YvOIx8zpacxnBKdQSoqpwhhZB5GXIFjZBvt7Qgw00hzPp2H0WqGBnAMGg645mSeBfdQCMxYJewCLJA0QatRSxxhaae9RZC3N20J8coHkQs7BIYM1uVXR1lijCzP0v1HKCTlbP2cxEvyDaoIymlc9aQZDZD
+    token: EAAP998NXCyIBOwkQpGBJuEnYUnIp0CCZCbft0dBZCNr1kOLeFy35SCyEUXOEAnMkK3BZA3PnxRxQwZAWL6DKJS9qhkEF7s0xNWaOBxBWtSccRvZCyZCX7tATKgqiiZCa7ku8PWmoUfqhHjITAYAeYzVPz6V6Vgpqy0jAfJw1jBgNKSJCwBYLpYfsinftmj90rF0CqZBxlJlLJODWIHa8KiD5H9hVBgZDZD
   cellNumber: 414660938406899
   templateName: menuprincipal
   templateVideo: https://res.cloudinary.com/drkaz7gd6/video/upload/v1732592503/swjcivtyxi43nll7walh.mp4
