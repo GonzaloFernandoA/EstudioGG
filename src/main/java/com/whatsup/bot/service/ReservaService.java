@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReservaService {
 
-    private final Logger log = LoggerFactory.getLogger(ReservaService.class);
+  //  private final Logger log = LoggerFactory.getLogger(ReservaService.class);
     
     @Autowired
     agendaRepository repo;
