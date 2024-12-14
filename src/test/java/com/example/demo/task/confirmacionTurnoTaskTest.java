@@ -34,14 +34,28 @@ public class confirmacionTurnoTaskTest {
     @Test
     void validTest() throws IOException {
 
-        Assertions.assertTrue(task.IsValid("1"));
+        Assertions.assertTrue(task.IsValid("A"));
 
     }
 
     @Test
     void valid2Test() throws IOException {
 
-        Assertions.assertTrue(task.IsValid("2"));
+        Assertions.assertTrue(task.IsValid("B"));
+
+    }
+    
+        @Test
+    void valid2Testa() throws IOException {
+
+        Assertions.assertTrue(task.IsValid("a"));
+
+    }
+    
+        @Test
+    void valid2Testb() throws IOException {
+
+        Assertions.assertTrue(task.IsValid("b"));
 
     }
 

@@ -20,8 +20,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class respuestaHorasTask extends basicTask {
+
     private static final Logger logger = LoggerFactory.getLogger(respuestaHorasTask.class);
-    
+
     @Autowired
     trackingService tracking;
 
@@ -38,12 +39,10 @@ public class respuestaHorasTask extends basicTask {
         Root message = this.getMessage(incomingMessage);
         String respuesta = message.entry.get(0).changes.get(0).value.messages.get(0).text.body;
 
-         String telefonowa_id = message.entry.get(0).changes.get(0).value.contacts.get(0).wa_id;
-            String telefono = equivalencia.get(telefonowa_id);
-        
-        
-        if (Valid(respuesta)) {
+        String telefonowa_id = message.entry.get(0).changes.get(0).value.contacts.get(0).wa_id;
+        String telefono = equivalencia.get(telefonowa_id);
 
+        if (Valid(respuesta)) {
 
             if (tracking.isReservaDiasIsBlank(telefono)) {
                 String diaElegido = tracking.getFechaSegunOpcion(telefono, respuesta);
@@ -51,31 +50,27 @@ public class respuestaHorasTask extends basicTask {
                 tracking.saveFechasReservada(telefono, diaElegido);
                 event.saveEvent(telefono, "MENU HORA");
             } else if (tracking.isReservaHorasIsBlank(telefono)) {
-                    String horaElegida = tracking.getHoraSegunOpcion(telefono, respuesta);
-                    tracking.saveHoraReservada(telefono, horaElegida);
-                    event.saveOutMessage(telefono, "CONFIRMACION_TURNO");
-            } else if (!tracking.IsConfirmado(telefono))
-            {
-                if( "A".equals(respuesta))  { 
+                String horaElegida = tracking.getHoraSegunOpcion(telefono, respuesta);
+                tracking.saveHoraReservada(telefono, horaElegida);
+                event.saveOutMessage(telefono, "CONFIRMACION_TURNO");
+            } else if (!tracking.IsConfirmado(telefono)) {
+                if ("A".equals(respuesta) || "a".equals(respuesta)) {
                     tracking.Confirmar(telefono);
-                    
-                    logger.info("fecha reservada:" +tracking.get(telefono).getFechaReservada());
-                    logger.info("hora reservada:" +tracking.get(telefono).getHoraReservada());
+
+                    logger.info("fecha reservada:" + tracking.get(telefono).getFechaReservada());
+                    logger.info("hora reservada:" + tracking.get(telefono).getHoraReservada());
                     reserva.reservarDiaHoraTurno(tracking.get(telefono).getFechaReservada(), tracking.get(telefono).getHoraReservada());
-                    event.saveEvent(telefono, "Turno Confirmado:" +
-                            DateUtil1.convertDateToText(tracking.get(telefono).getFechaReservada()) + " hora " + tracking.get(telefono).getHoraReservada());
- 
-                    event.saveOutMessage(telefono, "Turno Confirmado. Gracias");
-                } 
-                else if ("A".equals(respuesta)) 
-                    
-                {
+                    event.saveEvent(telefono, "Turno Confirmado:"
+                            + DateUtil1.convertDateToText(tracking.get(telefono).getFechaReservada()) + " hora " + tracking.get(telefono).getHoraReservada());
+
+                    event.saveOutMessage(telefono, "Turno Confirmado. Gracias \uD83D\uDC4D"  );
+                } else if ("B".equals(respuesta) || "b".equals(respuesta)) {
                     tracking.Delete(telefono);
                     event.saveOutMessage(telefono, "ENVIAR_ENCUESTA");
+                } else {
+                    event.saveOutMessage(telefono, "Respuesta inválida.");
                 }
-                else
-                {                    event.saveOutMessage(telefono, "Respuesta inválida.");}
-                    
+
             }
         }
     }
