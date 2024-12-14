@@ -10,7 +10,6 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.verify;
@@ -25,7 +24,8 @@ class DemoApplicationTests {
     @Mock
     agendaRepository repo; 
     
-        @BeforeEach
+    
+    @BeforeEach
     public void init() {
         MockitoAnnotations.openMocks(this);
     }
@@ -53,7 +53,6 @@ class DemoApplicationTests {
         List<String> dias = new ArrayList<>();
         dias.add("20241128");
         String diasToText = builder.AgendaBuild(dias);
-
         Assertions.assertEquals("*A*: Jueves, 28 de noviembre", diasToText);
     }
 
@@ -61,10 +60,8 @@ class DemoApplicationTests {
     void GuardarDiaReservaTest() throws IOException {
 
         reserva.reservarDiaHoraTurno("20241201", "15:00");
-        
-        
         verify(repo).save("20241201", "15:00");
-       
+      
     }
 
 }
