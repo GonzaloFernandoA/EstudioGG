@@ -80,8 +80,8 @@ public class messageWorkerTest {
         when(reserva.getDiasDisponibles()).thenReturn(diasDisponibles);
         when(builder.AgendaBuild(Mockito.any())).thenReturn("MENSAJEAGENDA");
         worker.ejecutarTarea("TELEFONO", "MENU_DIA");
-        verify(service).sendMessage("TELEFONO", "Elija un día para que nos comuniquemos con usted (indíque la letra) : " + 
-        System.lineSeparator()+ System.lineSeparator() + "MENSAJEAGENDA" );
+        verify(service).sendMessage("TELEFONO", "Elija un día para que nos comuniquemos con usted (indíque la letra) :"  + 
+        System.lineSeparator()+ "\u2B07" +System.lineSeparator() + "MENSAJEAGENDA" );
         verify(tracking).saveFechasEnviadas("TELEFONO", diasDisponibles);
     }
     
@@ -100,8 +100,8 @@ public class messageWorkerTest {
         
         worker.ejecutarTarea("TELEFONO", "MENU_HORA_20241012");
         
-        verify(service).sendMessage("TELEFONO", "Elija una hora para que nos comuniquemos con usted (indíque la letra) : " +
-                        System.lineSeparator()+ System.lineSeparator() + "MENSAJEAGENDA" );
+        verify(service).sendMessage("TELEFONO", "Elija una hora para que nos comuniquemos con usted (indíque la letra) :" +
+                    System.lineSeparator()+ "\u2B07" +System.lineSeparator() + "MENSAJEAGENDA" );
         verify(tracking).saveHorasEnviadas("TELEFONO", horasDisponibles);
     }
 }

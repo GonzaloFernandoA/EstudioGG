@@ -23,7 +23,8 @@ public class ConfirmacionTurnoTask {
     ReservaService reserva;
 
     public Boolean IsValid(String respuesta) {
-        return ("1".equals(respuesta) || "2".equals(respuesta));
+        return ("A".equals(respuesta) || "a".equals(respuesta)  || "B".equals(respuesta)   || "b".equals(respuesta)  
+                );
     }
 
     public void Process(String telefono) {
