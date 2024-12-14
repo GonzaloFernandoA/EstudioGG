@@ -5,6 +5,7 @@
 package com.example.demo;
 
 import com.whatsup.bot.builder.messageBuilder;
+import com.whatsup.bot.entity.Tracking;
 import com.whatsup.bot.service.EventService;
 import com.whatsup.bot.service.ReservaService;
 import com.whatsup.bot.service.RobotInMesssageService;
@@ -90,11 +91,15 @@ public class messageWorkerTest {
         List<String> horasDisponibles = new ArrayList<>();
         horasDisponibles.add("HORA1");
         horasDisponibles.add("HORA1");
+        Tracking track = new Tracking();
+        track.setFechaReservada("20241012");
         
         when(reserva.getTurnosLibres(any())).thenReturn(horasDisponibles);
-         when(builder.AgendaBuildHoras(Mockito.any())).thenReturn("MENSAJEAGENDA");
-         
+        when(builder.AgendaBuildHoras(Mockito.any())).thenReturn("MENSAJEAGENDA");
+        when(tracking.get("TELEFONO")).thenReturn(track);
+        
         worker.ejecutarTarea("TELEFONO", "MENU_HORA_20241012");
+        
         verify(service).sendMessage("TELEFONO", "Elija una hora para que nos comuniquemos con usted (indíque la letra) : " +
                         System.lineSeparator()+ System.lineSeparator() + "MENSAJEAGENDA" );
         verify(tracking).saveHorasEnviadas("TELEFONO", horasDisponibles);

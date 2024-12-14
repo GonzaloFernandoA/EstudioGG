@@ -83,8 +83,7 @@ public class messageWorker {
             } else if (contenido.contains("MENU_HORA")) {
                 log.info(contenido);
                 log.info(contenido.replaceAll("MENU_HORA_", ""));
-
-                List<String> opciones = reserva.getTurnosLibres(contenido.replaceAll("MENU_HORA_", ""));
+                List<String> opciones = reserva.getTurnosLibres(tracking.get(telefono).getFechaReservada());
                 String message = builder.AgendaBuildHoras(opciones);
                 service.sendMessage(telefono, "Elija una hora para que nos comuniquemos con usted (indíque la letra) : " + System.lineSeparator() + System.lineSeparator() + message);
                 eventService.saveEvent(telefono, "HORARIOS ENVIADOS");
