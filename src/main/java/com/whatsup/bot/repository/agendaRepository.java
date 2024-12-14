@@ -31,10 +31,7 @@ public class agendaRepository {
     }
 
     public void save(String dia, String hora) {
-        DiaReserva diaReserva = JsonUtils.readJsonFromFile(config.getReservas() + dia, DiaReserva.class);
-        if (diaReserva == null) {
-            diaReserva = new DiaReserva();
-        }
+        DiaReserva diaReserva = getOrDefault(dia);
         diaReserva.getHorariosOcupados().add(hora);
         JsonUtils.writeJsonToFile(config.getReservas() + dia, diaReserva);
     }
