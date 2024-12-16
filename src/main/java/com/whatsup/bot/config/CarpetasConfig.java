@@ -23,6 +23,9 @@ public class CarpetasConfig {
     @Value("${server.data.tracking}")
     private String tracking;
     
+    @Value("${server.data.nota}")
+    private String nota;
+    
     /**
      * @return the reservas
      */
@@ -49,5 +52,19 @@ public class CarpetasConfig {
      */
     public void setTracking(String tracking) {
         this.tracking = tracking;
+    }
+
+    /**
+     * @return the nota
+     */
+    public String getNota() {
+        return nota;
+    }
+
+    /**
+     * @param nota the nota to set
+     */
+    public void setNota(String nota) {
+        this.nota = nota;
     }
 }

@@ -8,6 +8,7 @@ server:
     response: C:/ruta/archivos/response/
     equivalencia: C:/ruta/archivos/equivalencia/
     tracking: C:/ruta/archivos/tracking/
+    nota: C:/ruta/archivos/nota/
 
 whatsapp:
   api:
