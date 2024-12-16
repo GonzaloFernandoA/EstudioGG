@@ -1,5 +1,6 @@
 package com.whatsup.bot.controler;
 
+import com.whatsup.bot.security.tokenService;
 import com.whatsup.bot.service.WhatsAppService;
 
 import org.slf4j.Logger;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BotController {
 
-   
+    @Autowired
+    tokenService token;
+    
     @Autowired
     WhatsAppService whatsAppService;
     private Logger log = LoggerFactory.getLogger(BotController.class);
@@ -29,10 +32,11 @@ public class BotController {
     public String sendMessage() {
         whatsAppService.sendMessage(""
                 + "541145587174", "Nos comunicaremos con usted a la brevedad. \uD83D\uDC4D");
-       
+
         return "Message sent!";
     }
-        @GetMapping("/sendMessage1")
+
+    @GetMapping("/sendMessage1")
     public String sendMessage1() {
         whatsAppService.sendMessage("5491145587174", "Nos comunicaremos con usted a la brevedad.");
         return "Message sent!";
@@ -40,11 +44,16 @@ public class BotController {
 
     @GetMapping("/sendTemplate")
     public String sendMessageTemplate() {
-        whatsAppService.enviarMensajeTemplate("541145587174",null);
+        whatsAppService.enviarMensajeTemplate("541145587174", null);
         return "Message sent!";
     }
-    
-        
+
+    @GetMapping("/getToken")
+    public String getToken() {
+        token.getToken();
+        return token.getToken();
+    }
+
     @GetMapping("/index")
     public String home() {
         return "index";
