@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BotController {
-
+    
     @Autowired
     tokenService token;
     
@@ -24,7 +24,6 @@ public class BotController {
 
     @GetMapping("/hello")
     public ResponseEntity<String> exportOpportunity() {
-
         return new ResponseEntity<>("Hello", HttpStatus.OK);
     }
 
@@ -52,6 +51,12 @@ public class BotController {
     public String getToken() {
         token.getToken();
         return token.getToken();
+    }
+    
+    @GetMapping("/renewToken")
+    public String getDateToken() {
+      
+        return token.renewToken();
     }
 
     @GetMapping("/index")

@@ -8,6 +8,7 @@ import com.whatsup.bot.config.WhatsupSecurityConfig;
 import com.whatsup.bot.message.ButtonList.Root;
 import com.whatsup.bot.message.Component;
 import com.whatsup.bot.message.responsePost.ResponseRoot;
+import com.whatsup.bot.security.tokenService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Service
 public class WhatsAppService {
 
+    @Autowired
+    tokenService tokens; 
+    
     @Autowired
     RobotInMesssageService Service;
 
@@ -61,9 +65,16 @@ public class WhatsAppService {
         this.sendObject(numeroDestino, body);
     }
 
+    private WebClient getWebClient()
+    {
+        return this.webClient.mutate()
+                .defaultHeader("Authorization", "Bearer " + tokens.getCurrentToken())
+                .build();
+    }
+    
     public void sendObject(String numeroDestino, Map<String, Object> mensaje) {
 
-                this.webClient.post()
+                getWebClient().post()
                 .header("Content-Type", "application/json")
                 .bodyValue(mensaje)
                 .retrieve()
@@ -75,7 +86,7 @@ public class WhatsAppService {
     }
 
     public void sendObject(Root mensaje) {
-        this.webClient.post()
+        getWebClient().post()
                 .header("Content-Type", "application/json")
                 .bodyValue(mensaje)
                 .retrieve()

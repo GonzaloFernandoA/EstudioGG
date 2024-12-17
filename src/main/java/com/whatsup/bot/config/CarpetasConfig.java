@@ -23,6 +23,11 @@ public class CarpetasConfig {
     @Value("${server.data.tracking}")
     private String tracking;
     
+    @Value("${server.data.nota}")
+    private String nota;
+    
+    @Value("${server.data.token}")
+    private String token;
     /**
      * @return the reservas
      */
@@ -49,5 +54,33 @@ public class CarpetasConfig {
      */
     public void setTracking(String tracking) {
         this.tracking = tracking;
+    }
+
+    /**
+     * @return the nota
+     */
+    public String getNota() {
+        return nota;
+    }
+
+    /**
+     * @param nota the nota to set
+     */
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+
+    /**
+     * @return the token
+     */
+    public String getToken() {
+        return token;
+    }
+
+    /**
+     * @param token the token to set
+     */
+    public void setToken(String token) {
+        this.token = token;
     }
 }

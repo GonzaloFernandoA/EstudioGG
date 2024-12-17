@@ -4,6 +4,7 @@
  */
 package com.whatsup.bot.controler;
 
+import com.whatsup.bot.security.securityConfig;
 import com.whatsup.bot.service.RobotInMesssageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WebhookController {
 
-    private static final String VERIFY_TOKEN = "2pGdHEELrcGh4BNFnCtTutHoeRy_277xRDVNUEQFv4zJgySX9";
     private static final Logger logger = LoggerFactory.getLogger(WebhookController.class);
 
     @Autowired
     RobotInMesssageService incomingService;
+    
+    @Autowired
+    securityConfig config; 
     
     @GetMapping("/webhook")
     public ResponseEntity<String> verifyWebhook(
@@ -39,7 +42,7 @@ public class WebhookController {
         logger.info("challenge: " + challenge);
         logger.info("token: " + token);
 
-        if ("subscribe".equals(mode) && VERIFY_TOKEN.equals(token)) {
+        if ("subscribe".equals(mode) && config.challenge.equals(token)) {
             return ResponseEntity.ok(challenge);
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
