@@ -26,4 +26,10 @@ public class securityConfig {
     @Value("${whatsapp.api.secret}")
     public String secret;
 
+    @Value("${whatsapp.api.challenge}")
+    public String challenge;
+
+    @Value("${whatsapp.api.token}")
+    public String token;
+    
 }

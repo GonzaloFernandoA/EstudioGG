@@ -4,6 +4,8 @@
  */
 package com.whatsup.bot.config;
 
+import com.whatsup.bot.security.tokenService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,20 +23,18 @@ public class WebClientConfig {
     @Value("${whatsapp.api.base-url}")
     private String baseUrl;
 
-    @Value("${whatsapp.api.token}")
-    private String token;
-
+    @Autowired
+    tokenService token; 
+    
     @Bean
     public WebClient webClient(WebClient.Builder builder) {
         return builder
                 .baseUrl(baseUrl)
                 .filter(logRequest()) // Registrar la solicitud
-                .defaultHeader("Authorization", "Bearer " + token)
+         //       .defaultHeader("Authorization", "Bearer " + token.getCurrentToken())
                 .defaultHeader("Content-Type", "application/json")
                 .build();
-        
-     //     .filter(logResponse()) // Registrar la respuesta
-    }
+            }
 
     private ExchangeFilterFunction logRequest() {
         return ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {

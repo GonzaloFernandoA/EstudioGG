@@ -1,3 +1,5 @@
+package com.whatsup.bot.security;
+
 import com.whatsup.bot.security.securityConfig;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,7 +14,7 @@ public class tokenExpirationService {
     @Autowired
     securityConfig config;
     
-    public Date getTokenExpirationDate(String token) throws Exception {
+    public Date getTokenExpirationDate(String token) {
         RestTemplate restTemplate = new RestTemplate();
         String url = config.expiration_token_uri + "?input_token=" + token + "&access_token=" + config.secret;
 
@@ -23,7 +25,7 @@ public class tokenExpirationService {
         // Verificar si el token es válido
         boolean isValid = (boolean) data.get("is_valid");
         if (!isValid) {
-            throw new Exception("El token proporcionado no es válido.");
+            return null; 
         }
 
         // Extraer la fecha de expiración del token

@@ -9,15 +9,17 @@ server:
     equivalencia: C:/ruta/archivos/equivalencia/
     tracking: C:/ruta/archivos/tracking/
     nota: C:/ruta/archivos/nota/
+    token: C:/ruta/archivos/security/
 
 whatsapp:
   api:
+    challenge: 2pGdHEELrcGh4BNFnCtTutHoeRy_277xRDVNUEQFv4zJgySX9
     id: 1123665506143010
     secret: c25ebe6bdc256216c0f8511261393490
     base-url: https://graph.facebook.com/v21.0/414660938406899/messages
     token-uri: https://graph.facebook.com/v16.0/oauth/access_token
     expiration-token-uri: https://graph.facebook.com/debug_token
-    token: EAAP998NXCyIBO4EfM8awmZAciZCcqrUNvBEoOo8jDPquyEfBJBPmurYQXlc2MqPuajLXP5lXnINe7YaI5uOi8LlZCEpuZCFkbgQSv94YBZBTc7Vq8qfkdeQvQE1slazLCTWqwJOCQG6WZBPBojeMDTuR0xQyFLCL1SecsMuF5M3UxWnCAs5NXKCgxFG5newGjBy2WlZBfGhvyLpjT6I9kZBDjFsnxe4ZD
+    token: EAAP998NXCyIBO53IZBrjuWAuZA3ItDG7iMJ6heRRRDA1vE18Kt8sOZCqSE4h8iFpZBoZBch3vyX3ZBfVGkyHNxUl6x9heYrCZCP5Nq8TkzCjDOZBhPHVwXpfl7mrC1gJebsi1uOfCAZBcQqdWvKQKM8VbGsV2XYOtuL7ZAgWwZBdlZAKhUFD5i9tpj6RWwZDZD
   cellNumber: 414660938406899
   templateName: menuprincipal
   templateVideo: https://res.cloudinary.com/drkaz7gd6/video/upload/v1732592503/swjcivtyxi43nll7walh.mp4
