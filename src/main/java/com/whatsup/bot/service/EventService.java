@@ -72,7 +72,8 @@ public class EventService {
                 contacto.getNombre(),
                 contacto.getApellido(),
                 contacto.getTelefono(),
-                eventoMap.getOrDefault(contacto.getTelefono(),null)
+                eventoMap.getOrDefault(contacto.getTelefono(),null),
+                Short.valueOf("0")
         ))
                 .collect(Collectors.toList());
     }
