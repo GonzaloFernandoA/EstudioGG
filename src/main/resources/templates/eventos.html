@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventos</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -57,6 +58,7 @@
                 <th>Nombre</th>
                 <th>Teléfono</th>
                 <th>Acción</th>
+                <th>Notas</th>
             </tr>
         </thead>
         <tbody>
@@ -65,6 +67,10 @@
                 <td th:text="${objeto.nombre}"></td>
                 <td th:text="${objeto.telefono}"></td>
                 <td th:text="${objeto.evento}"></td>
+                <td>
+                    <i class="fa-regular fa-file" th:if="${objeto.hayNotas == 0}"></i>
+                    <i class="fa-regular fa-file-lines" th:if="${objeto.hayNotas == 1}"></i>
+                </td>
             </tr>
         </tbody>
     </table>
