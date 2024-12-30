@@ -132,6 +132,7 @@
                     <th>Teléfono</th>
                     <th>Acción</th>
                     <th>Notas</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -162,8 +163,8 @@
                 <textarea id="desc" placeholder="Esctibe la nota acá..."></textarea><br>
 
                 <div class="botones-de-acceso">
-                    <button class="btn" onclick="abrirModal()">Grabar</button>
-                    <button class="btn" onclick="abrirModal()">Cancelar</button>
+                    <button class="btn" onclick="cerrarModal()">Grabar</button>
+                    <button class="btn" onclick="cerrarModal()">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -176,7 +177,6 @@
                 document.getElementById('modal-overly').style.display = 'none';
             }
         </script>
-
         <a href="/">
             <img src="https://img.icons8.com/ios-filled/50/000000/home.png" alt="Home" class="home-icon" title="Volver a Inicio">
         </a>
