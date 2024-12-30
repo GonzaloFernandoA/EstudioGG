@@ -13,14 +13,16 @@ public class ContactoEvento {
     private String apellido;
     private String evento;
     private String telefono;
+    private Short hayNotas;
 
-    public ContactoEvento (String nombre, String apellido, String telefono, String evento)
+    public ContactoEvento (String nombre, String apellido, String telefono, String evento, Short hayNotas)
             
     {
         this.nombre = nombre; 
         this.apellido = apellido; 
         this.telefono = telefono;
         this.evento = evento;
+        this.hayNotas = hayNotas;
         
     }
     
@@ -78,5 +80,13 @@ public class ContactoEvento {
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+    
+    public Short getHayNotas() {
+        return hayNotas;
+    }
+    
+    public void setHayNotas(Short hayNotas) {
+        this.hayNotas = hayNotas;
     }
 }
