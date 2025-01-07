@@ -5,7 +5,6 @@
 package com.whatsup.bot.repository;
 
 import com.whatsup.bot.config.CarpetasConfig;
-import com.whatsup.bot.entity.Equivalencia;
 import com.whatsup.bot.entity.Note;
 import com.whatsup.bot.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;

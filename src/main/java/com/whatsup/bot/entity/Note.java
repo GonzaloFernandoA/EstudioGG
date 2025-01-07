@@ -11,49 +11,64 @@ package com.whatsup.bot.entity;
 
 public class Note {
 
-    private String Id;
-    private String User;
-    private String Note;
+    private String id;
+    private String user;
+    private String note;
+
+    
+     public Note() {
+
+    }
+    public Note(String telefono, String usuario, String comentario) {
+        this.id = telefono; 
+        this.user = usuario; 
+        this.note = comentario;
+    }
 
     /**
-     * @return the Id
+     * @return the id
      */
     public String getId() {
-        return Id;
+        return id;
     }
 
     /**
-     * @param Id the Id to set
+     * @param id the id to set
      */
-    public void setId(String Id) {
-        this.Id = Id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
-     * @return the User
+     * @return the user
      */
     public String getUser() {
-        return User;
+        return user;
     }
 
     /**
-     * @param User the User to set
+     * @param user the user to set
      */
-    public void setUser(String User) {
-        this.User = User;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     /**
-     * @return the Note
+     * @return the note
      */
     public String getNote() {
-        return Note;
+        return note;
     }
 
     /**
-     * @param Note the Note to set
+     * @param note the note to set
      */
-    public void setNote(String Note) {
-        this.Note = Note;
+    public void setNote(String note) {
+        this.note = note;
     }
+
+
+
+
+
 }
