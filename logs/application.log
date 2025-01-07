@@ -33,3 +33,21 @@
 2024-12-14 00:44:41 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
 2024-12-14 00:44:41 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
 2024-12-14 00:44:41 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-01-06 21:49:09 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-01-06 21:49:09 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - MENU_HORA_20241012
+2025-01-06 21:49:09 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - 20241012
+2025-01-06 21:49:09 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-01-06 21:49:09 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-01-06 21:49:09 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-01-06 21:49:09 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-01-06 21:49:09 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 3
+2025-01-06 21:49:09 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-01-06 21:49:09 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-01-06 21:49:09 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
+2025-01-06 21:49:09 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-01-06 21:49:10 [Test worker] ERROR com.whatsup.bot.utils.JsonUtils - Failed to read JSON from file: src/test/java/resources/agenda/NOAHYRESERVA,src\test\java\resources\agenda\NOAHYRESERVA.json (The system cannot find the file specified)
+2025-01-06 21:49:10 [Test worker] INFO  com.whatsup.bot.utils.JsonUtils - Archivo guardado.src/test/java/resources/agenda/111111_HORA
+2025-01-06 21:49:10 [Test worker] INFO  c.w.b.repository.contactosRepository - src\test\java\resources\Contactos\541145587171.json
+2025-01-06 21:49:10 [Test worker] ERROR com.whatsup.bot.utils.JsonUtils - Failed to read JSON from file: src/test/java/resources/tracking/NOAHYRESERVA,src\test\java\resources\tracking\NOAHYRESERVA.json (The system cannot find the file specified)
+2025-01-06 21:49:10 [Test worker] ERROR com.whatsup.bot.utils.JsonUtils - Failed to read JSON from file: src/test/java/resources/tracking/NOAHYRESERVA,src\test\java\resources\tracking\NOAHYRESERVA.json (The system cannot find the file specified)
+2025-01-06 21:49:10 [Test worker] INFO  com.whatsup.bot.utils.JsonUtils - Archivo guardado.src/test/java/resources/tracking/telefono1
