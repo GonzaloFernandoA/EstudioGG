@@ -5,7 +5,8 @@
 package com.example.demo.services;
 
 import com.whatsup.bot.entity.Tracking;
-import com.whatsup.bot.repository.trackingRepository;
+import com.whatsup.bot.repository.S3RepositoryImpl;
+
 import com.whatsup.bot.service.trackingService;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class trackingServiceTest {
     trackingService service;
 
     @Mock
-    private trackingRepository repo;
+    private S3RepositoryImpl repo;
 
     @BeforeEach
     public void init() {
@@ -44,7 +45,7 @@ public class trackingServiceTest {
     @Test
     void getEmptyDayTest() {
 
-        when(repo.getOrDefault("TELEFONO1")).thenReturn(new Tracking());
+        when(repo.findByKey("TELEFONO1", any())).thenReturn(new Tracking());
 
         List<String> fechasEnviadas = new ArrayList<>();
         fechasEnviadas.add("20241012");
@@ -105,7 +106,8 @@ public class trackingServiceTest {
     void getNoTieneFechaReservadaTest() {
 
         Tracking tracking = new Tracking();
-        when(repo.getOrDefault("TELEFONO1")).thenReturn(tracking);
+        when(repo.findByKey("TELEFONO1", any())).thenReturn(tracking);
+
         Assertions.assertTrue(service.isReservaDiasIsBlank("TELEFONO1"));
     }
 
@@ -114,7 +116,7 @@ public class trackingServiceTest {
 
         Tracking tracking = new Tracking();
         tracking.setFechaReservada("HOY");
-        when(repo.getOrDefault("TELEFONO1")).thenReturn(tracking);
+        when(repo.findByKey("TELEFONO1", any())).thenReturn(tracking);
         Assertions.assertFalse(service.isReservaDiasIsBlank("TELEFONO1"));
     }
 
@@ -122,7 +124,7 @@ public class trackingServiceTest {
     void getNoTurnoHoraReservadaTest() {
 
         Tracking tracking = new Tracking();
-        when(repo.getOrDefault("TELEFONO1")).thenReturn(tracking);
+        when(repo.findByKey("TELEFONO1", any())).thenReturn(tracking);
         Assertions.assertTrue(service.isReservaHorasIsBlank("TELEFONO1"));
     }
 
@@ -131,7 +133,7 @@ public class trackingServiceTest {
 
         Tracking tracking = new Tracking();
         tracking.setHoraReservada("AHORA");
-        when(repo.getOrDefault("TELEFONO1")).thenReturn(tracking);
+        when(repo.findByKey("TELEFONO1", any())).thenReturn(tracking);
         Assertions.assertFalse(service.isReservaHorasIsBlank("TELEFONO1"));
     }
 
@@ -146,7 +148,7 @@ public class trackingServiceTest {
         horasEnviadas.add("hora3");
         tracking.setHorasEnviadas(horasEnviadas);
        
-        when(repo.getOrDefault("TELEFONO1")).thenReturn(tracking);
+        when(repo.findByKey("TELEFONO1", any())).thenReturn(tracking);
 
         Assertions.assertEquals( "hora2", service.getHoraSegunOpcion("TELEFONO1", "B") ); 
         

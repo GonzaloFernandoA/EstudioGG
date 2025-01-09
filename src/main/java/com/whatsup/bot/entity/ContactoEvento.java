@@ -21,7 +21,6 @@ public class ContactoEvento {
         this.apellido = apellido; 
         this.telefono = telefono;
         this.evento = evento;
-        
     }
     
     /**

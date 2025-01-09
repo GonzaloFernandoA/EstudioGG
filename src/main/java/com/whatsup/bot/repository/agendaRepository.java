@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class agendaRepository {
 
+    /*
     private final Logger logger = LoggerFactory.getLogger(agendaRepository.class);
 
     @Autowired
@@ -43,4 +44,6 @@ public class agendaRepository {
     public List<String> get(String telefono, String escala) {
         return JsonUtils.readJsonFromFileToList(config.getReservas() + telefono + "_" + escala, String.class);
     }
+*/
+
 }

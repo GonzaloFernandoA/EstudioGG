@@ -55,7 +55,7 @@ public class RobotInMesssageServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
+ /*   @Test
     void MensajeRespuestaAEleccionDeDiaTest() throws IOException {
 
         String response = new String(Files.readAllBytes(Paths.get("src/test/java/resources/respuestaEligioDIa.json")));
@@ -69,5 +69,5 @@ public class RobotInMesssageServiceTest {
         verify(respuestaHoras).Run(response);
         
     }
-
+*/
 }

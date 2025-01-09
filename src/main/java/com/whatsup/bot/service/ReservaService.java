@@ -4,9 +4,10 @@
  */
 package com.whatsup.bot.service;
 
+import com.whatsup.bot.config.CarpetasConfig;
 import com.whatsup.bot.entity.DiaReserva;
+import com.whatsup.bot.repository.S3RepositoryImpl;
 
-import com.whatsup.bot.repository.agendaRepository;
 import com.whatsup.bot.service.agenda.BusinessDaysCalculator;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,8 +27,11 @@ public class ReservaService {
     private final Logger log = LoggerFactory.getLogger(ReservaService.class);
     
     @Autowired
-    agendaRepository repo;
-
+    CarpetasConfig config; 
+    
+    @Autowired
+    S3RepositoryImpl repo;
+    
     @Autowired
     BusinessDaysCalculator calc;
 
@@ -45,18 +49,19 @@ public class ReservaService {
         return horarios;
     }
     public void reservarDiaHoraTurno(String fecha, String hora) {
-        repo.save(fecha, hora);
+        DiaReserva diaReserva = (DiaReserva)repo.findByKey(fecha, DiaReserva.class);
+        diaReserva.getHorariosOcupados().add(hora);
+        repo.save(config.getReservas()+ fecha, diaReserva);
     }
 
     public List<String> getDiasDisponibles() {
-        calc.setRepository(repo);
         List<String> dias = calc.getNextBusinessDays(LocalDate.now(), 5);
 
         return dias;
     }
 
     public List<String> getTurnosLibres(String dia) {
-        DiaReserva diaReserva = repo.getOrDefault(dia);
+        DiaReserva diaReserva = (DiaReserva)repo.findByKey(dia, DiaReserva.class);
         return getHorasDisponibles(diaReserva.getHorariosOcupados());
     }
 
@@ -67,17 +72,17 @@ public class ReservaService {
     }
 
     public void saveDias(String telefono, List<String> opciones) {
-        repo.save(telefono, opciones, "DIAS");
+     //   repo.save(telefono, opciones, "DIAS");
     }
     
     public void saveHoras(String telefono, List<String> opciones) {
-        repo.save(telefono, opciones, "HORAS");
+     //   repo.save(telefono, opciones, "HORAS");
     }
 
-    public String getDiaElegido(String telefono, String respuestaDia) {
+  /*  public String getDiaElegido(String telefono, String respuestaDia) {
         List<String> dias = repo.get(telefono, "DIAS");
         char lowerCaseLetter = Character.toLowerCase( respuestaDia.charAt(0));
         return dias.get(lowerCaseLetter - 'a' );
 
-    }
+    }*/
 }

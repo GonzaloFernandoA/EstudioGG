@@ -32,4 +32,21 @@ public class securityConfig {
     @Value("${whatsapp.api.token}")
     public String token;
     
+    @Value("${whatsapp.api.daysBeforeRenewToken}")
+    private long daysBeforeRenewToken;
+
+    /**
+     * @return the daysBeforeRenewToken
+     */
+    public long getDaysBeforeRenewToken() {
+        return daysBeforeRenewToken;
+    }
+
+    /**
+     * @param daysBeforeRenewToken the daysBeforeRenewToken to set
+     */
+    public void setDaysBeforeRenewToken(long daysBeforeRenewToken) {
+        this.daysBeforeRenewToken = daysBeforeRenewToken;
+    }
+    
 }

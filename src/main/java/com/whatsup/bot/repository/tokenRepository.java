@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class tokenRepository {
 
-    @Autowired
+ /*   @Autowired
     CarpetasConfig config;
 
     public Token getOrDefault() {
@@ -33,5 +33,5 @@ public class tokenRepository {
     public void Post(Token token) {
         JsonUtils.writeJsonToFile(config.getToken() + "tokenFile", token);
     }
-
+*/
 }

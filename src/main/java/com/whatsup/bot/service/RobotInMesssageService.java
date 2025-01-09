@@ -6,7 +6,6 @@ package com.whatsup.bot.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whatsup.bot.builder.task.respuestaHorasTask;
-import com.whatsup.bot.config.ContactConfig;
 import com.whatsup.bot.message.response.Root;
 import com.whatsup.bot.message.responsePost.ResponseRoot;
 import java.io.IOException;
@@ -31,9 +30,6 @@ public class RobotInMesssageService {
     @Autowired
     ReservaService reserva;
     
-    @Autowired
-    ContactConfig config;
-
     @Autowired
     EquivalenciaService equivalencia;
 

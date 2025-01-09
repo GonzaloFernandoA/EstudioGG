@@ -4,14 +4,12 @@
  */
 package com.whatsup.bot.service;
 
-import com.whatsup.bot.config.ContactConfig;
+import com.whatsup.bot.config.CarpetasConfig;
 import com.whatsup.bot.entity.Contacto;
 import com.whatsup.bot.entity.ContactoEvento;
 import com.whatsup.bot.entity.Evento;
 import com.whatsup.bot.message.responsePost.ResponseRoot;
-import com.whatsup.bot.repository.contactosRepository;
-import com.whatsup.bot.repository.eventRepository;
-import com.whatsup.bot.utils.JsonUtils;
+import com.whatsup.bot.repository.S3RepositoryImpl;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -30,43 +28,36 @@ public class EventService {
     private final Logger logger = LoggerFactory.getLogger(EventService.class);
 
     @Autowired
-    ContactConfig config;
-
+    S3RepositoryImpl repo;
+    
     @Autowired
-    contactosRepository contactRepo;
+    CarpetasConfig config;
 
-    @Autowired
-    eventRepository eventRepo;
+    private void saveFile(String id, String evento, String path) {
+            repo.save(path + id, new Evento(id, evento) );
 
-    private void saveFile(String id, Object evento, String path) {
-        JsonUtils.writeJsonToFile(path + id, evento);
     }
 
     public void saveEvent(String id, String evento) {
-        this.saveFile(id, evento, config.eventsPath);
+        this.saveFile(id, evento, config.getEventsPath());
     }
 
     public void saveOutMessage(String id, String evento) {
-        this.saveFile(id, evento, config.out);
+        this.saveFile(id, evento, config.getOut());
     }
 
     public void saveResponse(String id, ResponseRoot evento) {
-
-        this.saveFile(id, evento, config.response);
-
+        //this.saveFile(id, evento, config.getResponse());
     }
 
     public List<ContactoEvento> combinarListas(List<Contacto> contactos, List<Evento> eventos) {
 
-       
         Map<String, String> eventoMap = eventos.stream()
                 .collect(Collectors.toMap(Evento::getTelefono, Evento::getMensaje));
 
         logger.info("count eventMap: " + eventoMap.size());
         logger.info("count contactos: " + contactos.size());
     
-   //       .filter(contacto -> eventoMap.containsKey(contacto.getTelefono())) // Filtrar contactos con eventos
-        
         return contactos.stream()
                 .map(contacto -> new ContactoEvento(
                 contacto.getNombre(),
@@ -78,10 +69,10 @@ public class EventService {
     }
 
     public List<ContactoEvento> combinarListas() {
-        List<Contacto> contactos = contactRepo.getAll();
-        List<Evento> eventos = eventRepo.getAll();
+        
+        List<Contacto> contactos = repo.listAndReadAllAsObjects(config.getContactos(), Contacto.class);
+        List<Evento> eventos = repo.listAndReadAllAsObjects(config.getEventsPath(), Evento.class);
         return this.combinarListas(contactos, eventos);
-
     }
 
 }

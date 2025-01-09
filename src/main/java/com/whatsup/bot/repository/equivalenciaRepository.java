@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class equivalenciaRepository {
+  /*
     @Autowired
     CarpetasConfig config;
     
@@ -26,5 +27,5 @@ public class equivalenciaRepository {
     public Equivalencia get(String wa_id) {
         Equivalencia contacto = JsonUtils.readJsonFromFile(config.equivalencias + wa_id, Equivalencia.class);
         return contacto;
-    }
+    } */
 }

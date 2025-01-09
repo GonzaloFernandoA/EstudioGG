@@ -4,6 +4,8 @@
  */
 package com.whatsup.bot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author Gonzalo_Avalos
@@ -14,6 +16,12 @@ public class Equivalencia {
 
      public Equivalencia() {
 
+    }
+     
+    @JsonIgnore
+    public String getId()
+    {
+        return this.wa_id;
     }
     
      public Equivalencia(String wa_id , String telefono ) {

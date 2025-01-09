@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,5 +61,21 @@ public class JsonUtils {
             logger.error("Failed to read JSON from content: " + cadena + "," + e.getMessage());
             return null;
         }
+    }
+    
+        public static <T> T JSonToClass(InputStream inputStream, Class<T> clazz) throws Exception {
+        // Crea un ObjectMapper
+        ObjectMapper objectMapper = new ObjectMapper();
+        
+        return objectMapper.readValue(inputStream, clazz);
+    }
+        
+       public static <T> File ClassToFile(String filePath, T object) throws IOException  {
+        // Crea un ObjectMapper
+        ObjectMapper objectMapper = new ObjectMapper();
+        File tempFile = File.createTempFile("object", ".json");
+        objectMapper.writeValue(tempFile, object);
+
+        return tempFile;
     }
 }
