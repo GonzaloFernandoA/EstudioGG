@@ -46,7 +46,7 @@ public class messageWorker {
     @Autowired
     ReservaService reserva;
 
-    @Scheduled( fixedRate = 10000)
+ //   @Scheduled( fixedRate = 10000)
     public void ejecutarTareaAsincrona() {
         log.info("Tarea asíncrona iniciandose...");
 

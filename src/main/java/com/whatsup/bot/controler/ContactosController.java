@@ -31,9 +31,6 @@ public class ContactosController {
     public String saveData(@RequestParam String nombre,
             @RequestParam String apellido,
             @RequestParam String telefono, RedirectAttributes redirectAttributes) {
-
-        // model.addAttribute("mensajeTempotal", "Contacto guardado OK.");
-        // model.addAttribute("mostrarDiv", true);
         return service.save(nombre, apellido, telefono, redirectAttributes);
     }
 }

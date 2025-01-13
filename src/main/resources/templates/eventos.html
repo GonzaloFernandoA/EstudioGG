@@ -142,10 +142,10 @@
                     <td th:text="${objeto.evento}"></td>
 
                     <td>
-                        <button class="btn" onclick="abrirModal()">
+                        <a th:href="@{/notas(telefono=${objeto.telefono})}">
                             <i class="fa-regular fa-file" th:if="${objeto.hayNotas == 0}"></i>
                             <i class="fa-regular fa-file-lines" th:if="${objeto.hayNotas == 1}"></i>
-                        </button>
+                        </a>
                     </td>
                 </tr>
             </tbody>
@@ -157,7 +157,7 @@
 
         <script>
             const abrirModal = () => {
-                fetch('/templates/nota.html')
+                fetch('.\\Resources\\templates\\nota')
                         .then(res => res.text())
                         .then(dataModal => {
                             document.getElementById('modalContenedor').innerHTML = dataModal;

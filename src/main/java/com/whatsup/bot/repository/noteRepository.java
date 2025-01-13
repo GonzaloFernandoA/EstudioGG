@@ -24,6 +24,7 @@ public class noteRepository {
         Note note = JsonUtils.readJsonFromFile(config.getNota() + id, Note.class);
         if (note == null) {
             note = new Note();
+            note.setId(id);
         }
         return note;
     }
