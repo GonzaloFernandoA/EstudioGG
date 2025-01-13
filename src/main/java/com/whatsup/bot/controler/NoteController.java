@@ -6,9 +6,13 @@ package com.whatsup.bot.controler;
 
 import com.whatsup.bot.entity.Note;
 import com.whatsup.bot.service.NotaService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 /**
@@ -18,25 +22,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 
 public class NoteController {
-    
-        @Autowired
+        private final Logger logger = LoggerFactory.getLogger(NoteController.class);
+        
+    @Autowired
     NotaService service;
     
-    @PostMapping("/nota/save")
-    public void saveData(@RequestParam String telefono,
-            @RequestParam String usuario,
-            @RequestParam String nota) {
-
-        service.save(telefono, usuario, nota);  
+    @PostMapping("/notasave")
+    public String saveData(@ModelAttribute Note nota ) {
+        service.save(nota.getId(), nota.getUser(), nota.getNote());
+        return "redirect:/eventos";
     }
     
-    
-    @GetMapping("/nota/[idTelefono]")
-    public Note saveData(@RequestParam String telefono ) {
-
-        Note entity = service.get(telefono);
-        return entity;
-        
+    @GetMapping("/notas")
+    public String mostrarNotas(@RequestParam String telefono , Model model) {
+        Note nota = service.get(telefono);
+        model.addAttribute("oNota", nota);
        
+        return "notas";
     }
+    
 }

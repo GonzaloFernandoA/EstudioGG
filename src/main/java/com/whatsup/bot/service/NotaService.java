@@ -6,6 +6,8 @@ package com.whatsup.bot.service;
 
 import com.whatsup.bot.entity.Note;
 import com.whatsup.bot.repository.noteRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +18,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class NotaService {
 
+    private final Logger logger = LoggerFactory.getLogger(NotaService.class);
+    
     @Autowired
     noteRepository repo;
 
     public void save(String telefono, String usuario, String comentario) {
+        logger.info(telefono + "%"+ usuario + "%"+ comentario);
         Note nota = new Note(telefono, usuario, comentario);
         repo.save(nota);
     }

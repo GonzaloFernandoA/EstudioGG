@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .modal-overly {
+                position: fixed;
+                top: 10;
+                left: 10;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: none;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+
+            .modal {
+                width: 60%;
+                height: 60%;
+                background: white;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                position: relative;
+                padding: 200px;
+                margin-left: 15%;
+                margin-right: 15%;
+            }
+
+            .cerrar-modal {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: none;
+                border: none;
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+            #usuario {
+                width: 200px; 
+                height: 30px; 
+                padding: 5px;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
+
+            #nota {
+                width: 420px; 
+                height: 210px;
+                padding: 5px;
+                font-size: 16px;
+                box-sizing: border-box; 
+            }
+
+            .botones-de-acceso {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                margin-right: 3px;
+                font-size: 16px;
+                cursor: pointer;
+                background-color: #e0e0e0;
+                transition: background-color 0.3s, transform 0.3s;
+                border: none;
+            }
+            .btn:hover {
+                background-color: #d1d1d1;
+                transform: scale(1.05);
+            }
+    </style>
+    </head>
+    <body>
+        <div id="modal-overly">
+            <div class="modal">
+                <form id="formularionota" th:action="@{/notasave}" th:object="${oNota}" method="post">
+               
+                <label for="notero">Nombre de la persona</label>
+                <input id="usuario" th:field="*{user}" type="text" placeholder="" name="usuario" ><br>
+                
+                <input type="hidden" name="id" th:value="${id}" th:field="*{id}" >
+                 
+                <br>
+                <textarea id="nota" th:field="*{note}" th:text="${oNota.note}" placeholder="Escribe la nota acá..." name="nota">
+                </textarea><br>
+
+                <div class="botones-de-acceso">
+                    <button class="btn" type="submit">Grabar</button>
+                    <a th:href="@{/eventos}">Cancelar</a>
+                </div>
+                
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
