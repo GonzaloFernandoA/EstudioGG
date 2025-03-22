@@ -6,7 +6,6 @@ package com.whatsup.bot.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whatsup.bot.builder.task.respuestaHorasTask;
-import com.whatsup.bot.config.ContactConfig;
 import com.whatsup.bot.message.response.Root;
 import com.whatsup.bot.message.responsePost.ResponseRoot;
 import java.io.IOException;
@@ -28,12 +27,6 @@ public class RobotInMesssageService {
     @Autowired
     respuestaHorasTask respuestaHoras ;
     
-    @Autowired
-    ReservaService reserva;
-    
-    @Autowired
-    ContactConfig config;
-
     @Autowired
     EquivalenciaService equivalencia;
 
@@ -66,7 +59,7 @@ public class RobotInMesssageService {
             } catch (IOException ex) {
                 logger.error(ex.getMessage());
             }
-        } else if (incomingMessage.contains("\"type\":\"text\"")) {
+        } else if (incomingMessage.contains("\"type\": \"text\"")) {
                 respuestaHoras.Run(incomingMessage);
         }
     }

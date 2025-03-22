@@ -4,6 +4,8 @@
  */
 package com.whatsup.bot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author Gonzalo_Avalos
@@ -16,6 +18,12 @@ public class Contacto {
 
     public Contacto() {
 
+    }
+    
+    @JsonIgnore
+    public String getId()
+    {
+        return this.telefono;
     }
 
     public Contacto(String nombre, String apellido, String telefono) {

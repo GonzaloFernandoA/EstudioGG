@@ -10,6 +10,9 @@ package com.whatsup.bot.entity;
  */
 public class Evento {
     
+   
+    
+    
         public Evento( )
     {
 
@@ -21,8 +24,8 @@ public class Evento {
         mensaje = evento;
     }
             
-    private String telefono;
-    private String mensaje; 
+    private String telefono = "";
+    private String mensaje = "";
 
     /**
      * @return the telefono

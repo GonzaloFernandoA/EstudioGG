@@ -4,6 +4,8 @@
  */
 package com.example.demo.task;
 
+
+import java.io.ByteArrayInputStream;
 import com.whatsup.bot.builder.task.ConfirmacionTurnoTask;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -52,7 +54,7 @@ public class confirmacionTurnoTaskTest {
 
     }
     
-        @Test
+    @Test
     void valid2Testb() throws IOException {
 
         Assertions.assertTrue(task.IsValid("b"));
@@ -63,5 +65,11 @@ public class confirmacionTurnoTaskTest {
     void NotValid2Test() throws IOException {
 
         Assertions.assertFalse(task.IsValid("0"));
+    }
+    
+    @Test
+    void TransformacionArchivoConfirmacionTest() throws IOException {
+
+        String inputStream = task.CreateMessage("TELEFONO");
     }
 }

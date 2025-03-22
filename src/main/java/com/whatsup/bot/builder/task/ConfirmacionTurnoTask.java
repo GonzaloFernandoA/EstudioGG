@@ -6,6 +6,7 @@ package com.whatsup.bot.builder.task;
 
 import com.whatsup.bot.service.ReservaService;
 import com.whatsup.bot.service.trackingService;
+import java.io.ByteArrayInputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,5 +39,13 @@ public class ConfirmacionTurnoTask {
         if (IsValid(respuesta)) {
             Process(telefono);
         }
+    }
+
+    public String CreateMessage(String telefono) {
+        
+        String MessageContent = "{\"telefono\":\"@TELEFONO\",\"contenido\":\"Turno Confirmado. Gracias 👍 .\"}";
+        String finalMessage = MessageContent.replace("@TELEFONO", telefono);
+        return finalMessage;
+        
     }
 }

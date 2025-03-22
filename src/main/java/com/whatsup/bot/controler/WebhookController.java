@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Gonzalo_Avalos
  */
+@Deprecated
 @RestController
 public class WebhookController {
 

@@ -4,7 +4,7 @@
  */
 package com.whatsup.bot.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -12,8 +12,18 @@ import java.util.Date;
  */
 public class Token {
     private String secret; 
-    private Date validFrom;
+    private LocalDate validFrom;
 
+    
+    public Token(){}
+    
+    public Token(String newToken )
+            
+    {
+        this.secret = newToken; 
+        this.validFrom = LocalDate.now();
+    }
+    
     /**
      * @return the secret
      */
@@ -31,14 +41,14 @@ public class Token {
     /**
      * @return the validFrom
      */
-    public Date getValidFrom() {
+    public LocalDate getValidFrom() {
         return validFrom;
     }
 
     /**
      * @param validFrom the validFrom to set
      */
-    public void setValidFrom(Date validFrom) {
+    public void setValidFrom(LocalDate validFrom) {
         this.validFrom = validFrom;
     }
     

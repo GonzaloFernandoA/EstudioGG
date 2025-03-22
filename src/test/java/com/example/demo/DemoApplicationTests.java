@@ -1,7 +1,7 @@
 package com.example.demo;
 
 import com.whatsup.bot.builder.messageBuilder;
-import com.whatsup.bot.repository.agendaRepository;
+import com.whatsup.bot.repository.S3RepositoryImpl;
 import com.whatsup.bot.service.ReservaService;
 import com.whatsup.bot.service.agenda.DateUtil1;
 import java.io.IOException;
@@ -22,7 +22,7 @@ class DemoApplicationTests {
     ReservaService reserva;
 
     @Mock
-    agendaRepository repo; 
+    S3RepositoryImpl repo; 
     
     
     @BeforeEach
@@ -32,12 +32,6 @@ class DemoApplicationTests {
     
     @Test
     void contextLoads() {
-    }
-
-    @Test
-    void BotTest() {
-
-        Assertions.assertEquals(1, 1);
     }
 
     @Test
