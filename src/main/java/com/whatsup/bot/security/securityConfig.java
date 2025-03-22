@@ -31,5 +31,4 @@ public class securityConfig {
 
     @Value("${whatsapp.api.token}")
     public String token;
-    
 }

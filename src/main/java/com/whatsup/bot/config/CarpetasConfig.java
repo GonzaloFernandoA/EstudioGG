@@ -14,20 +14,33 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CarpetasConfig {
 
+    @Value("${server.data.contactos}")
+    private String contactos;
+
+    @Value("${server.data.events}")
+    private String eventsPath;
+
+    @Value("${server.data.out}")
+    private String out;
+
+    @Value("${server.data.response}")
+    private String response;
+
     @Value("${server.data.equivalencia}")
-    public String equivalencias;
+    private String equivalencias;
 
     @Value("${server.data.reservas}")
     private String reservas;
 
     @Value("${server.data.tracking}")
     private String tracking;
-    
+
     @Value("${server.data.nota}")
     private String nota;
-    
+
     @Value("${server.data.token}")
     private String token;
+
     /**
      * @return the reservas
      */
@@ -82,5 +95,72 @@ public class CarpetasConfig {
      */
     public void setToken(String token) {
         this.token = token;
+    }
+
+    /**
+     * @return the contactos
+     */
+    public String getContactos() {
+        return contactos;
+    }
+
+    public void setContactos(String contactos) {
+        this.contactos = contactos;
+    }
+
+    /**
+     * @return the eventsPath
+     */
+    public String getEventsPath() {
+        return eventsPath;
+    }
+
+    /**
+     * @param eventsPath the eventsPath to set
+     */
+    public void setEventsPath(String eventsPath) {
+        this.eventsPath = eventsPath;
+    }
+
+    /**
+     * @return the out
+     */
+    public String getOut() {
+        return out;
+    }
+
+    /**
+     * @param out the out to set
+     */
+    public void setOut(String out) {
+        this.out = out;
+    }
+
+    /**
+     * @return the response
+     */
+    public String getResponse() {
+        return response;
+    }
+
+    /**
+     * @param response the response to set
+     */
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    /**
+     * @return the equivalencias
+     */
+    public String getEquivalencias() {
+        return equivalencias;
+    }
+
+    /**
+     * @param equivalencias the equivalencias to set
+     */
+    public void setEquivalencias(String equivalencias) {
+        this.equivalencias = equivalencias;
     }
 }

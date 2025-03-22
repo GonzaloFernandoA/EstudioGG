@@ -68,7 +68,7 @@ public class WhatsAppService {
     private WebClient getWebClient()
     {
         return this.webClient.mutate()
-                .defaultHeader("Authorization", "Bearer " + tokens.getCurrentToken())
+                .defaultHeader("Authorization", "Bearer " + tokens.getToken())
                 .build();
     }
     

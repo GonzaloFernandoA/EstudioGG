@@ -12,13 +12,13 @@ import java.util.List;
  * @author Gonzalo_Avalos
  */
 public class DiaReserva {
-    private String fecha; 
+ //   private String fecha; 
     private List<String> horariosOcupados = new ArrayList<>();
 
     /**
      * @return the fecha
      */
-    public String getFecha() {
+ /*   public String getFecha() {
         return fecha;
     }
 
@@ -26,7 +26,7 @@ public class DiaReserva {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
+*/
     /**
      * @return the horariosDisponibles
      */

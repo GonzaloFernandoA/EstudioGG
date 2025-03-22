@@ -44,7 +44,8 @@ public class BotController {
     @GetMapping("/sendTemplate")
     public String sendMessageTemplate() {
         whatsAppService.enviarMensajeTemplate("541145587174", null);
-        return "Message sent!";
+        
+        return "Template sent!";
     }
 
     @GetMapping("/getToken")
@@ -53,12 +54,6 @@ public class BotController {
         return token.getToken();
     }
     
-    @GetMapping("/renewToken")
-    public String getDateToken() {
-      
-        return token.renewToken();
-    }
-
     @GetMapping("/index")
     public String home() {
         return "index";
