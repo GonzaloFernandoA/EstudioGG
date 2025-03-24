@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Eventos</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
 
         <style>
             body {
@@ -124,7 +125,7 @@
     <body>
         <h1>Eventos</h1>
 
-        <table>
+        <table id="myTable">
             <thead>
                 <tr>
                     <th>Apellido</th>
@@ -151,9 +152,44 @@
             </tbody>
         </table>
 
-
         <!-- Modal de notas. Se abre dinamicamente -->
         <div id="modalContenedor"></div>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#myTable').DataTable({
+                    language: {
+                        "decimal": ",",
+                        "thousands": ".",
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Buscar:",
+                        "sUrl": "",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    }
+                });
+            });
+
+        </script>
 
         <script>
             const abrirModal = () => {
@@ -161,14 +197,14 @@
                         .then(res => res.text())
                         .then(dataModal => {
                             document.getElementById('modalContenedor').innerHTML = dataModal;
-                    
+
                             const modal = document.getElementById('modal-overly');
                             if (!modal) {
                                 console.log("WARN: El modal no se abrió como corresponde...");
                             } else {
                                 modal.style.display = "flex";
                             }
-                }).catch(err => console.log("ERROR: ", err));
+                        }).catch(err => console.log("ERROR: ", err));
             };
 
             const cerrarModal = () => {
@@ -184,5 +220,6 @@
         <a href="/">
             <img src="https://img.icons8.com/ios-filled/50/000000/home.png" alt="Home" class="home-icon" title="Volver a Inicio">
         </a>
+
     </body>
 </html>
