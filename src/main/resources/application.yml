@@ -14,26 +14,26 @@ server:
 whatsapp:
   api:
     id: 1101260264846104
-    secret: secret
+    secret: [secret]
     base-url: https://graph.facebook.com/v21.0/578846945306314/messages
     token-uri: https://graph.facebook.com/v16.0/oauth/access_token
     expiration-token-uri: https://graph.facebook.com/debug_token
-    token: token
+    token: []
     challenge: 1386287589
   cellNumber: 5491138255605
   templateName: menuprincipal
   templateVideo: https://res.cloudinary.com/drkaz7gd6/video/upload/v1732592503/swjcivtyxi43nll7walh.mp4
 aws:
-  accessKeyId: AKIAQQABDVBWN2BE4CM4
-  secretAccessKey: secretAccessKey
+  accessKeyId: [accessKeyId]
+  secretAccessKey: [secretAccessKey]
   region: us-east-2
   bucket: beanstalk-apps-estudiogg
 spring:
   cloud:
     aws:
       credentials:
-        access-key: AKIAQQABDVBWN2BE4CM4
-        secret-key: secretAccessKey
+        access-key: [accessKeyId]
+        secret-key: [secretAccessKey]
       region: us-east-2
       sqs:
         enabled: true
