@@ -3111,3 +3111,398 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [notas
 2025-01-12 22:02:46 [http-nio-20000-exec-4] INFO  c.w.b.repository.contactosRepository - C:\ruta\archivos\contactos\telefono.json
 2025-01-12 22:02:46 [http-nio-20000-exec-4] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
 2025-01-12 22:02:46 [http-nio-20000-exec-4] INFO  c.whatsup.bot.service.EventService - count contactos: 4
+2025-03-26 23:40:21 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-26 23:40:21 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - MENU_HORA_20241012
+2025-03-26 23:40:21 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - 20241012
+2025-03-26 23:40:21 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-26 23:40:21 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-26 23:40:21 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-26 23:40:22 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-26 23:40:22 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 3
+2025-03-26 23:40:22 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-26 23:40:22 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-26 23:40:22 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
+2025-03-26 23:40:22 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-26 23:40:22 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-26 23:40:22 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-26 23:40:22 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [C]
+2025-03-26 23:40:22 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Valida
+2025-03-26 23:40:22 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [gracias]
+2025-03-26 23:40:22 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Invalida
+2025-03-26 23:54:57 [main] INFO  com.whatsup.bot.BotApplication - Starting BotApplication using Java 17.0.12 with PID 28944 (C:\Cosas\setup\build\classes\java\main started by Gonzalo_Avalos in C:\Cosas\setup)
+2025-03-26 23:54:57 [main] INFO  com.whatsup.bot.BotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-03-26 23:54:58 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5000 (http)
+2025-03-26 23:54:58 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5000"]
+2025-03-26 23:54:58 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-26 23:54:58 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.1]
+2025-03-26 23:54:59 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-26 23:54:59 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1693 ms
+2025-03-26 23:55:00 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-03-26 23:55:01 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5000"]
+2025-03-26 23:55:01 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5000 (http) with context path ''
+2025-03-26 23:55:01 [lifecycle-thread-2] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#1 started
+2025-03-26 23:55:01 [lifecycle-thread-1] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#0 started
+2025-03-26 23:55:01 [main] INFO  com.whatsup.bot.BotApplication - Started BotApplication in 4.825 seconds (process running for 5.835)
+2025-03-26 23:55:01 [main] INFO  com.whatsup.bot.BotApplication - Hello World from Application Runner
+2025-03-26 23:55:17 [http-nio-5000-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-26 23:55:17 [http-nio-5000-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-03-26 23:55:17 [http-nio-5000-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-03-26 23:55:23 [http-nio-5000-exec-3] INFO  c.whatsup.bot.service.EventService - JSON inválido, intentando reparar...
+2025-03-26 23:55:25 [http-nio-5000-exec-3] INFO  c.whatsup.bot.service.EventService - JSON inválido, intentando reparar...
+2025-03-26 23:55:26 [http-nio-5000-exec-3] INFO  c.whatsup.bot.service.EventService - JSON inválido, intentando reparar...
+2025-03-26 23:55:27 [http-nio-5000-exec-3] INFO  c.whatsup.bot.service.EventService - JSON inválido, intentando reparar...
+2025-03-26 23:55:28 [http-nio-5000-exec-3] INFO  c.whatsup.bot.service.EventService - count eventMap: 20
+2025-03-26 23:55:28 [http-nio-5000-exec-3] INFO  c.whatsup.bot.service.EventService - count contactos: 20
+2025-03-27 09:06:45 [main] INFO  com.whatsup.bot.BotApplication - Starting BotApplication using Java 17.0.12 with PID 11464 (C:\Cosas\setup\build\classes\java\main started by Gonzalo_Avalos in C:\Cosas\setup)
+2025-03-27 09:06:45 [main] INFO  com.whatsup.bot.BotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-03-27 09:06:47 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5000 (http)
+2025-03-27 09:06:47 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5000"]
+2025-03-27 09:06:47 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-27 09:06:47 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.1]
+2025-03-27 09:06:47 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-27 09:06:47 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1848 ms
+2025-03-27 09:06:50 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-03-27 09:06:50 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5000"]
+2025-03-27 09:06:50 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5000 (http) with context path ''
+2025-03-27 09:06:50 [lifecycle-thread-2] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#1 started
+2025-03-27 09:06:50 [lifecycle-thread-1] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#0 started
+2025-03-27 09:06:50 [main] INFO  com.whatsup.bot.BotApplication - Started BotApplication in 5.546 seconds (process running for 6.413)
+2025-03-27 09:06:50 [main] INFO  com.whatsup.bot.BotApplication - Hello World from Application Runner
+2025-03-27 09:07:01 [http-nio-5000-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-27 09:07:01 [http-nio-5000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-03-27 09:07:01 [http-nio-5000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-03-27 09:07:08 [http-nio-5000-exec-2] INFO  c.whatsup.bot.service.EventService - JSON inválido, intentando reparar...
+2025-03-27 09:07:11 [http-nio-5000-exec-2] INFO  c.whatsup.bot.service.EventService - JSON inválido, intentando reparar...
+2025-03-27 09:07:12 [http-nio-5000-exec-2] INFO  c.whatsup.bot.service.EventService - JSON inválido, intentando reparar...
+2025-03-27 09:07:13 [http-nio-5000-exec-2] INFO  c.whatsup.bot.service.EventService - JSON inválido, intentando reparar...
+2025-03-27 09:07:14 [http-nio-5000-exec-2] INFO  c.whatsup.bot.service.EventService - count eventMap: 20
+2025-03-27 09:07:14 [http-nio-5000-exec-2] INFO  c.whatsup.bot.service.EventService - count contactos: 20
+2025-03-27 09:17:43 [main] INFO  com.whatsup.bot.BotApplication - Starting BotApplication using Java 17.0.12 with PID 26984 (C:\Cosas\setup\build\classes\java\main started by Gonzalo_Avalos in C:\Cosas\setup)
+2025-03-27 09:17:43 [main] INFO  com.whatsup.bot.BotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-03-27 09:17:45 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5000 (http)
+2025-03-27 09:17:45 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5000"]
+2025-03-27 09:17:45 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-27 09:17:45 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.1]
+2025-03-27 09:17:45 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-27 09:17:45 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2007 ms
+2025-03-27 09:17:47 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-03-27 09:17:48 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5000"]
+2025-03-27 09:17:48 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5000 (http) with context path ''
+2025-03-27 09:17:48 [lifecycle-thread-2] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#1 started
+2025-03-27 09:17:48 [lifecycle-thread-1] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#0 started
+2025-03-27 09:17:48 [main] INFO  com.whatsup.bot.BotApplication - Started BotApplication in 5.282 seconds (process running for 6.411)
+2025-03-27 09:17:48 [main] INFO  com.whatsup.bot.BotApplication - Hello World from Application Runner
+2025-03-27 09:17:56 [http-nio-5000-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-27 09:17:56 [http-nio-5000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-03-27 09:17:56 [http-nio-5000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-03-27 09:18:00 [http-nio-5000-exec-1] INFO  c.whatsup.bot.service.EventService - JSON inválido, intentando reparar...
+2025-03-27 09:18:02 [http-nio-5000-exec-1] INFO  c.whatsup.bot.service.EventService - JSON inválido, intentando reparar...
+2025-03-27 09:18:03 [http-nio-5000-exec-1] INFO  c.whatsup.bot.service.EventService - JSON inválido, intentando reparar...
+2025-03-27 09:18:04 [http-nio-5000-exec-1] INFO  c.whatsup.bot.service.EventService - JSON inválido, intentando reparar...
+2025-03-27 09:18:05 [http-nio-5000-exec-1] INFO  c.whatsup.bot.service.EventService - count eventMap: 20
+2025-03-27 09:18:05 [http-nio-5000-exec-1] INFO  c.whatsup.bot.service.EventService - count contactos: 20
+2025-03-30 10:19:17 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 10:19:17 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - MENU_HORA_20241012
+2025-03-30 10:19:17 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - 20241012
+2025-03-30 10:19:17 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 10:19:17 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 10:19:17 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 10:19:18 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 10:19:18 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 3
+2025-03-30 10:19:18 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 10:19:18 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 10:19:18 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
+2025-03-30 10:19:18 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 10:19:18 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 10:19:18 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 10:19:19 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [C]
+2025-03-30 10:19:19 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Valida
+2025-03-30 10:19:19 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [gracias]
+2025-03-30 10:19:19 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Invalida
+2025-03-30 10:22:49 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 10:22:49 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 10:22:49 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 10:22:49 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - MENU_HORA_20241012
+2025-03-30 10:22:49 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - 20241012
+2025-03-30 10:22:49 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 10:22:49 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 10:22:49 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 10:22:50 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 10:22:50 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 3
+2025-03-30 10:22:50 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 10:22:50 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 10:22:50 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
+2025-03-30 10:22:50 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 10:22:50 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [C]
+2025-03-30 10:22:50 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Valida
+2025-03-30 10:22:50 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [gracias]
+2025-03-30 10:22:50 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Invalida
+2025-03-30 10:48:32 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.yaml.snakeyaml.scanner.ScannerException: mapping values are not allowed here
+ in 'reader', line 2, column 7:
+      time: @buildTime@
+          ^
+
+	at org.yaml.snakeyaml.scanner.ScannerImpl.fetchValue(ScannerImpl.java:927)
+	at org.yaml.snakeyaml.scanner.ScannerImpl.fetchMoreTokens(ScannerImpl.java:416)
+	at org.yaml.snakeyaml.scanner.ScannerImpl.peekToken(ScannerImpl.java:286)
+	at org.yaml.snakeyaml.parser.ParserImpl$ParseDocumentEnd.produce(ParserImpl.java:303)
+	at org.yaml.snakeyaml.parser.ParserImpl.peekEvent(ParserImpl.java:185)
+	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:57)
+	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:43)
+	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:136)
+	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:116)
+	at org.yaml.snakeyaml.composer.Composer.composeScalarNode(Composer.java:239)
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:208)
+	at org.yaml.snakeyaml.composer.Composer.getNode(Composer.java:134)
+	at org.yaml.snakeyaml.constructor.BaseConstructor.getData(BaseConstructor.java:168)
+	at org.springframework.boot.env.OriginTrackedYamlLoader$OriginTrackingConstructor.getData(OriginTrackedYamlLoader.java:98)
+	at org.yaml.snakeyaml.Yaml$1.next(Yaml.java:499)
+	at org.springframework.beans.factory.config.YamlProcessor.process(YamlProcessor.java:198)
+	at org.springframework.beans.factory.config.YamlProcessor.process(YamlProcessor.java:166)
+	at org.springframework.boot.env.OriginTrackedYamlLoader.load(OriginTrackedYamlLoader.java:83)
+	at org.springframework.boot.env.YamlPropertySourceLoader.load(YamlPropertySourceLoader.java:50)
+	at org.springframework.boot.context.config.StandardConfigDataLoader.load(StandardConfigDataLoader.java:54)
+	at org.springframework.boot.context.config.StandardConfigDataLoader.load(StandardConfigDataLoader.java:36)
+	at org.springframework.boot.context.config.ConfigDataLoaders.load(ConfigDataLoaders.java:95)
+	at org.springframework.boot.context.config.ConfigDataImporter.load(ConfigDataImporter.java:128)
+	at org.springframework.boot.context.config.ConfigDataImporter.resolveAndLoad(ConfigDataImporter.java:86)
+	at org.springframework.boot.context.config.ConfigDataEnvironmentContributors.withProcessedImports(ConfigDataEnvironmentContributors.java:115)
+	at org.springframework.boot.context.config.ConfigDataEnvironment.processInitial(ConfigDataEnvironment.java:242)
+	at org.springframework.boot.context.config.ConfigDataEnvironment.processAndApply(ConfigDataEnvironment.java:229)
+	at org.springframework.boot.context.config.ConfigDataEnvironmentPostProcessor.postProcessEnvironment(ConfigDataEnvironmentPostProcessor.java:96)
+	at org.springframework.boot.context.config.ConfigDataEnvironmentPostProcessor.postProcessEnvironment(ConfigDataEnvironmentPostProcessor.java:89)
+	at org.springframework.boot.env.EnvironmentPostProcessorApplicationListener.onApplicationEnvironmentPreparedEvent(EnvironmentPostProcessorApplicationListener.java:109)
+	at org.springframework.boot.env.EnvironmentPostProcessorApplicationListener.onApplicationEvent(EnvironmentPostProcessorApplicationListener.java:94)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:131)
+	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:81)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:352)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.whatsup.bot.BotApplication.main(BotApplication.java:18)
+2025-03-30 10:53:07 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 10:53:07 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 10:53:07 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 10:53:07 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - MENU_HORA_20241012
+2025-03-30 10:53:07 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - 20241012
+2025-03-30 10:53:07 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 10:53:07 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 10:53:07 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 10:53:08 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 10:53:08 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 3
+2025-03-30 10:53:08 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 10:53:08 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 10:53:08 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
+2025-03-30 10:53:08 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 10:53:08 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [C]
+2025-03-30 10:53:08 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Valida
+2025-03-30 10:53:08 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [gracias]
+2025-03-30 10:53:08 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Invalida
+2025-03-30 11:06:09 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:06:09 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - MENU_HORA_20241012
+2025-03-30 11:06:09 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - 20241012
+2025-03-30 11:06:09 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:06:09 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:06:09 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:06:09 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 11:06:09 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 3
+2025-03-30 11:06:09 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 11:06:09 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 11:06:09 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
+2025-03-30 11:06:09 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 11:06:10 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 11:06:10 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 11:06:10 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [C]
+2025-03-30 11:06:10 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Valida
+2025-03-30 11:06:10 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [gracias]
+2025-03-30 11:06:10 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Invalida
+2025-03-30 11:08:00 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 11:08:00 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 11:08:01 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:08:01 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - MENU_HORA_20241012
+2025-03-30 11:08:01 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - 20241012
+2025-03-30 11:08:01 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:08:01 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:08:01 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:08:01 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 11:08:01 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 3
+2025-03-30 11:08:01 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 11:08:01 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 11:08:01 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
+2025-03-30 11:08:01 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 11:08:02 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [C]
+2025-03-30 11:08:02 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Valida
+2025-03-30 11:08:02 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [gracias]
+2025-03-30 11:08:02 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Invalida
+2025-03-30 11:14:06 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 11:14:06 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 11:14:06 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:14:06 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - MENU_HORA_20241012
+2025-03-30 11:14:06 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - 20241012
+2025-03-30 11:14:06 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:14:06 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:14:06 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:14:07 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 11:14:07 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 3
+2025-03-30 11:14:07 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 11:14:07 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 11:14:07 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
+2025-03-30 11:14:07 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 11:14:07 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [C]
+2025-03-30 11:14:07 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Valida
+2025-03-30 11:14:07 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [gracias]
+2025-03-30 11:14:07 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Invalida
+2025-03-30 11:19:07 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:19:07 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - MENU_HORA_20241012
+2025-03-30 11:19:07 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - 20241012
+2025-03-30 11:19:07 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:19:07 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:19:07 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:19:08 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 11:19:08 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 3
+2025-03-30 11:19:08 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 11:19:08 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 11:19:08 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
+2025-03-30 11:19:08 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 11:19:09 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 11:19:09 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 11:19:09 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [C]
+2025-03-30 11:19:09 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Valida
+2025-03-30 11:19:09 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [gracias]
+2025-03-30 11:19:09 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Invalida
+2025-03-30 11:22:00 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 11:22:00 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 11:22:00 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:22:00 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - MENU_HORA_20241012
+2025-03-30 11:22:00 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - 20241012
+2025-03-30 11:22:00 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:22:01 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:22:01 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 11:22:01 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 11:22:01 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 3
+2025-03-30 11:22:01 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 11:22:01 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 11:22:01 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
+2025-03-30 11:22:01 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 11:22:01 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [C]
+2025-03-30 11:22:01 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Valida
+2025-03-30 11:22:01 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [gracias]
+2025-03-30 11:22:01 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Invalida
+2025-03-30 11:22:52 [main] INFO  com.whatsup.bot.BotApplication - Starting BotApplication using Java 17.0.12 with PID 19724 (C:\Cosas\setup\build\classes\java\main started by Gonzalo_Avalos in C:\Cosas\setup)
+2025-03-30 11:22:52 [main] INFO  com.whatsup.bot.BotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-03-30 11:22:54 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5000 (http)
+2025-03-30 11:22:54 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5000"]
+2025-03-30 11:22:54 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-30 11:22:54 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.1]
+2025-03-30 11:22:54 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-30 11:22:54 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1632 ms
+2025-03-30 11:22:56 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-03-30 11:22:57 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5000"]
+2025-03-30 11:22:57 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5000 (http) with context path ''
+2025-03-30 11:22:57 [lifecycle-thread-1] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#0 started
+2025-03-30 11:22:57 [lifecycle-thread-2] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#1 started
+2025-03-30 11:22:57 [main] INFO  com.whatsup.bot.BotApplication - Started BotApplication in 4.786 seconds (process running for 5.516)
+2025-03-30 11:22:57 [main] INFO  com.whatsup.bot.BotApplication - Hello World from Application Runner
+2025-03-30 11:23:13 [http-nio-5000-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-30 11:23:13 [http-nio-5000-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-03-30 11:23:13 [http-nio-5000-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-03-30 11:32:13 [main] INFO  com.whatsup.bot.BotApplication - Starting BotApplication using Java 17.0.12 with PID 23724 (C:\Cosas\setup\build\classes\java\main started by Gonzalo_Avalos in C:\Cosas\setup)
+2025-03-30 11:32:13 [main] INFO  com.whatsup.bot.BotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-03-30 11:32:15 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5000 (http)
+2025-03-30 11:32:15 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5000"]
+2025-03-30 11:32:15 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-30 11:32:15 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.1]
+2025-03-30 11:32:15 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-30 11:32:15 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2269 ms
+2025-03-30 11:32:18 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-03-30 11:32:18 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5000"]
+2025-03-30 11:32:18 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5000 (http) with context path ''
+2025-03-30 11:32:18 [lifecycle-thread-1] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#0 started
+2025-03-30 11:32:18 [lifecycle-thread-2] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#1 started
+2025-03-30 11:32:18 [main] INFO  com.whatsup.bot.BotApplication - Started BotApplication in 5.97 seconds (process running for 7.008)
+2025-03-30 11:32:18 [main] INFO  com.whatsup.bot.BotApplication - Hello World from Application Runner
+2025-03-30 11:32:29 [http-nio-5000-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-30 11:32:29 [http-nio-5000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-03-30 11:32:29 [http-nio-5000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-03-30 11:34:05 [main] INFO  com.whatsup.bot.BotApplication - Starting BotApplication using Java 17.0.12 with PID 24036 (C:\Cosas\setup\build\classes\java\main started by Gonzalo_Avalos in C:\Cosas\setup)
+2025-03-30 11:34:05 [main] INFO  com.whatsup.bot.BotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-03-30 11:34:07 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5000 (http)
+2025-03-30 11:34:07 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5000"]
+2025-03-30 11:34:07 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-30 11:34:07 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.1]
+2025-03-30 11:34:07 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-30 11:34:07 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2513 ms
+2025-03-30 11:34:10 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-03-30 11:34:11 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5000"]
+2025-03-30 11:34:11 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5000 (http) with context path ''
+2025-03-30 11:34:11 [lifecycle-thread-1] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#0 started
+2025-03-30 11:34:11 [lifecycle-thread-2] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#1 started
+2025-03-30 11:34:11 [main] INFO  com.whatsup.bot.BotApplication - Started BotApplication in 7.429 seconds (process running for 8.507)
+2025-03-30 11:34:11 [main] INFO  com.whatsup.bot.BotApplication - Hello World from Application Runner
+2025-03-30 11:34:21 [http-nio-5000-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-30 11:34:21 [http-nio-5000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-03-30 11:34:21 [http-nio-5000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-03-30 18:34:22 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 18:34:22 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - MENU_HORA_20241012
+2025-03-30 18:34:22 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - 20241012
+2025-03-30 18:34:23 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 18:34:23 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 18:34:23 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-30 18:34:23 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 18:34:23 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 3
+2025-03-30 18:34:23 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-30 18:34:23 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 18:34:23 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
+2025-03-30 18:34:23 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-30 18:34:23 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 18:34:23 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-30 18:34:23 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [C]
+2025-03-30 18:34:23 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Valida
+2025-03-30 18:34:23 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [gracias]
+2025-03-30 18:34:23 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Invalida
+2025-03-31 20:05:06 [main] INFO  com.whatsup.bot.BotApplication - Starting BotApplication using Java 17.0.12 with PID 18652 (C:\Cosas\setup\build\classes\java\main started by Gonzalo_Avalos in C:\Cosas\setup)
+2025-03-31 20:05:06 [main] INFO  com.whatsup.bot.BotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-03-31 20:05:08 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5000 (http)
+2025-03-31 20:05:08 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5000"]
+2025-03-31 20:05:08 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-31 20:05:08 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.1]
+2025-03-31 20:05:08 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-31 20:05:08 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1850 ms
+2025-03-31 20:05:10 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-03-31 20:05:11 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5000"]
+2025-03-31 20:05:11 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5000 (http) with context path ''
+2025-03-31 20:05:11 [lifecycle-thread-1] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#0 started
+2025-03-31 20:05:11 [lifecycle-thread-2] INFO  i.a.c.s.l.AbstractMessageListenerContainer - Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#1 started
+2025-03-31 20:05:11 [main] INFO  com.whatsup.bot.BotApplication - Started BotApplication in 5.356 seconds (process running for 6.241)
+2025-03-31 20:05:11 [main] INFO  com.whatsup.bot.BotApplication - Hello World from Application Runner
+2025-03-31 20:05:33 [http-nio-5000-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-31 20:05:33 [http-nio-5000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-03-31 20:05:33 [http-nio-5000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-03-31 20:07:06 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-31 20:07:06 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - MENU_HORA_20241012
+2025-03-31 20:07:06 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - 20241012
+2025-03-31 20:07:06 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-31 20:07:06 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-31 20:07:06 [Test worker] INFO  c.whatsup.bot.worker.messageWorker - Enviando mensaje a  TELEFONO
+2025-03-31 20:07:07 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-31 20:07:07 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 3
+2025-03-31 20:07:07 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 2
+2025-03-31 20:07:07 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-31 20:07:07 [Test worker] INFO  c.whatsup.bot.service.EventService - count eventMap: 3
+2025-03-31 20:07:07 [Test worker] INFO  c.whatsup.bot.service.EventService - count contactos: 2
+2025-03-31 20:07:07 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-31 20:07:07 [Test worker] INFO  c.w.bot.service.trackingService - getFechaSegunOpcion : 3
+2025-03-31 20:07:07 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [C]
+2025-03-31 20:07:07 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Valida
+2025-03-31 20:07:07 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta before valid [gracias]
+2025-03-31 20:07:07 [Test worker] INFO  c.w.b.b.task.respuestaHorasTask - Respuesta Invalida
