@@ -11,6 +11,7 @@ import com.whatsup.bot.entity.Evento;
 import com.whatsup.bot.message.OutMessage;
 import com.whatsup.bot.message.responsePost.ResponseRoot;
 import com.whatsup.bot.repository.S3RepositoryImpl;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -57,6 +58,8 @@ public class EventService {
 
         Map<String, String> eventoMap = eventos.stream()
                 .collect(Collectors.toMap(Evento::getTelefono, Evento::getMensaje));
+        
+        contactos.sort(Comparator.comparing(Contacto::getFecha).reversed());
 
         logger.info("count eventMap: " + eventoMap.size());
         logger.info("count contactos: " + contactos.size());
@@ -67,10 +70,9 @@ public class EventService {
                 contacto.getApellido(),
                 contacto.getTelefono(),
                 eventoMap.getOrDefault(contacto.getTelefono(),null),
-                        Short.valueOf("0")
+                Short.valueOf("0")
                         
-        ))
-                .collect(Collectors.toList());
+        )).collect(Collectors.toList());        
     }
 
     public List<ContactoEvento> combinarListas() {
