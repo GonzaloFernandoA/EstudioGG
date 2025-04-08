@@ -5,6 +5,8 @@
 package com.whatsup.bot.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -15,6 +17,7 @@ public class Contacto {
     private String nombre;
     private String apellido;
     private String telefono;
+    private Date fecha;
 
     public Contacto() {
 
@@ -26,10 +29,11 @@ public class Contacto {
         return this.telefono;
     }
 
-    public Contacto(String nombre, String apellido, String telefono) {
+    public Contacto(String nombre, String apellido, String telefono, Date fecha) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
+        this.fecha = fecha;
     }
 
     /**
@@ -72,6 +76,21 @@ public class Contacto {
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+    
+    public Date getFecha() {
+        if (fecha == null) {
+            Calendar calendario = Calendar.getInstance();
+            calendario.add(Calendar.DAY_OF_MONTH, -1);
+            
+            fecha = calendario.getTime();
+        }
+        
+        return fecha;
+    }
+    
+    public void setFecha(Date fecha) {        
+        this.fecha = fecha;
     }
 
 }

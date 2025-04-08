@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.whatsup.bot.entity.Contacto;
 import com.whatsup.bot.repository.S3RepositoryImpl;
+import java.time.Instant;
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.s3.model.NoSuchKeyException;
@@ -41,8 +45,10 @@ public class ContactService {
             redirectAttributes.addFlashAttribute("alerta", "ERROR: El contacto ya existe");
             return "redirect:/contactos";
         }
+        LocalDate fechaActual = LocalDate.now();
+        Date fecha = Date.from(fechaActual.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-        contac = new Contacto(nombre, apellido, telefono);
+        contac = new Contacto(nombre, apellido, telefono, fecha);
         this.save(contac);
 
         eventService.saveEvent(telefono, "CONTACTO_GUARDADO");
