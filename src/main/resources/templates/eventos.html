@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Eventos</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+        
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -43,88 +45,18 @@
                 font-weight: bold;
             }
 
-            .icon {
-                width: 24px;
-                height: 24px;
-            }
-
-            .modal-overly {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-                display: none;
-                justify-content: center;
-                align-items: center;
-                z-index: 1000;
-            }
-
-            .modal {
-                width: 40%;
-                height: 40%;
-                background: white;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-                position: relative;
-                padding: 20px;
-                margin-left: 15%;
-                margin-right: 15%;
-            }
-
-            .cerrar-modal {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                background: none;
-                border: none;
-                font-size: 20px;
+            .download-icon {
+                font-size: 24px;
                 cursor: pointer;
-            }
-
-            input {
-                width: 80%;
-            }
-
-            #desc {
-                width: 80%;
-                flex-grow: 1;
-                display: flex;
-                justify-content: center;
-                vertical-align: top;
-                resize: none;
-            }
-
-            .botones-de-acceso {
-                display: flex;
-                justify-content: space-between;
-            }
-
-            .btn {
-                padding: 10px 20px;
-                margin-right: 3px;
-                font-size: 16px;
-                cursor: pointer;
-                background-color: #e0e0e0;
-                transition: background-color 0.3s, transform 0.3s;
-                border: none;
-            }
-            .btn:hover {
-                background-color: #d1d1d1;
-                transform: scale(1.05);
+                margin-bottom: 15px;
             }
         </style>
-
     </head>
     <body>
         <h1>Eventos</h1>
+        <i class="fa fa-file-excel download-icon" onclick="downloadExcel()" title="Descargar Excel"></i>
 
-        <table>
+        <table id="eventosTable">
             <thead>
                 <tr>
                     <th>Apellido</th>
@@ -133,6 +65,11 @@
                     <th>Acción</th>
                     <th>Notas</th>
                 </tr>
+                <tr>
+                    <th><input type="text" placeholder="Filtrar Nombre" /></th>
+                    <th><input type="text" placeholder="Filtrar Apellido" /></th>
+                    <th><input type="text" placeholder="Filtrar Teléfono" /></th>
+                </tr>
             </thead>
             <tbody>
                 <tr th:each="objeto : ${objetos}">
@@ -140,7 +77,6 @@
                     <td th:text="${objeto.nombre}"></td>
                     <td th:text="${objeto.telefono}"></td>
                     <td th:text="${objeto.evento}"></td>
-
                     <td>
                         <a th:href="@{/notas(telefono=${objeto.telefono})}">
                             <i class="fa-regular fa-file" th:if="${objeto.hayNotas == 0}"></i>
@@ -150,39 +86,60 @@
                 </tr>
             </tbody>
         </table>
-
-
-        <!-- Modal de notas. Se abre dinamicamente -->
-        <div id="modalContenedor"></div>
-
+        
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <script>
-            const abrirModal = () => {
-                fetch('.\\Resources\\templates\\nota')
-                        .then(res => res.text())
-                        .then(dataModal => {
-                            document.getElementById('modalContenedor').innerHTML = dataModal;
-                    
-                            const modal = document.getElementById('modal-overly');
-                            if (!modal) {
-                                console.log("WARN: El modal no se abrió como corresponde...");
-                            } else {
-                                modal.style.display = "flex";
-                            }
-                }).catch(err => console.log("ERROR: ", err));
-            };
-
-            const cerrarModal = () => {
-                const modal = document.getElementById('modal-overly');
-                if (!modal) {
-                    console.log("WARN: El modal no se cerró como corresponde...");
-                } else {
-                    modal.style.display = "none";
-                }
-            };
+            $(document).ready(function () {
+                $('#eventosTable').DataTable({
+                    language: {
+                        "decimal": ",",
+                        "thousands": ".",
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Buscar:",
+                        "sUrl": "",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    }
+                });
+            });
         </script>
 
-        <a href="/">
-            <img src="https://img.icons8.com/ios-filled/50/000000/home.png" alt="Home" class="home-icon" title="Volver a Inicio">
-        </a>
+        <script>
+            function downloadExcel() {
+                let table = document.getElementById("eventosTable");
+                let wb = XLSX.utils.book_new();
+                let ws = XLSX.utils.table_to_sheet(table);
+                XLSX.utils.book_append_sheet(wb, ws, "Eventos");
+                
+                let now = new Date();
+                let formattedDate = now.getFullYear().toString() +
+                                    ("0" + (now.getMonth() + 1)).slice(-2) +
+                                    ("0" + now.getDate()).slice(-2) +
+                                    ("0" + now.getHours()).slice(-2) +
+                                    ("0" + now.getMinutes()).slice(-2) +
+                                    ("0" + now.getSeconds()).slice(-2);
+                
+                let fileName = "eventos_" + formattedDate + ".xlsx";
+                XLSX.writeFile(wb, fileName);
+            }
+        </script>
     </body>
 </html>

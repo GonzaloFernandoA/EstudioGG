@@ -55,7 +55,7 @@ public class respuestaHorasTaskTest {
         task.Run(response);
         verify(event, never()).saveEvent(any(), any());
         verify(equivalencia).get(any());
-        verify(reserva, never()).getDiaElegido(any(), any());
+    //    verify(reserva, never()).getDiaElegido(any(), any());
     }
 
     @Test

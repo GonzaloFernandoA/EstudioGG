@@ -34,36 +34,42 @@ public class respuestaHorasTask extends basicTask {
 
     @Autowired
     EventService event;
+    
+    @Autowired
+    ConfirmacionTurnoTask turnoTask;
 
     public void Run(String incomingMessage) {
         Root message = this.getMessage(incomingMessage);
         String respuesta = message.entry.get(0).changes.get(0).value.messages.get(0).text.body;
-
         String telefonowa_id = message.entry.get(0).changes.get(0).value.contacts.get(0).wa_id;
+        
         String telefono = equivalencia.get(telefonowa_id);
-
+        logger.info("Respuesta before valid [" + respuesta + "]");
         if (Valid(respuesta)) {
-
+            logger.info("Respuesta Valida");
             if (tracking.isReservaDiasIsBlank(telefono)) {
+                logger.info("Respuesta Valida 2");
                 String diaElegido = tracking.getFechaSegunOpcion(telefono, respuesta);
                 event.saveOutMessage(telefono, String.format("MENU_HORA_%s", diaElegido));
                 tracking.saveFechasReservada(telefono, diaElegido);
                 event.saveEvent(telefono, "MENU HORA");
+                logger.info("Respuesta Valida");
             } else if (tracking.isReservaHorasIsBlank(telefono)) {
+                logger.info("isReservaHorasIsBlank");
                 String horaElegida = tracking.getHoraSegunOpcion(telefono, respuesta);
                 tracking.saveHoraReservada(telefono, horaElegida);
                 event.saveOutMessage(telefono, "CONFIRMACION_TURNO");
             } else if (!tracking.IsConfirmado(telefono)) {
                 if ("A".equals(respuesta) || "a".equals(respuesta)) {
-                    tracking.Confirmar(telefono);
-
+                    logger.info("IsConfirmado");
                     logger.info("fecha reservada:" + tracking.get(telefono).getFechaReservada());
                     logger.info("hora reservada:" + tracking.get(telefono).getHoraReservada());
+                    tracking.Confirmar(telefono);
                     reserva.reservarDiaHoraTurno(tracking.get(telefono).getFechaReservada(), tracking.get(telefono).getHoraReservada());
                     event.saveEvent(telefono, "Turno Confirmado:"
                             + DateUtil1.convertDateToText(tracking.get(telefono).getFechaReservada()) + " hora " + tracking.get(telefono).getHoraReservada());
 
-                    event.saveOutMessage(telefono, "Turno Confirmado. Gracias \uD83D\uDC4D"  );
+                    event.saveOutMessage(telefono, "Turno Confirmado. Muchas gracias !!!" ) ; //turnoTask.CreateMessage(telefono) );
                 } else if ("B".equals(respuesta) || "b".equals(respuesta)) {
                     tracking.Delete(telefono);
                     event.saveOutMessage(telefono, "ENVIAR_ENCUESTA");
@@ -72,7 +78,7 @@ public class respuestaHorasTask extends basicTask {
                 }
 
             }
-        }
+        } else {logger.info("Respuesta Invalida");}
     }
 
     public Boolean Valid(String respuesta) {

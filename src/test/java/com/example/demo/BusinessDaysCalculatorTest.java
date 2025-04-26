@@ -4,9 +4,8 @@
  */
 package com.example.demo;
 
-import com.whatsup.bot.builder.messageBuilder;
 import com.whatsup.bot.entity.DiaReserva;
-import com.whatsup.bot.repository.agendaRepository;
+import com.whatsup.bot.repository.S3RepositoryImpl;
 import com.whatsup.bot.service.agenda.BusinessDaysCalculator;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +13,8 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.mockito.ArgumentMatchers.any;
+import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
@@ -23,8 +24,11 @@ import static org.mockito.Mockito.when;
  */
 public class BusinessDaysCalculatorTest {
 
+    @InjectMocks
+    BusinessDaysCalculator calc; 
+    
     @Mock
-    agendaRepository repo;
+    S3RepositoryImpl repo;
     
     @BeforeEach
     public void init() {
@@ -34,15 +38,12 @@ public class BusinessDaysCalculatorTest {
     @Test
     void TodosLosDiasLibresTest() {
 
-        when(repo.getOrDefault("20241209")).thenReturn(new DiaReserva());   
-        when(repo.getOrDefault("20241210")).thenReturn(new DiaReserva());   
-        when(repo.getOrDefault("20241211")).thenReturn(new DiaReserva());   
-        when(repo.getOrDefault("20241212")).thenReturn(new DiaReserva());   
-        when(repo.getOrDefault("20241213")).thenReturn(new DiaReserva());   
-        
-        BusinessDaysCalculator calc = new BusinessDaysCalculator();
-        calc.setRepository(repo);
-        
+        when(repo.findByKey("turnos/20241209", any())).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241209", any())).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241209", any())).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241209", any())).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241209", any())).thenReturn(new DiaReserva());   
+       
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDate fecha = LocalDate.parse("20241207", formatter);
         List<String> diasDisponibles = calc.getNextBusinessDays(fecha,5);
@@ -65,15 +66,13 @@ public class BusinessDaysCalculatorTest {
         diaFull.getHorariosOcupados().add("7");
         diaFull.getHorariosOcupados().add("8");
         
-        when(repo.getOrDefault("20241209")).thenReturn(new DiaReserva());   
-        when(repo.getOrDefault("20241210")).thenReturn(new DiaReserva());   
-        when(repo.getOrDefault("20241211")).thenReturn(diaFull);   
-        when(repo.getOrDefault("20241212")).thenReturn(new DiaReserva());   
-        when(repo.getOrDefault("20241213")).thenReturn(new DiaReserva());   
-        when(repo.getOrDefault("20241216")).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241209",any())).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241210",any())).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241211",any())).thenReturn(diaFull);   
+        when(repo.findByKey("turnos/20241212",any())).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241213",any())).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241216",any())).thenReturn(new DiaReserva());   
         
-        BusinessDaysCalculator calc = new BusinessDaysCalculator();
-        calc.setRepository(repo);
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDate fecha = LocalDate.parse("20241207", formatter);
@@ -97,18 +96,14 @@ public class BusinessDaysCalculatorTest {
         diaFull.getHorariosOcupados().add("7");
         diaFull.getHorariosOcupados().add("8");
         
-        when(repo.getOrDefault("20241209")).thenReturn(new DiaReserva());   
-        when(repo.getOrDefault("20241210")).thenReturn(new DiaReserva());   
-        when(repo.getOrDefault("20241211")).thenReturn(diaFull);   
-        when(repo.getOrDefault("20241212")).thenReturn(new DiaReserva());   
-        when(repo.getOrDefault("20241213")).thenReturn(new DiaReserva());   
-        when(repo.getOrDefault("20241216")).thenReturn(diaFull); 
-        when(repo.getOrDefault("20241217")).thenReturn(diaFull); 
-        when(repo.getOrDefault("20241218")).thenReturn(new DiaReserva());   
-        
-        
-        BusinessDaysCalculator calc = new BusinessDaysCalculator();
-        calc.setRepository(repo);
+        when(repo.findByKey("turnos/20241209",any())).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241210",any())).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241211",any())).thenReturn(diaFull);   
+        when(repo.findByKey("turnos/20241212",any())).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241213",any())).thenReturn(new DiaReserva());   
+        when(repo.findByKey("turnos/20241216",any())).thenReturn(diaFull); 
+        when(repo.findByKey("turnos/20241217",any())).thenReturn(diaFull); 
+        when(repo.findByKey("turnos/20241218",any())).thenReturn(new DiaReserva());   
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDate fecha = LocalDate.parse("20241207", formatter);

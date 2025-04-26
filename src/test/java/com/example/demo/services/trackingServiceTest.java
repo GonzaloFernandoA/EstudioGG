@@ -4,8 +4,10 @@
  */
 package com.example.demo.services;
 
+import com.whatsup.bot.config.CarpetasConfig;
 import com.whatsup.bot.entity.Tracking;
-import com.whatsup.bot.repository.trackingRepository;
+import com.whatsup.bot.repository.S3RepositoryImpl;
+
 import com.whatsup.bot.service.trackingService;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +32,11 @@ public class trackingServiceTest {
     trackingService service;
 
     @Mock
-    private trackingRepository repo;
+    private S3RepositoryImpl repo;
 
+    @Mock
+    private CarpetasConfig config;
+    
     @BeforeEach
     public void init() {
         MockitoAnnotations.openMocks(this);
@@ -44,15 +49,18 @@ public class trackingServiceTest {
     @Test
     void getEmptyDayTest() {
 
-        when(repo.getOrDefault("TELEFONO1")).thenReturn(new Tracking());
-
+        when(repo.findByKey("PATH/TELEFONO1.json", any())).thenReturn(new Tracking());
+        
+        when(config.getTracking()).thenReturn("PATH/");
+        
+        
         List<String> fechasEnviadas = new ArrayList<>();
         fechasEnviadas.add("20241012");
         fechasEnviadas.add("20241013");
         fechasEnviadas.add("20241014");
 
         service.saveFechasEnviadas("TELEFONO1", fechasEnviadas);
-        verify(repo).save(eq("TELEFONO1"), any());
+        verify(repo).save(eq("PATH/TELEFONO1"), any());
     }
 
     @Test
@@ -64,9 +72,12 @@ public class trackingServiceTest {
         fechasEnviadas.add("20241012");
         fechasEnviadas.add("20241013");
         fechasEnviadas.add("20241014");
-
+        
         tracking.setFechasEnviadas(fechasEnviadas);
-        String fechaElegida = service.getFechaSegunOpcion(tracking, 'C');
+        when(config.getTracking()).thenReturn("");
+        when(repo.findByKey(any(), any())).thenReturn(tracking);
+        
+        String fechaElegida = service.getFechaSegunOpcion("TELEFONO1", "C");
         Assertions.assertEquals("20241014", fechaElegida);
     }
 
@@ -78,9 +89,11 @@ public class trackingServiceTest {
         fechasEnviadas.add("20241012");
         fechasEnviadas.add("20241013");
         fechasEnviadas.add("20241014");
-
         tracking.setFechasEnviadas(fechasEnviadas);
-        String fechaElegida = service.getFechaSegunOpcion(tracking, 'a');
+
+         when(repo.findByKey(any(), any())).thenReturn(tracking);
+
+        String fechaElegida = service.getFechaSegunOpcion("TELEFONO1", "a");
         Assertions.assertEquals("20241012", fechaElegida);
     }
 
@@ -105,7 +118,8 @@ public class trackingServiceTest {
     void getNoTieneFechaReservadaTest() {
 
         Tracking tracking = new Tracking();
-        when(repo.getOrDefault("TELEFONO1")).thenReturn(tracking);
+        when(repo.findByKey("TELEFONO1", any())).thenReturn(tracking);
+
         Assertions.assertTrue(service.isReservaDiasIsBlank("TELEFONO1"));
     }
 
@@ -114,7 +128,7 @@ public class trackingServiceTest {
 
         Tracking tracking = new Tracking();
         tracking.setFechaReservada("HOY");
-        when(repo.getOrDefault("TELEFONO1")).thenReturn(tracking);
+        when(repo.findByKey("TELEFONO1", any())).thenReturn(tracking);
         Assertions.assertFalse(service.isReservaDiasIsBlank("TELEFONO1"));
     }
 
@@ -122,7 +136,7 @@ public class trackingServiceTest {
     void getNoTurnoHoraReservadaTest() {
 
         Tracking tracking = new Tracking();
-        when(repo.getOrDefault("TELEFONO1")).thenReturn(tracking);
+        when(repo.findByKey("TELEFONO1", any())).thenReturn(tracking);
         Assertions.assertTrue(service.isReservaHorasIsBlank("TELEFONO1"));
     }
 
@@ -131,7 +145,7 @@ public class trackingServiceTest {
 
         Tracking tracking = new Tracking();
         tracking.setHoraReservada("AHORA");
-        when(repo.getOrDefault("TELEFONO1")).thenReturn(tracking);
+        when(repo.findByKey("TELEFONO1", any())).thenReturn(tracking);
         Assertions.assertFalse(service.isReservaHorasIsBlank("TELEFONO1"));
     }
 
@@ -146,7 +160,7 @@ public class trackingServiceTest {
         horasEnviadas.add("hora3");
         tracking.setHorasEnviadas(horasEnviadas);
        
-        when(repo.getOrDefault("TELEFONO1")).thenReturn(tracking);
+        when(repo.findByKey("TELEFONO1", any())).thenReturn(tracking);
 
         Assertions.assertEquals( "hora2", service.getHoraSegunOpcion("TELEFONO1", "B") ); 
         
