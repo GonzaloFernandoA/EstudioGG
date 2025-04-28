@@ -81,7 +81,10 @@ public class Contacto {
     public Date getFecha() {
         if (fecha == null) {
             Calendar calendario = Calendar.getInstance();
-            calendario.add(Calendar.DAY_OF_MONTH, -1);
+            
+            calendario.set(Calendar.DAY_OF_MONTH, 1);
+            calendario.set(Calendar.MONTH, 0);
+            calendario.set(Calendar.YEAR, 2000);
             
             fecha = calendario.getTime();
         }
