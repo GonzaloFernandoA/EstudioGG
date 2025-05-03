@@ -8,7 +8,16 @@ package com.whatsup.bot.message;
  *
  * @author Gonzalo_Avalos
  */
-public class Parameter {
-    public String type = "video";
-    public Video video = new Video(); 
+public class ParameterString implements IParameter{
+    public String type = "text";
+    public String text = "";
+
+    ParameterString(String nombre) {
+        text = nombre; 
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
 }

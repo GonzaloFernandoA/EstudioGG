@@ -4,9 +4,14 @@
  */
 package com.whatsup.bot.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whatsup.bot.config.WhatsupSecurityConfig;
+import com.whatsup.bot.controler.BotController;
 import com.whatsup.bot.message.ButtonList.Root;
-import com.whatsup.bot.message.Component;
+import com.whatsup.bot.message.ComponentBody;
+import com.whatsup.bot.message.ComponentHeader;
+import com.whatsup.bot.message.IComponent;
 import com.whatsup.bot.message.responsePost.ResponseRoot;
 import com.whatsup.bot.security.tokenService;
 import java.util.ArrayList;
@@ -15,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 /**
  *
@@ -30,6 +38,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Service
 public class WhatsAppService {
 
+    private Logger log = LoggerFactory.getLogger(WhatsAppService.class);
+    
+    
     @Autowired
     tokenService tokens; 
     
@@ -39,6 +50,10 @@ public class WhatsAppService {
     @Autowired
     WhatsupSecurityConfig config;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    
     private final WebClient webClient;
 
     @Autowired
@@ -46,7 +61,7 @@ public class WhatsAppService {
         this.webClient = webClient;
     }
 
-    public void enviarMensajeTemplate(String numeroDestino, Map<String, String> parametros) {
+    public void enviarMensajeTemplate(String numeroDestino, String nombre ) {
         Map<String, Object> body = new HashMap<>();
         body.put("messaging_product", "whatsapp");
         body.put("to", numeroDestino);
@@ -56,9 +71,12 @@ public class WhatsAppService {
         template.put("name", config.getTemplateName());
         template.put("language", Map.of("code", "es_AR")); // Cambia el idioma si es necesario
 
-        List<Component> componentes = new ArrayList<>();
-        Component componente = new Component();
-        componentes.add(componente);
+        List<IComponent> componentes = new ArrayList<>();
+        IComponent componente = new ComponentBody(nombre);     componentes.add(componente);
+        
+        IComponent componenteHeader = new ComponentHeader();
+        componentes.add(componenteHeader);
+        
         template.put("components", componentes);
         body.put("template", template);
 
@@ -74,15 +92,29 @@ public class WhatsAppService {
     
     public void sendObject(String numeroDestino, Map<String, Object> mensaje) {
 
-                getWebClient().post()
-                .header("Content-Type", "application/json")
-                .bodyValue(mensaje)
-                .retrieve()
-                .bodyToMono(ResponseRoot.class)
-                .doOnSuccess(response -> Service.SaveInconmeMessage(response) )
-                .doOnError(error -> System.err.println("Error al enviar el mensaje: " + error.getMessage()))
-                .subscribe();
-  
+           
+        try {
+            String payloadJson = objectMapper.writeValueAsString(mensaje);
+            log.info("➡️ Enviando POST a WebService con body: {}", payloadJson);
+        } catch (JsonProcessingException e) {
+            log.warn("Error al serializar payload", e);
+        }
+
+        getWebClient().post()
+        .header("Content-Type", "application/json")
+        .bodyValue(mensaje)
+        .retrieve()
+        .onStatus(status -> status.is4xxClientError(), response ->  
+        response.bodyToMono(String.class)
+                  .flatMap(errorBody -> { log.error( "Error http" , response.statusCode(), errorBody) ;
+                  return Mono.error(new RuntimeException("Error whasapp" + errorBody));
+                  })
+        )
+        .bodyToMono(ResponseRoot.class)
+        .doOnSuccess(response -> Service.SaveInconmeMessage(response) )
+        .doOnError(error -> log.error("Error al enviar el mensaje: " + error.getMessage()))
+        .subscribe();
+
     }
 
     public void sendObject(Root mensaje) {

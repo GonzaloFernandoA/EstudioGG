@@ -33,13 +33,21 @@ public class ContactService {
         repo.save(config.getContactos() + contacto.getId(), contacto);
     }
 
+    public String getName(String telefono)
+    {
+        Contacto contac = null;
+        
+        contac = (Contacto) repo.findByKey(config.getContactos() + telefono, Contacto.class);
+        
+        return contac.getNombre();
+    }
+    
     public String save(String nombre, String apellido, String telefono, RedirectAttributes redirectAttributes) {
 
         Contacto contac = null;
 
         contac = (Contacto) repo.findByKey(config.getContactos() + telefono, Contacto.class);
-
-        // catch (NoSuchKeyException NoExist) {
+        
         if (contac != null) {
             logger.error("El contacto ya existe. ");
             redirectAttributes.addFlashAttribute("alerta", "ERROR: El contacto ya existe");

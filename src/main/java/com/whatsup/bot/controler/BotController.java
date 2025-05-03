@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BotController {
     
-    @Value("${build.time}")
+ //   @Value("${build.time}")
     private String buildTime;
     
     @Autowired
@@ -48,7 +48,7 @@ public class BotController {
 
     @GetMapping("/sendTemplate")
     public String sendMessageTemplate() {
-        whatsAppService.enviarMensajeTemplate("541145587174", null);
+        whatsAppService.enviarMensajeTemplate("541145587174", "Gonzalo");
         
         return "Template sent!";
     }

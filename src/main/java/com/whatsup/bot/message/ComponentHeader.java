@@ -12,14 +12,24 @@ import java.util.List;
  * @author Gonzalo_Avalos
  */
 
-public class Component {
+public class ComponentHeader implements IComponent {
     public String type = "header";
-    public List<Parameter> parameters;
+    public List<IParameter> parameters;
     
-    public Component()
+    public ComponentHeader()
+    {
+        this.CreateParameter();
+    }
+
+    private void CreateParameter()
     {
         parameters = new ArrayList<>();
-        Parameter para = new Parameter();
-        parameters.add(para);
+        IParameter para = new ParameterVideo();
+        parameters.add(para);   
+    }
+
+    @Override
+    public String getType() {
+        return type;
     }
 }
