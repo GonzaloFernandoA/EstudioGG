@@ -8,6 +8,7 @@ package com.whatsup.bot.worker;
 import com.whatsup.bot.builder.messageBuilder;
 
 import com.whatsup.bot.config.CarpetasConfig;
+import com.whatsup.bot.service.ContactService;
 
 import com.whatsup.bot.service.EventService;
 import com.whatsup.bot.service.ReservaService;
@@ -37,6 +38,9 @@ public class messageWorker {
     WhatsAppService service;
 
     @Autowired
+    ContactService contact; 
+    
+    @Autowired
     EventService eventService;
 
     @Autowired
@@ -50,7 +54,7 @@ public class messageWorker {
         log.info("Enviando mensaje a  " + telefono);
 
         if (contenido.contains("ENVIAR_ENCUESTA")) {
-            service.enviarMensajeTemplate(telefono, null);
+            service.enviarMensajeTemplate(telefono, contact.getName(telefono));
             eventService.saveEvent(telefono, "ENCUESTA_ENVIADA");
 
         } else {
