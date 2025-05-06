@@ -37,7 +37,7 @@ public class ContactService {
     {
         Contacto contac = null;
         
-        contac = (Contacto) repo.findByKey(config.getContactos() + telefono, Contacto.class);
+        contac = (Contacto) repo.findByKey(config.getContactos() + telefono+ ".json", Contacto.class);
         
         return contac.getNombre();
     }
