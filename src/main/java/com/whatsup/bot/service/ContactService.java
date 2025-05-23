@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import software.amazon.awssdk.services.s3.model.NoSuchKeyException;
 
 @Service
 public class ContactService {
@@ -36,17 +35,13 @@ public class ContactService {
     public String getName(String telefono)
     {
         Contacto contac = null;
-        
         contac = (Contacto) repo.findByKey(config.getContactos() + telefono+ ".json", Contacto.class);
-        
         return contac.getNombre();
     }
     
     public String save(String nombre, String apellido, String telefono, RedirectAttributes redirectAttributes) {
 
-        Contacto contac = null;
-
-        contac = (Contacto) repo.findByKey(config.getContactos() + telefono, Contacto.class);
+        Contacto contac = (Contacto) repo.findByKey(config.getContactos() + telefono, Contacto.class);
         
         if (contac != null) {
             logger.error("El contacto ya existe. ");

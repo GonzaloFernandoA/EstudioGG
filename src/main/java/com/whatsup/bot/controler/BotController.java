@@ -1,7 +1,10 @@
 package com.whatsup.bot.controler;
 
+import com.whatsup.bot.message.MessageTemplateRequest;
 import com.whatsup.bot.security.tokenService;
 import com.whatsup.bot.service.WhatsAppService;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +29,7 @@ public class BotController {
     
     @Autowired
     WhatsAppService whatsAppService;
+    
     private Logger log = LoggerFactory.getLogger(BotController.class);
     
     @GetMapping("/hello")
@@ -53,6 +58,78 @@ public class BotController {
         return "Template sent!";
     }
 
+    @GetMapping("/sendRecordatorio")
+    public String sendRecordatorioTemplate() {
+        MessageTemplateRequest request = new MessageTemplateRequest();
+        
+        request.setTemplate("altaturno");
+        request.setTelefono("54111545587174");
+        
+        request.add("Maxi Guiggi");
+
+        request.add("Sabado 12 de Diciembre 2018");
+        request.add("18:00");
+        
+        request.add("Pity Martinez");
+        request.add("Bernabeu 2018, Madrid");
+        request.add("Proctologia");
+        
+        whatsAppService.enviar(request);
+        return "Template sent!";
+    }
+    
+
+    @GetMapping("/sendConfirmacion")
+    public String sendConfirmacionTemplate() {
+        MessageTemplateRequest request = new MessageTemplateRequest();
+        
+        request.setTemplate("postconfirmacion");
+        request.setTelefono("54111545587174");
+        
+        request.add("Maxi Guiggi");
+        request.add("Pity Martinez");
+        request.add("Proctologia");
+        
+        whatsAppService.enviar(request);
+        return "Template sent!";
+    }
+    
+    
+        @GetMapping("/sendRecordatorio3")
+    public String sendRecordatorio3Template() {
+        MessageTemplateRequest request = new MessageTemplateRequest();
+        
+        request.setTemplate("recordatorio3");
+        request.setTelefono("54111545587174");
+        
+        request.add("Maxi Guiggi");
+        request.add("Sabado 12 de Diciembre 2018");
+        request.add("18:00");
+        request.add("Pity Martinez");
+        request.add("Bernabeu 2018, Madrid");
+        request.add("Proctologia");
+        
+        whatsAppService.enviar(request);
+        return "Template sent!";
+    }
+
+    @GetMapping("/sendRecordatorio1")
+    public String sendRecordatorio1Template() {
+        MessageTemplateRequest request = new MessageTemplateRequest();
+        
+        request.setTemplate("recordatorio1");
+        request.setTelefono("54111545587174");
+        
+        request.add("Maxi Guiggi");
+        request.add("18:00");
+        request.add("Pity Martinez");
+        request.add("Bernabeu 2018, Madrid");
+        request.add("Proctologia");
+        
+        whatsAppService.enviar(request);
+        return "Template sent!";
+    }    
+    
     @GetMapping("/getToken")
     public String getToken() {
         token.getToken();
@@ -67,3 +144,4 @@ public class BotController {
         return "index";
     }
 }
+

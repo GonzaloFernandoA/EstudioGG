@@ -6,12 +6,13 @@ package com.whatsup.bot.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.whatsup.bot.builder.ComponentTemplateBuilder;
 import com.whatsup.bot.config.WhatsupSecurityConfig;
-import com.whatsup.bot.controler.BotController;
 import com.whatsup.bot.message.ButtonList.Root;
 import com.whatsup.bot.message.ComponentBody;
 import com.whatsup.bot.message.ComponentHeader;
 import com.whatsup.bot.message.IComponent;
+import com.whatsup.bot.message.MessageTemplateRequest;
 import com.whatsup.bot.message.responsePost.ResponseRoot;
 import com.whatsup.bot.security.tokenService;
 import java.util.ArrayList;
@@ -61,6 +62,31 @@ public class WhatsAppService {
         this.webClient = webClient;
     }
 
+    public void enviar(MessageTemplateRequest request ){
+        Map<String, Object> body = new HashMap<>();
+        body.put("messaging_product", "whatsapp");
+        body.put("to", request.getTelefono());
+        body.put("type", "template");
+
+        Map<String, Object> template = new HashMap<>();
+        template.put("name", request.getTemplate());
+        template.put("language", Map.of("code", "es_AR"));
+
+        List<IComponent> componentes = new ArrayList<>();
+        IComponent componente = new ComponentTemplateBuilder(request).getComponent();
+        componentes.add(componente);
+        
+     //   IComponent componenteHeader = new ComponentHeader();
+     //   componentes.add(componenteHeader);
+        
+        template.put("components", componentes);
+        body.put("template", template);
+
+        this.sendObject(request.getTelefono(), body);
+    }
+
+    
+    
     public void enviarMensajeTemplate(String numeroDestino, String nombre ) {
         Map<String, Object> body = new HashMap<>();
         body.put("messaging_product", "whatsapp");
@@ -72,7 +98,8 @@ public class WhatsAppService {
         template.put("language", Map.of("code", "es_AR")); // Cambia el idioma si es necesario
 
         List<IComponent> componentes = new ArrayList<>();
-        IComponent componente = new ComponentBody(nombre);     componentes.add(componente);
+        IComponent componente = new ComponentBody(nombre);     
+        componentes.add(componente);
         
         IComponent componenteHeader = new ComponentHeader();
         componentes.add(componenteHeader);

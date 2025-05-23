@@ -55,9 +55,21 @@ public class SqsMessageListener {
             OutMessage fileMessage = outService.get(file);
             logger.info("Mensaje recibido File Name:" + fileMessage.getTelefono() + " Contenido: "+ fileMessage.getContenido());
             worker.ejecutarTarea(fileMessage.getTelefono(), fileMessage.getContenido());
-            
-           
-
+        } catch (Exception e) {
+            logger.error("Error al procesar el mensaje: " + e.getMessage());
+        }
+    }
+    
+    @SqsListener("https://sqs.us-east-2.amazonaws.com/034362075244/TurnosToWorkerTest")
+    public void receiveMessageToSendTurnos(String message) {
+        try {
+          
+            logger.info("Mensaje recibido S3ToWorker:" + message);
+/*            String file = getKeyComponent.transform(message);
+            logger.info("Mensaje recibido File Name:" + file);
+            OutMessage fileMessage = outService.get(file);
+            logger.info("Mensaje recibido File Name:" + fileMessage.getTelefono() + " Contenido: "+ fileMessage.getContenido());
+            worker.ejecutarTarea(fileMessage.getTelefono(), fileMessage.getContenido());*/
         } catch (Exception e) {
             logger.error("Error al procesar el mensaje: " + e.getMessage());
         }
