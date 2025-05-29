@@ -95,7 +95,7 @@ public class BotController {
     }
     
     
-        @GetMapping("/sendRecordatorio3")
+   @GetMapping("/sendRecordatorio3")
     public String sendRecordatorio3Template() {
         MessageTemplateRequest request = new MessageTemplateRequest();
         
