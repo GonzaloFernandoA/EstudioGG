@@ -6,12 +6,10 @@ package com.whatsup.bot.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.whatsup.bot.builder.ComponentTemplateBuilder;
 import com.whatsup.bot.config.WhatsupSecurityConfig;
-import com.whatsup.bot.controler.BotController;
+import com.whatsup.bot.message.*;
 import com.whatsup.bot.message.ButtonList.Root;
-import com.whatsup.bot.message.ComponentBody;
-import com.whatsup.bot.message.ComponentHeader;
-import com.whatsup.bot.message.IComponent;
 import com.whatsup.bot.message.responsePost.ResponseRoot;
 import com.whatsup.bot.security.tokenService;
 import java.util.ArrayList;
@@ -61,18 +59,49 @@ public class WhatsAppService {
         this.webClient = webClient;
     }
 
+    public void enviar(MessageTemplateRequest request ){
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("messaging_product", "whatsapp");
+        body.put("to", request.getTelefono());
+        body.put("type", "template");
+        Metadata metadata = new Metadata();
+        metadata.setCustom( request.getTemplate()) ;
+        metadata.setId( request.getId());
+        body.put("metadata", metadata );
+
+        Map<String, Object> template = new HashMap<>();
+        template.put("name", request.getTemplate());
+        template.put("language", Map.of("code", "es_AR"));
+
+        List<IComponent> componentes = new ArrayList<>();
+        IComponent componente = new ComponentTemplateBuilder(request).getComponent();
+        componentes.add(componente);
+        template.put("components", componentes);
+        body.put("template", template);
+
+        this.sendObject(request.getTelefono(), body);
+    }
+
+    
+    
     public void enviarMensajeTemplate(String numeroDestino, String nombre ) {
         Map<String, Object> body = new HashMap<>();
         body.put("messaging_product", "whatsapp");
         body.put("to", numeroDestino);
         body.put("type", "template");
 
+        Metadata metadata = new Metadata();
+        metadata.setCustom(nombre + "123456");
+        body.put("metadata", metadata );
+
         Map<String, Object> template = new HashMap<>();
         template.put("name", config.getTemplateName());
         template.put("language", Map.of("code", "es_AR")); // Cambia el idioma si es necesario
 
         List<IComponent> componentes = new ArrayList<>();
-        IComponent componente = new ComponentBody(nombre);     componentes.add(componente);
+        IComponent componente = new ComponentBody(nombre);     
+        componentes.add(componente);
         
         IComponent componenteHeader = new ComponentHeader();
         componentes.add(componenteHeader);
@@ -92,7 +121,6 @@ public class WhatsAppService {
     
     public void sendObject(String numeroDestino, Map<String, Object> mensaje) {
 
-           
         try {
             String payloadJson = objectMapper.writeValueAsString(mensaje);
             log.info("➡️ Enviando POST a WebService con body: {}", payloadJson);
@@ -111,7 +139,23 @@ public class WhatsAppService {
                   })
         )
         .bodyToMono(ResponseRoot.class)
-        .doOnSuccess(response -> Service.SaveInconmeMessage(response) )
+        .doOnSuccess(response -> {
+
+            Service.SaveInconmeMessage(response) ;
+            Service.SaveWa_id(response, mensaje) ;
+
+            try {
+                String responseJson = objectMapper.writeValueAsString(response);
+                try {
+                    String responseJson1 = objectMapper.writeValueAsString(response);
+                    log.info("✅ POST response JSON: {}", responseJson1);
+                } catch (JsonProcessingException e) {
+                    log.warn("Error serializing response to JSON", e);
+                };
+            } catch (JsonProcessingException e) {
+                log.warn("Error serializing response to JSON", e);
+            };
+        }            )
         .doOnError(error -> log.error("Error al enviar el mensaje: " + error.getMessage()))
         .subscribe();
 
@@ -150,15 +194,11 @@ public class WhatsAppService {
             Mac mac = Mac.getInstance("HmacSHA256");
             SecretKeySpec secretKeySpec = new SecretKeySpec(appSecret.getBytes(), "HmacSHA256");
             mac.init(secretKeySpec);
-            //byte[] digest = mac.doFinal(payload.getBytes());
-
-            String calculatedSignature = "sha256="; // + Hex.encodeHexString(digest);
-
+            String calculatedSignature = "sha256=";
             if (!calculatedSignature.equals(signature)) {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
 
-            // Procesa el payload aquí
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

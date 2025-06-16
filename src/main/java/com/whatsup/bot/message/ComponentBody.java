@@ -16,7 +16,7 @@ public class ComponentBody implements IComponent {
     public String type = "body";
     public List<IParameter> parameters;
     
-    public ComponentBody(String nombre )
+    public ComponentBody(String nombre)
     {
         parameters = new ArrayList<>();
         IParameter para = new ParameterString(nombre);
@@ -24,6 +24,17 @@ public class ComponentBody implements IComponent {
         
     }
 
+    public void addParameter(String value)
+    {
+        IParameter para = new ParameterString(value);
+        parameters.add(para);
+    }
+    
+    public ComponentBody()
+    {
+        parameters = new ArrayList<>();
+    }
+    
     @Override
     public String getType() {
         return type;

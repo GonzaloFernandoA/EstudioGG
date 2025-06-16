@@ -17,18 +17,18 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.boot:spring-boot-starter-logging'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-        implementation 'org.springframework.boot:spring-boot-starter-json'
+    implementation 'org.springframework.boot:spring-boot-starter-json'
 
-        implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs:3.0.2'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 
-        implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
-        implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
+    implementation 'ch.qos.logback:logback-core:1.4.14'
 
-        implementation 'ch.qos.logback:logback-classic:1.4.14'
-        implementation 'ch.qos.logback:logback-core:1.4.14'
-
-        implementation 'software.amazon.awssdk:s3:2.20.46'
-        implementation 'software.amazon.awssdk:cloudwatch:2.20.46'
+    implementation platform("software.amazon.awssdk:bom:2.20.46")
+    implementation 'software.amazon.awssdk:sqs'
+    implementation 'software.amazon.awssdk:s3'
+    implementation 'software.amazon.awssdk:cloudwatch'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'	
         testImplementation 'org.mockito:mockito-inline:3.4.0'	

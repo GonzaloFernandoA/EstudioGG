@@ -5,18 +5,18 @@
 package com.whatsup.bot.worker;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whatsup.bot.builder.messageBuilder;
 
 import com.whatsup.bot.config.CarpetasConfig;
+import com.whatsup.bot.message.MessageTemplateRequest;
 import com.whatsup.bot.service.ContactService;
 
 import com.whatsup.bot.service.EventService;
 import com.whatsup.bot.service.ReservaService;
 import com.whatsup.bot.service.WhatsAppService;
 import com.whatsup.bot.service.trackingService;
-import com.whatsup.bot.utils.DateTimeUtils;
-import com.whatsup.bot.utils.PathUtils;
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -49,9 +49,36 @@ public class messageWorker {
     @Autowired
     ReservaService reserva;
 
+    private boolean isTemplateJson(String contenido) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode node = mapper.readTree(contenido);
+            return node.has("type") && "template".equals(node.get("type").asText());
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private void handleTemplate(String contenido) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            MessageTemplateRequest request = mapper.readValue(contenido, MessageTemplateRequest.class);
+            service.enviar(request) ;
+
+        } catch (Exception e) {
+            log.error("Error parsing contenido to MessageTemplateRequest", e);
+        }
+    }
+
     public void ejecutarTarea(String telefono, String contenido) {
 
         log.info("Enviando mensaje a  " + telefono);
+
+
+        if (isTemplateJson(contenido)) {
+            handleTemplate(contenido);
+            return;
+        }
 
         if (contenido.contains("ENVIAR_ENCUESTA")) {
             service.enviarMensajeTemplate(telefono, contact.getName(telefono));
