@@ -38,6 +38,9 @@ public class CarpetasConfig {
     @Value("${server.data.nota}")
     private String nota;
 
+    @Value("${server.data.mensajes}")
+    private String mensajes;
+
     @Value("${server.data.token}")
     private String token;
 
@@ -162,5 +165,13 @@ public class CarpetasConfig {
      */
     public void setEquivalencias(String equivalencias) {
         this.equivalencias = equivalencias;
+    }
+
+    public String getMensajes() {
+        return mensajes;
+    }
+
+    public void setMensajes(String mensajes) {
+        this.mensajes = mensajes;
     }
 }

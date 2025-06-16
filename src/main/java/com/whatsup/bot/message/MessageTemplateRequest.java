@@ -18,9 +18,11 @@ import java.util.logging.Logger;
 public class MessageTemplateRequest {
     
     private String type = "template";
-    private final Queue<String> parametros = new LinkedList<>();
+    private Queue<String> parametros = new LinkedList<>();
     private String template; 
-    private String telefono; 
+    private String telefono;
+    private String id;
+
 
     public String toJson()
     {
@@ -32,20 +34,22 @@ public class MessageTemplateRequest {
         }
         return null;
     }
-    
+
+
+
     public void add(String valor)
     {
-        parametros.add(valor);
+        getParametros().add(valor);
     }
     
     public boolean isEmpty()
     {
-        return this.parametros.isEmpty();
+        return this.getParametros().isEmpty();
     }
     
     public String get()
     {
-        return this.parametros.poll();
+        return this.getParametros().poll();
     }
 
     /**
@@ -74,5 +78,29 @@ public class MessageTemplateRequest {
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Queue<String> getParametros() {
+        return parametros;
+    }
+
+    public void setParametros(Queue<String> parametros) {
+        this.parametros = parametros;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

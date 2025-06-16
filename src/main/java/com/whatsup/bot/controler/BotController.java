@@ -2,8 +2,12 @@ package com.whatsup.bot.controler;
 
 import com.whatsup.bot.message.MessageTemplateRequest;
 import com.whatsup.bot.security.tokenService;
+import com.whatsup.bot.service.SqsMessagePublisher;
 import com.whatsup.bot.service.WhatsAppService;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -16,14 +20,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BotController {
     
- //   @Value("${build.time}")
-    private String buildTime;
-    
+    @Value("${version}")
+    private String buildVersion;
+
+    @Autowired
+    SqsMessagePublisher sqsMessagePublisher;
+
     @Autowired
     tokenService token;
     
@@ -31,24 +39,27 @@ public class BotController {
     WhatsAppService whatsAppService;
     
     private Logger log = LoggerFactory.getLogger(BotController.class);
-    
-    @GetMapping("/hello")
-    public ResponseEntity<String> exportOpportunity() {
-        return new ResponseEntity<>("Hello", HttpStatus.OK);
+
+
+    @GetMapping("/version")
+    @ResponseBody
+    public Map<String, String> getVersion() {
+        return Map.of("buildVersion", buildVersion); // o la versión que quieras mostrar
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<String> getHealth() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String response = "OK - " + now.format(formatter);
+        return ResponseEntity.ok(response);
+
     }
 
     @GetMapping("/sendMessage")
     public String sendMessage() {
-        whatsAppService.sendMessage(""
-                + "541145587174", "Nos comunicaremos con usted a la brevedad. \uD83D\uDC4D");
-
-        return "Message sent!";
-    }
-
-    @GetMapping("/sendMessage1")
-    public String sendMessage1() {
-        whatsAppService.sendMessage("5491145587174", "Nos comunicaremos con usted a la brevedad.");
-        return "Message sent!";
+        whatsAppService.sendMessage("541145587174", "Nos comunicaremos con usted a la brevedad.");
+        return "Message sent!  --->  " + LocalDateTime.now();
     }
 
     @GetMapping("/sendTemplate")
@@ -58,7 +69,7 @@ public class BotController {
         return "Template sent!";
     }
 
-    @GetMapping("/sendRecordatorio")
+    @GetMapping("/sendAlta")
     public String sendRecordatorioTemplate() {
         MessageTemplateRequest request = new MessageTemplateRequest();
         
@@ -66,18 +77,18 @@ public class BotController {
         request.setTelefono("54111545587174");
         
         request.add("Maxi Guiggi");
-
         request.add("Sabado 12 de Diciembre 2018");
         request.add("18:00");
-        
         request.add("Pity Martinez");
         request.add("Bernabeu 2018, Madrid");
         request.add("Proctologia");
         
         whatsAppService.enviar(request);
-        return "Template sent!";
+        return "Template sent! --->  " + LocalDateTime.now();
     }
     
+
+
 
     @GetMapping("/sendConfirmacion")
     public String sendConfirmacionTemplate() {
@@ -139,8 +150,8 @@ public class BotController {
     @GetMapping("/index")
     public String index(Model model) {
         
-        log.info(buildTime);
-        model.addAttribute("buildTime", buildTime);
+   //     log.info(buildTime);
+     //   model.addAttribute("buildTime", buildTime);
         return "index";
     }
 }
