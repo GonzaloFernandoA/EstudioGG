@@ -1,5 +1,6 @@
 package com.whatsup.bot.controler;
 
+import com.whatsup.bot.builder.messageBuilder;
 import com.whatsup.bot.message.MessageTemplateRequest;
 import com.whatsup.bot.security.tokenService;
 import com.whatsup.bot.service.SqsMessagePublisher;
@@ -34,7 +35,11 @@ public class BotController {
 
     @Autowired
     tokenService token;
-    
+
+    @Autowired
+    messageBuilder messageBuilder;
+
+
     @Autowired
     WhatsAppService whatsAppService;
     
@@ -56,9 +61,21 @@ public class BotController {
 
     }
 
+    @GetMapping("/sendEncuesta")
+    public String sendEncuesta()
+    {        whatsAppService.sendMessage("541145587174", messageBuilder.construirMensajeOpciones("Juan Perez" ));
+        return "Message sent!  --->  " + LocalDateTime.now();
+    }
+
     @GetMapping("/sendMessage")
     public String sendMessage() {
         whatsAppService.sendMessage("541145587174", "Nos comunicaremos con usted a la brevedad.");
+        return "Message sent!  --->  " + LocalDateTime.now();
+    }
+
+    @GetMapping("/sendWelcome")
+    public String sendWelcome() {
+        whatsAppService.sendMessage("541145587174", messageBuilder.construirWelcomeMensaje("Juan Perez" ));
         return "Message sent!  --->  " + LocalDateTime.now();
     }
 

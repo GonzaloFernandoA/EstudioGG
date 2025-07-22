@@ -12,7 +12,7 @@ import com.whatsup.bot.utils.JsonUtils;
  *
  * @author Gonzalo_Avalos
  */
-public class basicTask implements ITask {
+public class basicTask {
 
     public void Run() {
 

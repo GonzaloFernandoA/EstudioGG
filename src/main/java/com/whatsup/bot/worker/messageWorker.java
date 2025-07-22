@@ -11,12 +11,8 @@ import com.whatsup.bot.builder.messageBuilder;
 
 import com.whatsup.bot.config.CarpetasConfig;
 import com.whatsup.bot.message.MessageTemplateRequest;
-import com.whatsup.bot.service.ContactService;
+import com.whatsup.bot.service.*;
 
-import com.whatsup.bot.service.EventService;
-import com.whatsup.bot.service.ReservaService;
-import com.whatsup.bot.service.WhatsAppService;
-import com.whatsup.bot.service.trackingService;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -47,6 +43,9 @@ public class messageWorker {
     messageBuilder builder;
 
     @Autowired
+    ConversationService conversationService;
+
+    @Autowired
     ReservaService reserva;
 
     private boolean isTemplateJson(String contenido) {
@@ -74,16 +73,22 @@ public class messageWorker {
 
         log.info("Enviando mensaje a  " + telefono);
 
-
         if (isTemplateJson(contenido)) {
             handleTemplate(contenido);
             return;
         }
 
         if (contenido.contains("ENVIAR_ENCUESTA")) {
-            service.enviarMensajeTemplate(telefono, contact.getName(telefono));
+            service.sendMessage(telefono, builder.construirMensajeOpciones(contact.getName(telefono)));
             eventService.saveEvent(telefono, "ENCUESTA_ENVIADA");
+            conversationService.save(telefono, "MENSAJE_ENCUESTA_ENVIADO");
+            return;
+        }
 
+        if (contenido.contains("ENVIAR_WELCOME")) {
+            service.sendMessage(telefono, builder.construirWelcomeMensaje(contact.getName(telefono) ));
+            eventService.saveEvent(telefono, "WELCOME_ENVIADA");
+            conversationService.save(telefono, "MENSAJE_WELCOME_ENVIADO");
         } else {
             if (contenido.contains("MENU_DIA")) {
                 List<String> dias = reserva.getDiasDisponibles();

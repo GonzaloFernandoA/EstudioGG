@@ -8,7 +8,12 @@ package com.whatsup.bot.builder.task;
  *
  * @author Gonzalo_Avalos
  */
+
 public interface ITask {
-    void Run();
+    Boolean CanRun(String lastAction);
+
+    String getMessage(String Name, String telefono);
+
+    String getEventName(String telefono);
     
 }

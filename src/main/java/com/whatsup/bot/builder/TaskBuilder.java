@@ -13,9 +13,5 @@ import com.whatsup.bot.builder.task.respuestaHorasTask;
  */
 public class TaskBuilder {
     
-    public ITask Create(String IncomeMessage)
-            
-    {
-        return new respuestaHorasTask();
-    }
+
 }

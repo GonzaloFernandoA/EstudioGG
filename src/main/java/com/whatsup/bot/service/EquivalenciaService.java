@@ -18,7 +18,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EquivalenciaService {
-        private static final Logger logger = LoggerFactory.getLogger(EquivalenciaService.class);
+    private static final Logger logger = LoggerFactory.getLogger(EquivalenciaService.class);
+
     @Autowired
     S3RepositoryImpl repo;
     
