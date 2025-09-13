@@ -55,7 +55,7 @@ public class ContactService {
         this.save(contac);
 
         eventService.saveEvent(telefono, "CONTACTO_GUARDADO");
-        eventService.saveOutMessage(telefono, "ENVIAR_ENCUESTA");
+        eventService.saveOutMessage(telefono, "ENVIAR_WELCOME");
         redirectAttributes.addFlashAttribute("alerta", "El contacto se guardó con éxito");
         return "redirect:/contactos";
 
