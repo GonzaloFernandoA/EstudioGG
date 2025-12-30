@@ -1,5 +1,8 @@
 package com.whatsup.bot.service;
 
+import com.whatsup.bot.builder.ExecuteParameter;
+import com.whatsup.bot.builder.messageBuilder;
+import com.whatsup.bot.builder.task.TaskBotExecutor;
 import com.whatsup.bot.config.CarpetasConfig;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ public class ContactService {
     private static final Logger logger = LoggerFactory.getLogger(ContactService.class);
 
     @Autowired
+    TaskBotExecutor executor;
+
+    @Autowired
     CarpetasConfig config;
 
     @Autowired
@@ -36,6 +42,8 @@ public class ContactService {
     {
         Contacto contac = null;
         contac = (Contacto) repo.findByKey(config.getContactos() + telefono+ ".json", Contacto.class);
+        if (contac == null)
+            return "No Name Found";
         return contac.getNombre();
     }
     
@@ -55,7 +63,9 @@ public class ContactService {
         this.save(contac);
 
         eventService.saveEvent(telefono, "CONTACTO_GUARDADO");
-        eventService.saveOutMessage(telefono, "ENVIAR_WELCOME");
+
+        executor.runAllTasks( new ExecuteParameter( nombre, telefono, "START" ) ) ;
+
         redirectAttributes.addFlashAttribute("alerta", "El contacto se guardó con éxito");
         return "redirect:/contactos";
 

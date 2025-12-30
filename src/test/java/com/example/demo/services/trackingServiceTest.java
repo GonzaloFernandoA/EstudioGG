@@ -109,7 +109,7 @@ public class trackingServiceTest {
 
         tracking.setHorasEnviadas(horasEnviadas);
 
-        String horaElegida = service.getHoraSegunOpcion(tracking, 'B');
+        String horaElegida = service.getHoraSegunOpcion(tracking, "B");
 
         Assertions.assertEquals("hora2", horaElegida);
     }

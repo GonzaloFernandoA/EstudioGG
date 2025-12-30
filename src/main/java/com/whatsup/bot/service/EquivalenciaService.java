@@ -6,6 +6,7 @@ package com.whatsup.bot.service;
 
 import com.whatsup.bot.config.CarpetasConfig;
 import com.whatsup.bot.entity.Equivalencia;
+import com.whatsup.bot.message.responsePost.ResponseRoot;
 import com.whatsup.bot.repository.S3RepositoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,14 @@ public class EquivalenciaService {
     
     public void save(String wa_id, String telefono)
     {
+        Equivalencia equivalencia = new Equivalencia(wa_id, telefono);
+        repo.save(config.getEquivalencias() + equivalencia.getId(),equivalencia);
+    }
+
+    public void save( ResponseRoot response )
+    {
+        String wa_id = response.contacts.get(0).wa_id;
+        String telefono = response.contacts.get(0).input;
         Equivalencia equivalencia = new Equivalencia(wa_id, telefono);
         repo.save(config.getEquivalencias() + equivalencia.getId(),equivalencia);
     }

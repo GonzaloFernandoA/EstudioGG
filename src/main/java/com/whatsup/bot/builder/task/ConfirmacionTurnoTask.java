@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  *
  * @author Gonzalo_Avalos
  */
-@Component
+
 public class ConfirmacionTurnoTask {
 
     @Autowired

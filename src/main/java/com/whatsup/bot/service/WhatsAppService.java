@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.whatsup.bot.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whatsup.bot.builder.ComponentTemplateBuilder;
 import com.whatsup.bot.config.WhatsupSecurityConfig;
 import com.whatsup.bot.message.*;
-import com.whatsup.bot.message.ButtonList.Root;
 import com.whatsup.bot.message.responsePost.ResponseRoot;
 import com.whatsup.bot.security.tokenService;
 
@@ -17,17 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -39,12 +27,14 @@ public class WhatsAppService {
 
     private Logger log = LoggerFactory.getLogger(WhatsAppService.class);
 
+    @Autowired
+    EquivalenciaService equivalenciaService;
+
+    @Autowired
+    LogMensajesService logMensajesService;
 
     @Autowired
     tokenService tokens;
-
-    @Autowired
-    RobotInMesssageService Service;
 
     @Autowired
     WhatsupSecurityConfig config;
@@ -52,13 +42,13 @@ public class WhatsAppService {
     @Autowired
     private ObjectMapper objectMapper;
 
-
     private final WebClient webClient;
 
     @Autowired
     public WhatsAppService(WebClient webClient) {
         this.webClient = webClient;
     }
+
 
     public void enviar(MessageTemplateRequest request) {
 
@@ -83,7 +73,6 @@ public class WhatsAppService {
 
         this.sendObject(request.getTelefono(), body);
     }
-
 
     public void enviarMensajeTemplate(String numeroDestino, String nombre) {
         Map<String, Object> body = new HashMap<>();
@@ -133,25 +122,14 @@ public class WhatsAppService {
                 )
                 .bodyToMono(ResponseRoot.class)
                 .doOnSuccess(response -> {
-                    Service.SaveInconmeMessage(response);
-                    Service.SaveWa_id(response, mensaje);
-                    log.info("✅ POST response JSON: {}", response.toString());
+                //   Service.SaveInconmeMessage(response);
+                     equivalenciaService.save(response);
+                     logMensajesService.save(response, mensaje);
+                     log.info("✅ POST response JSON: {}", response.toString());
                 })
                 .doOnError(error -> log.error("Error al enviar el mensaje: " + error.getMessage()))
                 .subscribe();
-
     }
-
-/*    public void sendObject(Root mensaje) {
-        getWebClient().post()
-                .header("Content-Type", "application/json")
-                .bodyValue(mensaje)
-                .retrieve()
-                .bodyToMono(String.class)
-                .doOnSuccess(response -> System.out.println("Mensaje enviado correctamente: " + response))
-                .doOnError(error -> System.err.println("Error al enviar el mensaje: " + error.getMessage()))
-                .subscribe();
-    }*/
 
     public Map<String, Object> sendMessage(String recipientPhoneNumber, String messageText) {
         Map<String, Object> payload = new HashMap<>();

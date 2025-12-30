@@ -8,17 +8,15 @@ import com.whatsup.bot.message.response.Root;
 import com.whatsup.bot.service.EquivalenciaService;
 import com.whatsup.bot.service.EventService;
 import com.whatsup.bot.service.ReservaService;
-import com.whatsup.bot.service.RobotInMesssageService;
 import com.whatsup.bot.service.agenda.DateUtil1;
 import com.whatsup.bot.service.trackingService;
-import com.whatsup.bot.utils.DateTimeUtils;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class respuestaHorasTask extends basicTask {
 
     private static final Logger logger = LoggerFactory.getLogger(respuestaHorasTask.class);

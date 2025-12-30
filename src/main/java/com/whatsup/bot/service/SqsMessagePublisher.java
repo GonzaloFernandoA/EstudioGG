@@ -1,5 +1,7 @@
 package com.whatsup.bot.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.whatsup.bot.utils.IJasonable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.sqs.SqsClient;
@@ -26,7 +28,8 @@ public class SqsMessagePublisher {
         sqsClient.sendMessage(request);
     }
 
-
-        // For now, we will just print the message to the console
+    public void sendMessage(IJasonable objectJasonable) {
+        this.sendMessage(objectJasonable.toJson());
+    }
 }
 

@@ -4,6 +4,7 @@
  */
 package com.whatsup.bot.service;
 
+
 import com.whatsup.bot.config.CarpetasConfig;
 import com.whatsup.bot.entity.Contacto;
 import com.whatsup.bot.entity.ContactoEvento;
@@ -46,7 +47,11 @@ public class EventService {
 
     public void saveOutMessage(String id, String evento) {
         logger.info(String.format("saveOutMessage [%s] [%s] ",  id , evento ));
-        repo.save(config.getOut() + id , new OutMessage(id, evento));
+
+        OutMessage outMessage = new OutMessage(id, evento);
+        logger.info(outMessage.getContenido());
+
+        repo.save(config.getOut() + id , outMessage);
        
     }
 

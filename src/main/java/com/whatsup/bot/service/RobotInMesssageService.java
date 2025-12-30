@@ -6,16 +6,15 @@ package com.whatsup.bot.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.whatsup.bot.builder.ExecutorParameterBuilder;
 import com.whatsup.bot.builder.task.ResponseBuilder;
+import com.whatsup.bot.builder.task.TaskBotExecutor;
 import com.whatsup.bot.builder.task.respuestaHorasTask;
-import com.whatsup.bot.entity.LogMensajes;
 import com.whatsup.bot.message.Metadata;
-import com.whatsup.bot.message.SqsMessageTurno;
 import com.whatsup.bot.message.WebHookResponse.WebHookMessageWIthSender;
 import com.whatsup.bot.message.response.Root;
 import com.whatsup.bot.message.responsePost.ResponseRoot;
 
-import java.io.IOException;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -32,13 +31,16 @@ public class RobotInMesssageService {
     private static final Logger logger = LoggerFactory.getLogger(RobotInMesssageService.class);
 
     @Autowired
+    ExecutorParameterBuilder builder;
+
+    @Autowired
     ResponseBuilder responseBuilder;
 
     @Autowired
     SqsMessagePublisher sqsMessagePublisher;
 
-    @Autowired
-    respuestaHorasTask respuestaHoras;
+/*    @Autowired
+    respuestaHorasTask respuestaHoras; */
 
     @Autowired
     ConversationService conversationService;
@@ -52,14 +54,20 @@ public class RobotInMesssageService {
     @Autowired
     LogMensajesService logMensajesService;
 
+    @Autowired
+    TaskBotExecutor executor;
+
+    @Autowired
+    ContactService contactService;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public void SaveInconmeMessage(String incomingMessage) {
+    public void SaveInconmeMessage(String incomingMessage)
+    {
         Root message;
         WebHookMessageWIthSender messageWithSender;
 
-        if (incomingMessage.contains("Unknown"))
-        {
+        if (incomingMessage.contains("Unknown")) {
             logger.info("System Message recibido: " + incomingMessage);
             return;
         }
@@ -71,67 +79,17 @@ public class RobotInMesssageService {
             return;
         }
 
+        String telefono = equivalencia.get(messageWithSender.getSender());
+        String name = contactService.getName(telefono);
+        String mensajeRecibido = messageWithSender.getText();
+        String lastAction = conversationService.get(telefono).getLastMessage();
 
-        if (conversationService.get(equivalencia.get(messageWithSender.getSender())).getLastMessage().equals("MENSAJE_WELCOME_ENVIADO")) {
-            String telefono = equivalencia.get(messageWithSender.getSender());
-            event.saveOutMessage(telefono, "ENVIAR_ENCUESTA");
-            conversationService.save(telefono, "ENVIAR_ENCUESTA");
-            return ;
-        }
+        logger.info("lastAction {} Mensaje recibido: {} -telefono {} -name {}",lastAction, mensajeRecibido, telefono, name);
+        // executor.runAllTasks(lastAction, mensajeRecibido, name, telefono);
 
-        if (conversationService.get(equivalencia.get(messageWithSender.getSender())).getLastMessage().equals("MENSAJE_ENCUESTA_ENVIADO")
-        && messageWithSender.text.equals("2")
-        )
-        {
-            try {
-                message = objectMapper.readValue(incomingMessage, Root.class);
-                String telefonowa_id = message.entry.get(0).changes.get(0).value.contacts.get(0).wa_id;
-                String telefono = equivalencia.get(telefonowa_id);
-                event.saveEvent(telefono, "Llamar ahora. " + telefono);
-                event.saveOutMessage(telefono, "Muchas Gracias. Nos comunicaremos con usted a la brevedad.");
-            } catch (IOException ex) {
-                logger.error(ex.getMessage());
-            }
-            return ;
-        }
+        executor.runAllTasks(builder.Build(incomingMessage));
+        logger.info("Fin de las tareas del Bot");
 
-        if (conversationService.get(equivalencia.get(messageWithSender.getSender())).getLastMessage().equals("MENSAJE_ENCUESTA_ENVIADO")
-                && messageWithSender.text.equals("1")
-        )
-        {
-                try {
-                    message = objectMapper.readValue(incomingMessage, Root.class);
-                    String telefonowa_id = message.entry.get(0).changes.get(0).value.contacts.get(0).wa_id;
-                    String telefono = equivalencia.get(telefonowa_id);
-
-                    event.saveEvent(telefono, "Envio agenda dia.");
-                    event.saveOutMessage(telefono, "MENU_DIA");
-                } catch (IOException ex) {
-                    logger.error(ex.getMessage());
-                }
-
-            return ;
-            }
-
-         if (incomingMessage.contains("\"type\": \"text\"")) {
-            logger.info("type text: " + incomingMessage);
-            respuestaHoras.Run(incomingMessage);
-        } else {
-            Root messageResponse = responseBuilder.Build(incomingMessage);
-            LogMensajes logMensaje = logMensajesService.get(messageResponse.entry.get(0).changes.get(0).
-                    value.messages.get(0).context.id);
-
-            String valueResponse = messageResponse.entry.get(0).changes.get(0).value.messages.get(0).button.payload;
-            logger.info("Mensaje recibido: {} - {} - {}", logMensaje.getCustom_id(), logMensaje.getId(), valueResponse);
-            SqsMessageTurno messageTurno = new SqsMessageTurno(logMensaje, valueResponse);
-            try {
-                String jsonMessage = objectMapper.writeValueAsString(messageTurno);
-                logger.info("Mensaje reenviado a turnos: " + jsonMessage);
-                sqsMessagePublisher.sendMessage(jsonMessage);
-            } catch (JsonProcessingException e) {
-                logger.error("Error al convertir el mensaje a JSON: " + e.getMessage());
-            }
-        }
     }
 
     public void SaveInconmeMessage(ResponseRoot incomingMessage) {
