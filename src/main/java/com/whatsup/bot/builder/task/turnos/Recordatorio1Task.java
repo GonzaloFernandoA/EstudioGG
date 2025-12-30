@@ -1,0 +1,46 @@
+package com.whatsup.bot.builder.task.turnos;
+
+import com.whatsup.bot.builder.ExecuteParameter;
+import com.whatsup.bot.builder.task.ITask;
+import com.whatsup.bot.entity.LogMensajes;
+import com.whatsup.bot.message.SqsMessageTurno;
+import com.whatsup.bot.service.LogMensajesService;
+import com.whatsup.bot.service.SqsMessagePublisher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Recordatorio1Task implements ITask {
+    private static final Logger log = LoggerFactory.getLogger(Recordatorio1Task.class);
+
+    @Autowired
+    SqsMessagePublisher sqsMessagePublisher;
+
+    @Autowired
+    LogMensajesService logMensajesService;
+
+    @Override
+    public Boolean CanRun(String lastAction) {
+        return lastAction.contains("RECORDATORIO_1");
+    }
+
+    @Override
+    public String getMessage(ExecuteParameter parameter) {
+
+        log.info("Recordatorio1Task getMessage " + parameter.getName() + " telefono " + parameter.getPhoneNumber());
+        LogMensajes message = logMensajesService.get(parameter.getWaId());
+        log.info("Recordatorio1Task getMessage " + "result " + parameter.getMessage() + " message:"+message.getId());
+        SqsMessageTurno messageTurno = new SqsMessageTurno(message.getId(), "recordatorio1", parameter.getMessage());
+
+        sqsMessagePublisher.sendMessage(messageTurno);
+
+        return null;
+    }
+
+    @Override
+    public String getEventName(String telefono) {
+        return "CONFIRMACION";
+    }
+}

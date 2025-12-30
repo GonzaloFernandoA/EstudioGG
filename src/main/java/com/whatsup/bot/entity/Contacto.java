@@ -29,6 +29,13 @@ public class Contacto {
         return this.telefono;
     }
 
+    public Contacto(String nombre, String apellido, String telefono) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.fecha = null;
+    }
+
     public Contacto(String nombre, String apellido, String telefono, Date fecha) {
         this.nombre = nombre;
         this.apellido = apellido;

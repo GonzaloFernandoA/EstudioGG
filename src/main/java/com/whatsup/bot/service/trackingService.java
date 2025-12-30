@@ -47,29 +47,34 @@ public class trackingService {
 
     public String getFechaSegunOpcion(String telefono, String opcion) {
         Tracking entity = getOrCreate(telefono);
+
         logger.info("getFechaSegunOpcion : " + entity.getFechasEnviadas().size());
-                
-        char cOpcion = opcion.charAt(0); 
-        return this.getValor(entity.getFechasEnviadas(),cOpcion );
+
+        return this.getValor(entity.getFechasEnviadas(),opcion );
     }
 
-    public String getHoraSegunOpcion(Tracking tracking, char opcion) {
-        return this.getValor(tracking.getHorasEnviadas(), opcion);
+    public String getHoraSegunOpcion(Tracking entity, String opcion) {
+
+        return this.getValor(entity.getHorasEnviadas(), opcion);
 
     }
 
     public String getHoraSegunOpcion(String telefono, String opcion) {
 
+        logger.debug("getHoraSegunOpcion: telefono={}, opcion={}", telefono, opcion);
         Tracking entity = getOrCreate(telefono);
-        char cOpcion = opcion.charAt(0); 
-        
-        return this.getValor(entity.getHorasEnviadas(), cOpcion);
+
+        return this.getHoraSegunOpcion(entity, opcion);
 
     }
 
-    private String getValor(List<String> lista, char opcion) {
-        char lowerCaseLetter = Character.toLowerCase(opcion);
-        return lista.get(lowerCaseLetter - 'a');
+    private String getValor(List<String> lista, String opcion) {
+        int index = Integer.parseInt(opcion);
+        if (index < 0 || index >= lista.size()) {
+            logger.error("Index out of bounds: {}", index);
+            return "";
+        }
+        return lista.get( index-1);
     }
 
     public void saveHoraReservada(String telefono, String hora) {

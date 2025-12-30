@@ -2,16 +2,39 @@ package com.whatsup.bot.entity;
 
 public class LogMensajes {
 
+    public LogMensajes() { }
+
+
+    public LogMensajes(String wa_id, String custom_id, String id, String status) {
+        this.setWa_id(wa_id);
+        this.setCustom_id(custom_id);
+        this.id = id;
+        this.status = status;
+    }
+
     public LogMensajes(String wa_id, String custom_id, String id) {
         this.setWa_id(wa_id);
         this.setCustom_id(custom_id);
         this.id = id;
+        this.status = "";
 
     }
+
 
     private String wa_id;
     private String custom_id;
     private String id;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private String status;
+
 
     public String getWa_id() {
         return wa_id;

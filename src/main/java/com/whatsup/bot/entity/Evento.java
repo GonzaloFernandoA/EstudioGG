@@ -22,10 +22,47 @@ public class Evento {
     {
         telefono = id;
         mensaje = evento;
+
     }
             
     private String telefono = "";
     private String mensaje = "";
+
+    public Evento(String telefono, String mensaje, String wa_id, String status, String fecha) {
+        this.telefono = telefono;
+        this.mensaje = mensaje;
+        this.wa_id = wa_id;
+        this.status = status;
+        this.fecha = fecha;
+    }
+
+    public String getWa_id() {
+        return wa_id;
+    }
+
+    public void setWa_id(String wa_id) {
+        this.wa_id = wa_id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    private String wa_id = "";
+    private String status = "";
+    private String fecha = "";
 
     /**
      * @return the telefono

@@ -6,9 +6,11 @@ package com.whatsup.bot.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.whatsup.bot.entity.Conversation;
 import com.whatsup.bot.message.OutMessage;
 import com.whatsup.bot.utils.TransformMessage;
 import com.whatsup.bot.worker.messageWorker;
+import com.whatsup.bot.service.ConversationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ import java.util.List;
 
 @Service
 public class SqsMessageListener {
+
+    @Autowired
+    ConversationService conversationService;
 
     @Autowired
     RobotInMesssageService robot; 
@@ -47,6 +52,10 @@ public class SqsMessageListener {
     @Value("${aws.sqs.s3-to-worker}")
     private String s3ToWorkerQueue;
 
+    @Value("${aws.sqs.turnosToConversacion}")
+    private String TurnosToConversacion;
+
+
     public SqsMessageListener(SqsClient sqsClient) {
         this.sqsClient = sqsClient;
     }
@@ -55,23 +64,43 @@ public class SqsMessageListener {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    @Scheduled(fixedDelay = 10000) // cada 30 segundos después de terminar
+    @Scheduled(fixedDelay = 4000) // cada 30 segundos después de terminar
     public  void Process()
     {
         this.processWebhookMessages();
         this.processS3ToWorker();
+        this.processTurnosToConversation();
     }
 
+    public void processTurnosToConversation(){
+        Message message = read(TurnosToConversacion);
+        if (message != null) {
+            try {
+                logger.info("Mensaje recibido TurnosToConversacion: " + message.body());
+                String body = message.body();
+                logger.info("Mensaje recibido TurnosToConversacion Body: " + body);
+                Conversation conversation = objectMapper.readValue(body, Conversation.class);
+                String telefono = conversation.getId();
+                logger.info("Telefono recibido: " + telefono);
+                // actualiza la ultima conversacion del turno enviado
+                conversationService.save(telefono, conversation.getLastMessage());
+            } catch (Exception e) {
+                logger.error("processTurnosToConversation Error al procesar el mensaje: " + e.getMessage());
+            } finally {
+                deleteMessage(TurnosToConversacion, message);
+            }
+        }
+    }
 
     public void processWebhookMessages() {
         Message message = read(webhookMessagesQueue);
         if (message != null) {
             try {
+                logger.info("Mensaje recibido WebhookMessages: " + message.body());
                 String body = message.body();
-                logger.info("Mensaje recibido WebhookMessages: " + body);
                 robot.SaveInconmeMessage(body);
             } catch (Exception e) {
-                logger.error("Error al procesar el mensaje: " + e.getMessage());
+                logger.error("processWebhookMessages Error al procesar el mensaje: " + e.getMessage());
             } finally {
                 deleteMessage(webhookMessagesQueue, message);
             }
@@ -90,7 +119,7 @@ public class SqsMessageListener {
                 logger.info("Mensaje recibido File Name: " + fileMessage.getTelefono() + " Contenido: " + fileMessage.getContenido());
                 worker.ejecutarTarea(fileMessage.getTelefono(), fileMessage.getContenido());
             } catch (Exception e) {
-                logger.error("Error al procesar el mensaje: " + e.getMessage());
+                logger.error("processS3ToWorker Error al procesar el mensaje: " + e.getMessage());
             } finally {
                 deleteMessage(s3ToWorkerQueue, message);
             }

@@ -8,10 +8,18 @@ public class Conversation {
     private String lastMessage;
     private String lastMessageTime;
 
+    public Conversation() {};
+
     public Conversation( String phoneNumber, String lastMessage) {
         this.phoneNumber = phoneNumber;
         this.lastMessage = lastMessage;
         this.lastMessageTime = LocalDateTime.now().toString();
+    }
+
+    public Conversation( String phoneNumber, String lastMessage, String lastMessageTime) {
+        this.phoneNumber = phoneNumber;
+        this.lastMessage = lastMessage;
+        this.lastMessageTime = lastMessageTime;
     }
 
     public String getId() {

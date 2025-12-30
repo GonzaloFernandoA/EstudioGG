@@ -15,10 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class HorarioSender {
     
-    @Autowired 
-    WhatsAppService sender;
-    
-    public void Send( String telefono )
+    public void Send( String telefono, WhatsAppService sender )
     {
         sender.sendMessage(telefono, "Elija una hora para entrevista:" + System.lineSeparator() );
     }

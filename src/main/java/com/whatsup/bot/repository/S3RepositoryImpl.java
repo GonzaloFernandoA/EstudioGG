@@ -26,7 +26,7 @@ import software.amazon.awssdk.core.sync.ResponseTransformer;
 @Repository
 public class S3RepositoryImpl<T> implements IS3Repository<T> {
 
-    private final org.slf4j.Logger logger = LoggerFactory.getLogger(EventService.class);
+    private final org.slf4j.Logger logger = LoggerFactory.getLogger(S3RepositoryImpl.class);
 
     @Autowired
     S3Config config;

@@ -7,19 +7,15 @@ import com.whatsup.bot.service.SqsMessagePublisher;
 import com.whatsup.bot.service.WhatsAppService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,9 +25,6 @@ public class BotController {
     
     @Value("${version}")
     private String buildVersion;
-
-    @Autowired
-    SqsMessagePublisher sqsMessagePublisher;
 
     @Autowired
     tokenService token;
@@ -73,17 +66,22 @@ public class BotController {
         return "Message sent!  --->  " + LocalDateTime.now();
     }
 
-    @GetMapping("/sendWelcome")
-    public String sendWelcome() {
+    @GetMapping("/sendWelcome_old")
+    public String sendWelcome_old() {
         whatsAppService.sendMessage("541145587174", messageBuilder.construirWelcomeMensaje("Juan Perez" ));
         return "Message sent!  --->  " + LocalDateTime.now();
     }
 
-    @GetMapping("/sendTemplate")
-    public String sendMessageTemplate() {
-        whatsAppService.enviarMensajeTemplate("541145587174", "Gonzalo");
-        
-        return "Template sent!";
+    @GetMapping("/sendCalculadora")
+    public String sendWelcome() {
+        MessageTemplateRequest request = new MessageTemplateRequest();
+
+        request.setTemplate("bienvenida_calculadora");
+        request.setTelefono("54111545587174");
+        request.add("Maxi");
+        whatsAppService.enviar(request);
+
+        return "Message sent!  --->  " + LocalDateTime.now();
     }
 
     @GetMapping("/sendAlta")
